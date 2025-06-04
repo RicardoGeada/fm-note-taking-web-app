@@ -1,0 +1,91 @@
+@use "sass:map";
+
+/* === Inter === */
+@font-face {
+  font-display: swap;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400, 500, 600, 700;
+  src: url("./assets/fonts/inter/Inter-VariableFont_opsz\,wght.ttf");
+}
+
+/* === Noto Serif === */
+@font-face {
+  font-display: swap;
+  font-family: "Noto Serif";
+  font-style: normal;
+  font-weight: 400, 500, 600, 700;
+  src: url("./assets/fonts/noto-serif/NotoSerif-VariableFont_wdth\,wght.ttf");
+}
+
+/* === Source Code Pro === */
+@font-face {
+  font-display: swap;
+  font-family: "Source Code Pro";
+  font-style: normal;
+  font-weight: 400, 500, 600, 700;
+  src: url("./assets/fonts/source-code-pro/SourceCodePro-VariableFont_wght.ttf");
+}
+
+/* === Text Presets === */
+$text-base-presets: (
+  "1": (
+    size: 1.5em, // 24px
+    line-height: 1.2,
+    letter-spacing: -0.03125em, // -0.5px 
+    weight: 700,
+  ),
+  "2": (
+    size: 1.25em, // 20px
+    line-height: 1.2,
+    letter-spacing: -0.03125em, // -0.5px 
+    weight: 700,
+  ),
+  "3": (
+      size: 1em, // 16px
+      line-height: 1.2,
+      letter-spacing: -0.01875em, // -0.3px
+      weight: 600,
+  ),
+  "4": (
+      size: 0.875em, // 14px  
+      line-height: 1.2,
+      letter-spacing: -0.0125em, // -0.2px
+      weight: 500,
+  ),
+  "5": (
+      size: 0.875em, // 14px  
+      line-height: 1.2,
+      letter-spacing: -0.0125em, // -0.2px
+      weight: 400,
+  ),
+  "6": (
+      size: 0.75em, // 12px  
+      line-height: 1.2,
+      letter-spacing: -0.0125em, // -0.2px
+      weight: 400,
+  )
+);
+
+
+$font-families: (
+  "inter": "Inter",
+  "noto-serif": "Noto Serif",
+  "source-code-pro": "Source Code Pro"
+);
+
+
+@mixin apply-text-preset($font-key, $preset-key) {
+  $preset: map.get($text-base-presets, $preset-key);
+  $font: map.get($font-families, $font-key);
+
+  @if $preset and $font {
+    font-family: $font;
+    font-size: map.get($preset, size);
+    line-height: map.get($preset, line-height);
+    letter-spacing: map.get($preset, letter-spacing);
+    font-weight: map.get($preset, weight);
+  } @else {
+    @warn "Invalid font key or preset key: #{$font-key}, #{$preset-key}";
+  }
+}
