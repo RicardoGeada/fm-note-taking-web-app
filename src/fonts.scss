@@ -30,39 +30,39 @@
 /* === Text Presets === */
 $text-base-presets: (
   "1": (
-    size: 1.5em, // 24px
+    size: 1.5rem, // 24px
     line-height: 1.2,
-    letter-spacing: -0.03125em, // -0.5px 
+    letter-spacing: -0.03125rem, // -0.5px 
     weight: 700,
   ),
   "2": (
-    size: 1.25em, // 20px
+    size: 1.25rem, // 20px
     line-height: 1.2,
-    letter-spacing: -0.03125em, // -0.5px 
+    letter-spacing: -0.03125rem, // -0.5px 
     weight: 700,
   ),
   "3": (
-      size: 1em, // 16px
+      size: 1rem, // 16px
       line-height: 1.2,
-      letter-spacing: -0.01875em, // -0.3px
+      letter-spacing: -0.01875rem, // -0.3px
       weight: 600,
   ),
   "4": (
-      size: 0.875em, // 14px  
+      size: 0.875rem, // 14px  
       line-height: 1.2,
-      letter-spacing: -0.0125em, // -0.2px
+      letter-spacing: -0.0125rem, // -0.2px
       weight: 500,
   ),
   "5": (
-      size: 0.875em, // 14px  
+      size: 0.875rem, // 14px  
       line-height: 1.2,
-      letter-spacing: -0.0125em, // -0.2px
+      letter-spacing: -0.0125rem, // -0.2px
       weight: 400,
   ),
   "6": (
-      size: 0.75em, // 12px  
+      size: 0.75rem, // 12px  
       line-height: 1.2,
-      letter-spacing: -0.0125em, // -0.2px
+      letter-spacing: -0.0125rem, // -0.2px
       weight: 400,
   )
 );
@@ -75,12 +75,14 @@ $font-families: (
 );
 
 
-@mixin apply-text-preset($font-key, $preset-key) {
+@mixin apply-text-preset($preset-key, $font-key: null) {
   $preset: map.get($text-base-presets, $preset-key);
-  $font: map.get($font-families, $font-key);
+  $font: if($font-key != null, map.get($font-families, $font-key), null);
 
-  @if $preset and $font {
-    font-family: $font;
+  @if $preset {
+    @if $font {
+      font-family: $font;
+    }
     font-size: map.get($preset, size);
     line-height: map.get($preset, line-height);
     letter-spacing: map.get($preset, letter-spacing);

@@ -25,9 +25,9 @@
 
   // === Spaces ===
   --spacing-0: 0px;
-  --spacing-025: 2px;
-  --spacing-050: 4px;
-  --spacing-075: 6px;
+  --spacing-25: 2px;
+  --spacing-50: 4px;
+  --spacing-75: 6px;
   --spacing-100: 8px;
   --spacing-150: 12px;
   --spacing-200: 16px;
@@ -54,6 +54,7 @@
   // === Shadows ===
   --shadow-small: 0px 4px 6px rgba(#F0F0F0, 0.6);
   --shadow-large: 0px 8px 12px rgba(#F0F0F0, 0.6);
+
 }
 
 
@@ -61,5 +62,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
