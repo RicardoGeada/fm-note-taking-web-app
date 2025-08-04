@@ -1,30 +1,33 @@
-import "./Login.module.scss";
+import Input from "../../../components/Input/Input";
+import styles from "./Login.module.scss";
 
 function Login() {
   return (<main>
-    <form action="">
-        <img src="./images/logo.svg" alt="notes logo" />
-        <h1>Welcome to Note</h1>
-        <p>Please log in to continue</p>
+    <form className={styles["form"]} action="">
+        <img className={styles["form__logo"]} src="./images/logo.svg" alt="notes logo" />
+        <h1 className={styles["form__headline"]}>Welcome to Note</h1>
+        <p className={styles["form__description"]}>Please log in to continue</p>
 
-        <label htmlFor="email">Email Adress</label>
-        <input id="email" type="email" placeholder="email@example.com"/>
+        <Input />
 
-        <label htmlFor="password">Password</label>
+        {/* <label className={styles["input__label"]} htmlFor="email">Email Adress</label>
+        <input className={styles["input"]} id="email" type="email" placeholder="email@example.com"/>
+
+        <label className={styles["input__label"]} htmlFor="password">Password</label>
         <a href="">Forgot</a>
-        <input id="password" type="password" />
+        <input className={styles["input"]} id="password" type="password" /> */}
 
-        <button type="submit">Login</button>
+        <button className={`${styles["btn"]} ${styles["btn--primary"]}`} type="submit">Login</button>
 
-        <div className="hl-separator"></div>
+        <div className={styles["hl-separator"]}></div>
 
         <p>Or log in with:</p>
-        <button>
+        <button className={`${styles["btn"]} ${styles["btn--border"]}`} type="button">
             <img src="./images/icon-google.svg" alt="" />
             Google
         </button>
 
-        <div className="hl-separator"></div>
+        <div className={styles["hl-separator"]}></div>
 
         <p>
           <span>No account yet?</span>  
