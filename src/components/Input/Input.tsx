@@ -12,7 +12,7 @@ interface InputButtonConfig {
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string,
   id: string,
-  error?: string,
+  error?: boolean | string,
   button?: InputButtonConfig,
 }
 

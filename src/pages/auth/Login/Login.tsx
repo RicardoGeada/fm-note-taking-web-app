@@ -1,7 +1,42 @@
+import { useState } from "react";
 import Input from "../../../components/Input/Input";
 import styles from "./Login.module.scss";
+import { hasMinLength, isEmail, isNotEmpty } from '../../../util/validation.ts';
 
 function Login() {
+
+  const [enteredValues, setEnteredValues] = useState({
+    email: '',
+    password: '',
+  })
+
+  const [didEdit, setDidEdit] = useState({
+    email: false,
+    password: false,
+  })
+
+  const emailIsInvalid = didEdit.email && !isEmail(enteredValues.email) && !isNotEmpty(enteredValues.email);
+  const passwordIsInvalid = didEdit.password && !hasMinLength(enteredValues.password, 6);
+
+  function handleInputChange(identifier:string, value:string) {
+    setEnteredValues((prevValues) => ({
+      ...prevValues,
+      [identifier]: value,
+    }));
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: false,
+    }))
+  }
+
+  function handleInputBlur(identifier:string) {
+    setDidEdit((prevEdit) => ({
+      ...prevEdit,
+      [identifier]: true,
+    }))
+  }
+
+
   return (<main>
     <form className={styles["form"]} action="">
         <img className={styles["form__logo"]} src="./images/logo.svg" alt="notes logo" />
@@ -14,9 +49,10 @@ function Login() {
           type="email"
           name="email"
           placeholder="email@example.com"
-          value=""
-          onBlur={() => {}}
-          onInput={() => {}}
+          value={enteredValues.email}
+          onBlur={() => handleInputBlur('email')}
+          onChange={(event) => handleInputChange('email', event.target.value)}
+          error={emailIsInvalid && 'Please enter a valid email.'}
         />
 
         <Input 
@@ -24,9 +60,10 @@ function Login() {
           id="password"
           type="password"
           name="password"
-          value=""
-          onBlur={() => {}}
-          onInput={() => {}}
+          value={enteredValues.password}
+          onBlur={() => handleInputBlur('password')}
+          onChange={(event) => handleInputChange('password', event.target.value)}
+          error={passwordIsInvalid && 'Please enter a valid password.'}
           button={
             {
               position: 'right',
