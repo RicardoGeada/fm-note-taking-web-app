@@ -46,11 +46,11 @@
       border-color: var(--color-red-500);
     }
 
-    &--btn-start {
+    &--btn-left {
       padding-left: 44px; // 16 + 20 + 8
     }
 
-    &--btn-end {
+    &--btn-right {
       padding-right: 44px;
     }
   }
@@ -65,13 +65,13 @@
       object-fit: cover;
     }
 
-    &--start {
+    &--left {
       position: absolute;
       top: 12px;
       left: 16px;
     }
 
-    &--end {
+    &--right {
       position: absolute;
       top: 12px;
       right: 16px;

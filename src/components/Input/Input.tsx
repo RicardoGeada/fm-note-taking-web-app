@@ -3,32 +3,59 @@ import clsx from "clsx";
 import styles from "./Input.module.scss";
 import InfoIcon from './../../assets/images/icon-info.svg?react';
 
-function Input() {
+interface InputButtonConfig {
+  position: 'left' | 'right',
+  onClick: () => void,
+  content: React.ReactNode, 
+}
+
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  label: string,
+  id: string,
+  error?: string,
+  button?: InputButtonConfig,
+}
+
+const Input: React.FC<InputProps> = ({ label, id, error, button, ...props }) => {
+
   return (
     <div className={styles["input-field"]}>
-      <label className={styles["input-field__label"]} htmlFor="input">Label</label>
+      <label className={styles["input-field__label"]} htmlFor={id}>{ label }</label>
 
       <div className={styles["input-field__input-container"]} >
-        <input 
-          className={clsx(styles["input-field__input"], styles["input-field__input--btn-start"], styles["input-field__input--btn-end"])} 
-          id="input" 
-          type="password" 
-          placeholder="Placeholder Text"
+        <input
+          id={id}  
+          className={
+            clsx(
+              styles["input-field__input"], 
+              button?.position === 'left' && styles["input-field__input--btn-left"], 
+              button?.position === 'right' && styles["input-field__input--btn-right"])
+          } 
+          { ...props }
         />
         {/* Icon / Button */}
-        <button className={clsx(styles["input-field__btn"], styles["input-field__btn--start"])}>
-          <img src="./images/icon-show-password.svg" alt="" />
-        </button>
-        <button className={clsx(styles["input-field__btn"], styles["input-field__btn--end"])}>
-          <img src="./images/icon-show-password.svg" alt="" />
-        </button>
+        {button && (
+          <button 
+            type="button"
+            onClick={button.onClick} 
+            className={clsx(
+              styles["input-field__btn"], 
+              button.position === 'left' 
+              ? styles["input-field__btn--left"]
+              : styles["input-field__btn--right"])}>
+            {button.content}
+          </button>
+        )}
       </div>  
       
-
-      <div className={clsx(styles["input-field__info"])}>
-        <InfoIcon />
-        <span>This is a hint text to help the user.</span>
-      </div>
+      {/* Hint / Notification */}
+      {error && 
+       <div className={clsx(styles["input-field__info"], styles["input-field__info--invalid"])}>
+         <InfoIcon />
+         <span>{error}</span>
+       </div> 
+      }
+      
     </div>
   );
 }

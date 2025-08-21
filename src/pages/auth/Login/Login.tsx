@@ -8,14 +8,33 @@ function Login() {
         <h1 className={styles["form__headline"]}>Welcome to Note</h1>
         <p className={styles["form__description"]}>Please log in to continue</p>
 
-        <Input />
+        <Input 
+          label="Email Address"
+          id="email"
+          type="email"
+          name="email"
+          placeholder="email@example.com"
+          value=""
+          onBlur={() => {}}
+          onInput={() => {}}
+        />
 
-        {/* <label className={styles["input__label"]} htmlFor="email">Email Adress</label>
-        <input className={styles["input"]} id="email" type="email" placeholder="email@example.com"/>
-
-        <label className={styles["input__label"]} htmlFor="password">Password</label>
-        <a href="">Forgot</a>
-        <input className={styles["input"]} id="password" type="password" /> */}
+        <Input 
+          label="Password"
+          id="password"
+          type="password"
+          name="password"
+          value=""
+          onBlur={() => {}}
+          onInput={() => {}}
+          button={
+            {
+              position: 'right',
+              onClick: () => {console.log('Click')},
+              content: <img src="./images/icon-show-password.svg"></img>
+            }
+          }
+        />
 
         <button className={`${styles["btn"]} ${styles["btn--primary"]}`} type="submit">Login</button>
 
