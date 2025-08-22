@@ -29,7 +29,9 @@ const Input: React.FC<InputProps> = ({ label, id, error, button, ...props }) => 
             clsx(
               styles["input-field__input"], 
               button?.position === 'left' && styles["input-field__input--btn-left"], 
-              button?.position === 'right' && styles["input-field__input--btn-right"])
+              button?.position === 'right' && styles["input-field__input--btn-right"],
+              error && styles["input-field__input--invalid"]
+            )
           } 
           { ...props }
         />

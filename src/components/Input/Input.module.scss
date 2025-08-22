@@ -42,7 +42,8 @@
       background-color: var(--color-neutral-50);
     }
 
-    &:invalid {
+    &:invalid,
+    &--invalid {
       border-color: var(--color-red-500);
     }
 
