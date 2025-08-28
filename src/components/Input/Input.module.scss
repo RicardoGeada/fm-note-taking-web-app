@@ -1,7 +1,7 @@
 @use "./../../fonts.scss";
 
 .input-field {
-  margin-block-end: var(--spacing-200);
+  width: 100%;
 
   &__label {
     display: block;
@@ -19,7 +19,6 @@
     border-radius: var(--spacing-150);
     border: 1px solid var(--color-neutral-300);
     width: 100%;
-    margin-block-end: var(--spacing-75);
     color: var(--color-neutral-950);
 
     ::placeholder {
@@ -83,6 +82,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-100);
+    margin-block-start: var(--spacing-75);
     @include fonts.apply-text-preset("6");
 
     svg {

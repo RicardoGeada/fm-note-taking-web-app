@@ -52,11 +52,9 @@
   --radius-full: 999px;
 
   // === Shadows ===
-  --shadow-small: 0px 4px 6px rgba(#F0F0F0, 0.6);
-  --shadow-large: 0px 8px 12px rgba(#F0F0F0, 0.6);
-
+  --shadow-small: 0px 4px 6px rgba(#f0f0f0, 0.6);
+  --shadow-large: 0px 8px 12px rgba(#f0f0f0, 0.6);
 }
-
 
 * {
   box-sizing: border-box;
@@ -65,3 +63,17 @@
   font-family: "Inter", Arial, Helvetica, sans-serif;
 }
 
+// Links
+.link {
+  color: var(--color-neutral-950);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-blue-500);
+  }
+
+  &--underline {
+    color: var(--color-neutral-600);
+    text-decoration: underline;
+  }
+}
