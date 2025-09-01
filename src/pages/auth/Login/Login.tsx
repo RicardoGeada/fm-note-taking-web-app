@@ -20,7 +20,8 @@ function Login() {
   } = useInput('', (value) =>  hasMinLength(value, 6));
 
 
-  return (<main>
+  return (
+  <main>
     <form className={styles["form"]} action="">
 
         <img className={styles["form__logo"]} src="./images/logo.svg" alt="notes logo" />
@@ -65,21 +66,21 @@ function Login() {
           </div>
           
 
-          <button className={clsx(styles["btn"], styles["btn--primary"])} type="submit">Login</button>
+          <button className={clsx("btn", "btn--primary", styles["btn"])} type="submit">Login</button>
         </div>
 
-        <div className={styles["hl-separator"]}></div>
+        <div className="hl-separator"></div>
 
         <div className={clsx(styles["form__section"], styles["form__section--google-login"])}>
             <p>Or log in with:</p>
 
-            <button className={clsx(styles["btn"], styles["btn--border"])} type="button">
+            <button className={clsx("btn", "btn--border", styles["btn"])} type="button">
                 <img src="./images/icon-google.svg" alt="" />
                 Google
             </button>
         </div>
 
-        <div className={styles["hl-separator"]}></div>
+        <div className="hl-separator"></div>
 
         <p>
           <span>No account yet? </span>  
