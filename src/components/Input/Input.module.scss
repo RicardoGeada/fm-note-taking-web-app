@@ -88,6 +88,9 @@
     svg {
       width: var(--spacing-200); // 16px
       height: var(--spacing-200); // 16px
+      path {
+        stroke: var(--color-neutral-600);
+      }
     }
 
     &--disabled {

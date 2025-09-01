@@ -13,10 +13,11 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string,
   id: string,
   error?: boolean | string,
+  hint?: string,
   button?: InputButtonConfig,
 }
 
-const Input: React.FC<InputProps> = ({ label, id, error, button, ...props }) => {
+const Input: React.FC<InputProps> = ({ label, id, error, hint, button, ...props }) => {
 
   return (
     <div className={styles["input-field"]}>
@@ -51,10 +52,10 @@ const Input: React.FC<InputProps> = ({ label, id, error, button, ...props }) => 
       </div>  
       
       {/* Hint / Notification */}
-      {error && 
-       <div className={clsx(styles["input-field__info"], styles["input-field__info--invalid"])}>
+      {(error || hint) && 
+       <div className={clsx(styles["input-field__info"], error && styles["input-field__info--invalid"])}>
          <InfoIcon />
-         <span>{error}</span>
+         <span>{error || hint}</span>
        </div> 
       }
       
