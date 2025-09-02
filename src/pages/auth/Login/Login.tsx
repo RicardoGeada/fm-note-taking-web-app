@@ -17,7 +17,7 @@ function Login() {
     handleInputChange: handlePasswordChange, 
     handleInputBlur: handlePasswordBlur,
     hasError: passwordHasError,
-  } = useInput('', (value) =>  hasMinLength(value, 6));
+  } = useInput('', (value) =>  hasMinLength(value, 8));
 
 
   return (
