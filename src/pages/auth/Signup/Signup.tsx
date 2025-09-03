@@ -3,6 +3,7 @@ import styles from "./Signup.module.scss";
 import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
 import { useInput } from "../../../hooks/useInput.ts";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 function Signup() {
   const {
@@ -103,9 +104,9 @@ function Signup() {
 
         <p>
           <span>Already have an account? </span>
-          <a href="" className="link">
+          <Link to={"/login"} className="link">
             Login
-          </a>
+          </Link>
         </p>
       </form>
     </main>

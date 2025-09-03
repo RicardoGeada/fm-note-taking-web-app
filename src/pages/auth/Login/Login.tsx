@@ -3,6 +3,7 @@ import styles from "./Login.module.scss";
 import { hasMinLength, isEmail, isNotEmpty } from '../../../util/validation.ts';
 import { useInput } from '../../../hooks/useInput.ts';
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 function Login() {
   const {
@@ -45,7 +46,7 @@ function Login() {
           />
 
           <div className={styles["form__input-container"]}>
-            <a href="" className={clsx("link", "link--underline")}>Forgot</a>
+            <Link to={"/forgot-password"} className={clsx("link", "link--underline")}>Forgot</Link>
             <Input 
             label="Password"
             id="password"
@@ -84,7 +85,7 @@ function Login() {
 
         <p>
           <span>No account yet? </span>  
-          <a href="" className="link">Sign Up</a>  
+          <Link to={"/signup"} className="link">Sign Up</Link>  
         </p>        
     </form>
     </main>);
