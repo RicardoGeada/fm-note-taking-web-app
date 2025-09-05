@@ -13,7 +13,7 @@ function ForgotPassword() {
   } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
   return (
-    <main>
+    <main className={styles["main"]}>
       <form className={styles["form"]} action="">
         <img
           className={styles["form__logo"]}

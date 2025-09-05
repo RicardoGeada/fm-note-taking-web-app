@@ -21,7 +21,7 @@ function ResetPassword() {
       } = useInput('', (value) =>  isEqualToOtherValue(value, newPasswordValue));
 
     return(
-      <main>
+      <main className={styles["main"]}>
     <form className={styles["form"]} action="">
 
         <img className={styles["form__logo"]} src="./images/logo.svg" alt="notes logo" />

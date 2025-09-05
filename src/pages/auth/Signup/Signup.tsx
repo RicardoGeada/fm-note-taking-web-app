@@ -21,7 +21,7 @@ function Signup() {
   } = useInput("", (value) => hasMinLength(value, 8));
 
   return (
-    <main>
+    <main className={styles["main"]}>
       <form className={styles["form"]} action="">
         <img
           className={styles["form__logo"]}
