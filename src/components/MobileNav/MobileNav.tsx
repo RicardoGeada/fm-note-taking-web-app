@@ -9,6 +9,7 @@ import SettingsIcon from "./../../assets/images/icon-settings.svg?react";
 
 import { NavLink } from "react-router-dom";
 import clsx from "clsx";
+import { Fragment } from "react/jsx-runtime";
 
 export default function MobileNav() {
 
@@ -23,9 +24,8 @@ export default function MobileNav() {
     return (
         <nav className={styles["mobile-nav"]}>
             {navItems.map(({to, label, Icon, iconClass}, index) => (
-                <>
+                <Fragment key={index}>
                 <NavLink
-                  key={index}   
                   to={to} 
                   className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }> 
                     <Icon className={iconClass}/> 
@@ -35,7 +35,7 @@ export default function MobileNav() {
                 {index < navItems.length - 1 &&
                  <div className={clsx("vl-separator", styles["vl-separator"])}></div>
                 }           
-                </>
+                </Fragment>
             ))}
         </nav>
     )
