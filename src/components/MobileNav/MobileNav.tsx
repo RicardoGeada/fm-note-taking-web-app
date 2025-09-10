@@ -12,40 +12,31 @@ import clsx from "clsx";
 
 export default function MobileNav() {
 
+    const navItems = [
+        { to: "/", label: "Home", Icon: HomeIcon, iconClass: styles["icon--path"] },
+        { to: "/search", label: "Search", Icon: SearchIcon, iconClass: styles["icon--path"] },
+        { to: "/archived", label: "Archived", Icon: ArchiveIcon, iconClass: styles["icon--stroke"] },
+        { to: "/tags", label: "Tags", Icon: TagIcon, iconClass: styles["icon--stroke"] },
+        { to: "/settings", label: "Settings", Icon: SettingsIcon, iconClass: styles["icon--path"] },
+    ];
+
     return (
         <nav className={styles["mobile-nav"]}>
-            <NavLink to={"/"} className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }>
-                <HomeIcon className={styles["icon--path"]}/>
-                <span>Home</span>
-            </NavLink>
+            {navItems.map(({to, label, Icon, iconClass}, index) => (
+                <>
+                <NavLink
+                  key={index}   
+                  to={to} 
+                  className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }> 
+                    <Icon className={iconClass}/> 
+                    <span>{label}</span> 
+                </NavLink>
 
-            <div className={clsx("vl-separator", styles["vl-separator"])}></div>
-
-            <NavLink to={"/search"} className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }>
-                <SearchIcon className={styles["icon--path"]}/>
-                <span>Search</span>
-            </NavLink>
-
-            <div className={clsx("vl-separator", styles["vl-separator"])}></div>
-
-            <NavLink to={"/archived"} className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }>
-                <ArchiveIcon className={styles["icon--stroke"]}/>
-                <span>Archived</span>
-            </NavLink>
-
-            <div className={clsx("vl-separator", styles["vl-separator"])}></div>
-
-            <NavLink to={"/tags"} className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }>
-                <TagIcon className={styles["icon--stroke"]}/>
-                <span>Tags</span>
-            </NavLink>
-
-            <div className={clsx("vl-separator", styles["vl-separator"])}></div>
-
-            <NavLink to={"/settings"} className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }>
-                <SettingsIcon className={styles["icon--path"]}/>
-                <span>Settings</span>
-            </NavLink>
+                {index < navItems.length - 1 &&
+                 <div className={clsx("vl-separator", styles["vl-separator"])}></div>
+                }           
+                </>
+            ))}
         </nav>
     )
 }
