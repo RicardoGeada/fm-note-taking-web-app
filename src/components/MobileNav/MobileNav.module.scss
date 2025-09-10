@@ -1,0 +1,77 @@
+@use "./../../fonts.scss";
+
+.mobile-nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: var(--spacing-150) var(--spacing-200);
+    height: 56px;
+    box-shadow: 0px -4px 6px rgba(#f0f0f0, 0.6);
+
+    &__menu-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-50);
+        color: var(--color-neutral-600);
+        text-decoration: none;
+        padding: var(--spacing-50);
+        border-radius: var(--spacing-50);
+        flex: 1;
+        max-width: var(--spacing-1000);
+        @include fonts.apply-text-preset("6");
+
+        span {
+            display: none;
+        }
+
+        .icon {
+            &--path {
+                path {
+                    fill: var(--color-neutral-600);
+                }
+            }
+            &--stroke {
+                path {
+                    stroke: var(--color-neutral-600);
+                }
+            }
+        }
+
+        &--active {
+            color: var(--color-blue-500);
+            background-color: var(--color-blue-50);
+            .icon {
+            &--path {
+                path {
+                    fill: var(--color-blue-500);
+                }
+            }
+            &--stroke {
+                path {
+                    stroke: var(--color-blue-500);
+                }
+            }
+        }
+        }
+    }
+
+    .vl-separator {
+        display: none;
+    }
+}
+
+@media (min-width: 48rem) { // 768px
+    .mobile-nav {
+        padding: var(--spacing-150) var(--spacing-400);
+        height: 74px;
+
+        span {
+            display: block;
+        }
+
+        .vl-separator {
+            display: block;
+        }
+    }
+}
