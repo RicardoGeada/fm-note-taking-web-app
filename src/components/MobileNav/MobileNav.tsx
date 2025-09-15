@@ -11,7 +11,11 @@ import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import { Fragment } from "react/jsx-runtime";
 
-export default function MobileNav() {
+type MobileNavProps = {
+    className?: string;
+}
+
+export default function MobileNav({className}: MobileNavProps) {
 
     const navItems = [
         { to: "/", label: "Home", Icon: HomeIcon, iconClass: styles["icon--path"] },
@@ -22,7 +26,7 @@ export default function MobileNav() {
     ];
 
     return (
-        <nav className={styles["mobile-nav"]}>
+        <nav className={clsx(styles["mobile-nav"], className)}>
             {navItems.map(({to, label, Icon, iconClass}, index) => (
                 <Fragment key={index}>
                 <NavLink
