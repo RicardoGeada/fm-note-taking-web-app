@@ -1,0 +1,22 @@
+@use "./../../../fonts.scss";
+
+.all-notes {
+  padding: var(--spacing-250) var(--spacing-200);
+  
+
+  &__headline {
+    color: var(--color-neutral-950);
+    margin-bottom: var(--spacing-200);
+    @include fonts.apply-text-preset("1");
+  }
+}
+
+
+.notes-list {
+    >:not(:last-child)::after {
+        content: "";
+        width: 100%;
+        height: 1px;
+        background-color: var(--color-neutral-200);
+    }
+}

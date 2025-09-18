@@ -1,4 +1,6 @@
-export default DUMMY_NOTES = [
+// import type { Note } from "./types/note"
+
+const DUMMY_NOTES = [
     {
         id: "note-0",
         archived: false,
@@ -87,3 +89,4 @@ export default DUMMY_NOTES = [
     },
 ]
 
+export default DUMMY_NOTES;
