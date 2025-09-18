@@ -1,6 +1,7 @@
 .layout {
   display: grid;
   min-height: 100dvh;
+  max-height: 100dvh;
   grid-template-areas:
     "header"
     "main"
@@ -13,6 +14,7 @@
 
   &__main {
     grid-area: main;
+    overflow: scroll;
   }
 
   &__nav {
