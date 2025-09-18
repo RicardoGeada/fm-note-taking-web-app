@@ -7,6 +7,7 @@
     "main"
     "nav";
   grid-template-rows: auto 1fr auto;
+  background-color: var(--color-neutral-100);
 
   &__header {
     grid-area: header;
@@ -15,6 +16,8 @@
   &__main {
     grid-area: main;
     overflow: scroll;
+    background-color: var(--color-neutral-0);
+    border-radius: var(--spacing-150) var(--spacing-150) 0 0;
   }
 
   &__nav {
