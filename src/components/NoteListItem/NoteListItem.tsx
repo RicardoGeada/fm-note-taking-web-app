@@ -1,13 +1,10 @@
 import type { Note } from "../../types/note";
+import { formatDate } from "../../util/date";
 import styles from "./NoteListItem.module.scss";
 
 export default function NoteListItem(note: Note) {
     
-  const lastEdited = new Intl.DateTimeFormat("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  }).format(new Date(note.last_edited));
+  const lastEdited = formatDate(note.last_edited);
 
   return (
     <li className={styles["note-item"]} key={note.id}>

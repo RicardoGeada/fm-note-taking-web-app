@@ -1,6 +1,7 @@
 @use "./../../../fonts.scss";
 
 .all-notes {
+ 
   padding: var(--spacing-250) var(--spacing-200);
 
   &__headline {
@@ -24,6 +25,16 @@
     height: 1px;
     background-color: var(--color-neutral-200);
   }
+}
+
+.overlay {
+  position: absolute;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--color-neutral-0);
 }
 
 @media (min-width: 48rem) { // 768px
