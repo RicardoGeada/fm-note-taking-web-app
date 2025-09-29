@@ -1,7 +1,7 @@
 import styles from "./NoteDetail.module.scss";
 import DUMMY_NOTES from "../../dummy-notes";
-import tagIcon from "./../../assets/images/icon-tag.svg";
-import lastEditedIcon from "./../../assets/images/icon-clock.svg";
+import TagIcon from "./../../assets/images/icon-tag.svg?react";
+import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
 
 type NoteDetailProps = {
@@ -20,19 +20,23 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
   return (
     <div className={styles["note"]}>
 
+      <div className="hl-separator"></div>
+
       <h1 className={styles["note__title"]}>{note.title}</h1>
 
       <div className={styles["note__properties"]}>
         <div className={styles["note__property"]}>
           <span className={styles["note__property-key"]}>
-            <img src={tagIcon} alt="" />
+            <TagIcon />
             Tags
           </span>
-          <span className={styles["note__property-value"]}>{note.tags.join(", ")}</span>
+          <span className={styles["note__property-value"]}>
+            {note.tags.join(", ")}
+          </span>
         </div>
         <div className={styles["note__property"]}>
           <span className={styles["note__property-key"]}>
-            <img src={lastEditedIcon} alt="" />
+            <LastEditedIcon />
             Last edited
           </span>
           <span className={styles["note__property-value"]}>{lastEdited}</span>
@@ -42,7 +46,6 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
       <div className="hl-separator"></div>
 
       <p className={styles["note__text"]}>{note.text.trim()}</p>
-
     </div>
   );
 }

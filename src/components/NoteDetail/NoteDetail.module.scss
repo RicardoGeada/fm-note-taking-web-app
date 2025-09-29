@@ -17,9 +17,10 @@
         display: flex;
         align-items: center;
         gap: var(--spacing-75);
+        color: var(--color-neutral-700);
         min-width: 115px;
 
-        img {
+        svg {
             width: var(--spacing-200);
             height: var(--spacing-200);
         }
