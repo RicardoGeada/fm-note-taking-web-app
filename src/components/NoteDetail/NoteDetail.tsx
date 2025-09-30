@@ -1,8 +1,12 @@
 import styles from "./NoteDetail.module.scss";
 import DUMMY_NOTES from "../../dummy-notes";
+import ArrowLeftIcon from "./../../assets/images/icon-arrow-left.svg?react";
+import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
+import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
+import clsx from "clsx";
 
 type NoteDetailProps = {
   noteId: string;
@@ -19,6 +23,31 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
 
   return (
     <div className={styles["note"]}>
+      <header
+        className={styles["note__controls"]}
+        role="toolbar"
+        aria-label="Note actions"
+      >
+        <button className={styles["note__controls-button"]}>
+          <ArrowLeftIcon />
+          <span>Go Back</span>
+        </button>
+
+        <div className={styles["note__controls-right"]}>
+          <button className={styles["note__controls-button"]}>
+            <DeleteIcon />
+          </button>
+          <button className={styles["note__controls-button"]}>
+            <ArchiveIcon />
+          </button>
+          <button className={styles["note__controls-button"]}>
+            <span>Cancel</span>
+          </button>
+          <button className={clsx(styles["note__controls-button"],styles["note__controls-button--primary"])}>
+            <span>Save Note</span>
+          </button>
+        </div>
+      </header>
 
       <div className="hl-separator"></div>
 
