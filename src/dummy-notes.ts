@@ -9,23 +9,23 @@ const DUMMY_NOTES = [
     created_at: "2024-10-29T15:23:00Z",
     last_edited: "2024-10-29T15:23:00Z",
     text: `
-        Key performance optimization techniques:
+Key performance optimization techniques:
 
-        1. Code Splitting
-        - Use React.lazy() for route-based splitting
-        - Implement dynamic imports for heavy components
+1. Code Splitting
+- Use React.lazy() for route-based splitting
+- Implement dynamic imports for heavy components
 
-        2.	Memoization
-        - useMemo for expensive calculations
-        - useCallback for function props
-        - React.memo for component optimization
+2.	Memoization
+- useMemo for expensive calculations
+- useCallback for function props
+- React.memo for component optimization
 
-        3. Virtual List Implementation
-        - Use react-window for long lists
-        - Implement infinite scrolling
+3. Virtual List Implementation
+- Use react-window for long lists
+- Implement infinite scrolling
 
-        TODO: Benchmark current application and identify bottlenecks
-        `,
+TODO: Benchmark current application and identify bottlenecks
+    `,
   },
   {
     id: "note-1",
@@ -95,24 +95,24 @@ const DUMMY_NOTES = [
     created_at: "2024-10-26T15:23:00Z",
     last_edited: "2024-10-26T15:23:00Z",
     text: `
-        Project migration steps:
+Project migration steps:
 
-        1. Initial Setup
-        - Install TypeScript dependencies
-        - Configure tsconfig.json
-        - Set up build pipeline
+1. Initial Setup
+- Install TypeScript dependencies
+- Configure tsconfig.json
+- Set up build pipeline
 
-        2. Migration Strategy
-        - Start with newer modules
-        - Add type definitions gradually
-        - Use 'any' temporarily for complex cases
+2. Migration Strategy
+- Start with newer modules
+- Add type definitions gradually
+- Use 'any' temporarily for complex cases
 
-        3. Testing Approach
-        - Update test configuration
-        - Add type testing
-        - Validate build process
+3. Testing Approach
+- Update test configuration
+- Add type testing
+- Validate build process
 
-        Deadline: End of Q4 2024
+Deadline: End of Q4 2024
     `,
   },
   {
@@ -125,7 +125,7 @@ const DUMMY_NOTES = [
     text: `
         `,
   },
-    {
+  {
     id: "note-9",
     archived: true,
     title: "React Component Library",

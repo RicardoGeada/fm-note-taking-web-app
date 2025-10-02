@@ -1,4 +1,3 @@
-/// <reference types="vite-plugin-svgr/client" />
 import styles from "./MobileNav.module.scss";
 import HomeIcon from "./../../assets/images/icon-home.svg?react";
 import SearchIcon from "./../../assets/images/icon-search.svg?react";
