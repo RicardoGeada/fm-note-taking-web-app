@@ -23,6 +23,7 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
 
   return (
     <div className={styles["note"]}>
+      
       <header
         className={styles["note__controls"]}
         role="toolbar"

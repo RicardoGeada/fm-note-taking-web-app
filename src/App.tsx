@@ -1,5 +1,9 @@
 import "./App.scss";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Home from "./pages/main/Home/Home";
 import Login from "./pages/auth/Login/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword/ForgotPassword";
@@ -12,8 +16,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     children: [
+      { index: true, element: <Navigate to="all" replace /> }, // redirect to all
       {
-        path: "",
+        path: "all",
         element: <AllNotes />,
         children: [{ path: ":noteId", element: null }],
       },
