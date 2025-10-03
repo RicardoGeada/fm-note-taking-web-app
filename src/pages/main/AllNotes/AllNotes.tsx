@@ -3,6 +3,7 @@ import styles from "./AllNotes.module.scss";
 import DUMMY_NOTES from "../../../dummy-notes";
 import { useParams } from "react-router-dom";
 import NoteDetail from "../../../components/NoteDetail/NoteDetail";
+import AddIcon from "./../../../assets/images/icon-plus.svg?react";
 
 export default function AllNotes() {
   const { noteId } = useParams();
@@ -11,6 +12,11 @@ export default function AllNotes() {
     <>
       <div className={styles["all-notes"]}>
         <h2 className={styles["all-notes__headline"]}>All Notes</h2>
+
+        <button className={styles["new-note-button"]}>
+          <AddIcon />
+        </button>
+        
         {DUMMY_NOTES.length > 0 && (
           <ul className={styles["notes-list"]}>
             {DUMMY_NOTES.filter((note) => !note.archived).map((note) => (
@@ -26,6 +32,7 @@ export default function AllNotes() {
           </div>
         )}
       </div>
+
       {noteId && (
         <div className={styles["overlay"]}>
           <NoteDetail noteId={noteId} />

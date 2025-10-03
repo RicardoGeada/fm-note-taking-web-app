@@ -17,21 +17,21 @@ type MobileNavProps = {
 export default function MobileNav({className}: MobileNavProps) {
 
     const navItems = [
-        { to: "/", label: "Home", Icon: HomeIcon, iconClass: styles["icon--path"] },
-        { to: "/search", label: "Search", Icon: SearchIcon, iconClass: styles["icon--path"] },
-        { to: "/archived", label: "Archived", Icon: ArchiveIcon, iconClass: styles["icon--stroke"] },
-        { to: "/tags", label: "Tags", Icon: TagIcon, iconClass: styles["icon--stroke"] },
-        { to: "/settings", label: "Settings", Icon: SettingsIcon, iconClass: styles["icon--path"] },
+        { to: "/", label: "Home", Icon: HomeIcon },
+        { to: "/search", label: "Search", Icon: SearchIcon },
+        { to: "/archived", label: "Archived", Icon: ArchiveIcon },
+        { to: "/tags", label: "Tags", Icon: TagIcon },
+        { to: "/settings", label: "Settings", Icon: SettingsIcon },
     ];
 
     return (
         <nav className={clsx(styles["mobile-nav"], className)}>
-            {navItems.map(({to, label, Icon, iconClass}, index) => (
+            {navItems.map(({to, label, Icon}, index) => (
                 <Fragment key={index}>
                 <NavLink
                   to={to} 
                   className={({isActive}) => isActive ? clsx(styles["mobile-nav__menu-item"],styles["mobile-nav__menu-item--active"]) : styles["mobile-nav__menu-item"] }> 
-                    <Icon className={iconClass}/> 
+                    <Icon/> 
                     <span>{label}</span> 
                 </NavLink>
 

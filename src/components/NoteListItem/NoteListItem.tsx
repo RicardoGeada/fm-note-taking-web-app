@@ -6,7 +6,6 @@ import styles from "./NoteListItem.module.scss";
 export default function NoteListItem(note: Note) {
   const location = useLocation();  
   const lastEdited = formatDate(note.last_edited);
-  console.log(location);
 
   return (
     <li className={styles["note-item"]} key={note.id}>
