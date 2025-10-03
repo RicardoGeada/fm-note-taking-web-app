@@ -1,6 +1,7 @@
 @use "./../../../fonts.scss";
 
 .all-notes {
+  position: relative;
   padding: var(--spacing-250) var(--spacing-200);
 
   &__headline {
@@ -36,6 +37,23 @@
   background-color: var(--color-neutral-0);
 }
 
+.new-note-button {
+  position: fixed;
+  right: var(--spacing-200);
+  bottom: calc(56px + var(--spacing-200)); // 56px for mobile nav height
+  width: var(--spacing-600);
+  height: var(--spacing-600);
+  background-color: var(--color-blue-500);
+  border-radius: var(--radius-full);
+  color: var(--color-neutral-0);
+  box-shadow: 0 7px 11px 0 rgb(from var(--color-neutral-300) r g b / 70%);
+
+  svg {
+    width: var(--spacing-400);
+    height: var(--spacing-400);
+  }
+}
+
 @media (min-width: 48rem) { // 768px
     .all-notes {
     &__empty-notification {
@@ -52,5 +70,12 @@
         background-color: var(--color-neutral-200);
       }
     }
+  }
+
+  .new-note-button {
+    right: var(--spacing-400);
+    bottom: calc(74px + var(--spacing-400)); // 74px for mobile nav height
+    width: var(--spacing-800);
+    height: var(--spacing-800);
   }
 }
