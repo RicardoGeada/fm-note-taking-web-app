@@ -6,7 +6,11 @@
     align-items: center;
     padding: var(--spacing-150) var(--spacing-200);
     height: 56px;
-    box-shadow: 0px -4px 6px rgba(#f0f0f0, 0.6);
+    box-shadow: 0px -4px 6px 0 rgba(#f0f0f0, 0.6);
+    background-color: var(--color-neutral-0);
+    border-top: 1px solid var(--color-neutral-200);
+    position: relative;
+    z-index: 999;
 
     &__menu-item {
         display: flex;
@@ -23,19 +27,6 @@
 
         span {
             display: none;
-        }
-
-        .icon {
-            &--path {
-                path {
-                    fill: var(--color-neutral-600);
-                }
-            }
-            &--stroke {
-                path {
-                    stroke: var(--color-neutral-600);
-                }
-            }
         }
 
         &--active {
