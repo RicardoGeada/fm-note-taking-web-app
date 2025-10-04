@@ -16,9 +16,9 @@ const router = createBrowserRouter([
     path: "/",
     element: <Home />,
     children: [
-      { index: true, element: <Navigate to="all" replace /> }, // redirect to all
+      { index: true, element: <Navigate to="/all" replace /> }, // redirect to all
       {
-        path: "all",
+        path: "/all",
         element: <AllNotes />,
         children: [{ path: ":noteId", element: null }],
       },
