@@ -22,60 +22,66 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
   const lastEdited = formatDate(note.last_edited);
 
   return (
-    <div className={styles["note"]}>
-      
-      <header
-        className={styles["note__controls"]}
-        role="toolbar"
-        aria-label="Note actions"
-      >
-        <button className={styles["note__controls-button"]}>
-          <ArrowLeftIcon />
-          <span>Go Back</span>
-        </button>
-
-        <div className={styles["note__controls-right"]}>
+    <div className={styles["note-wrapper"]}>
+      <div className={styles["note"]}>
+        <header
+          className={styles["note__controls"]}
+          role="toolbar"
+          aria-label="Note actions"
+        >
           <button className={styles["note__controls-button"]}>
-            <DeleteIcon />
+            <ArrowLeftIcon />
+            <span>Go Back</span>
           </button>
-          <button className={styles["note__controls-button"]}>
-            <ArchiveIcon />
-          </button>
-          <button className={styles["note__controls-button"]}>
-            <span>Cancel</span>
-          </button>
-          <button className={clsx(styles["note__controls-button"],styles["note__controls-button--primary"])}>
-            <span>Save Note</span>
-          </button>
-        </div>
-      </header>
 
-      <div className="hl-separator"></div>
+          <div className={styles["note__controls-right"]}>
+            <button className={styles["note__controls-button"]}>
+              <DeleteIcon />
+            </button>
+            <button className={styles["note__controls-button"]}>
+              <ArchiveIcon />
+            </button>
+            <button className={styles["note__controls-button"]}>
+              <span>Cancel</span>
+            </button>
+            <button
+              className={clsx(
+                styles["note__controls-button"],
+                styles["note__controls-button--primary"]
+              )}
+            >
+              <span>Save Note</span>
+            </button>
+          </div>
+        </header>
 
-      <h1 className={styles["note__title"]}>{note.title}</h1>
+        <div className="hl-separator"></div>
 
-      <div className={styles["note__properties"]}>
-        <div className={styles["note__property"]}>
-          <span className={styles["note__property-key"]}>
-            <TagIcon />
-            Tags
-          </span>
-          <span className={styles["note__property-value"]}>
-            {note.tags.join(", ")}
-          </span>
+        <h1 className={styles["note__title"]}>{note.title}</h1>
+
+        <div className={styles["note__properties"]}>
+          <div className={styles["note__property"]}>
+            <span className={styles["note__property-key"]}>
+              <TagIcon />
+              Tags
+            </span>
+            <span className={styles["note__property-value"]}>
+              {note.tags.join(", ")}
+            </span>
+          </div>
+          <div className={styles["note__property"]}>
+            <span className={styles["note__property-key"]}>
+              <LastEditedIcon />
+              Last edited
+            </span>
+            <span className={styles["note__property-value"]}>{lastEdited}</span>
+          </div>
         </div>
-        <div className={styles["note__property"]}>
-          <span className={styles["note__property-key"]}>
-            <LastEditedIcon />
-            Last edited
-          </span>
-          <span className={styles["note__property-value"]}>{lastEdited}</span>
-        </div>
+
+        <div className="hl-separator"></div>
+
+        <p className={styles["note__text"]}>{note.text.trim()}</p>
       </div>
-
-      <div className="hl-separator"></div>
-
-      <p className={styles["note__text"]}>{note.text.trim()}</p>
     </div>
   );
 }

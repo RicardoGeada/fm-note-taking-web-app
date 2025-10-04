@@ -1,6 +1,12 @@
 @use "./../../fonts.scss";
 
+.note-wrapper {
+    height: 100%;
+    overflow: auto;
+}
+
 .note {
+  overflow: auto;
   padding: var(--spacing-250) var(--spacing-200);
   display: flex;
   flex-direction: column;
