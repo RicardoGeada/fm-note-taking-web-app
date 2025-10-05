@@ -7,12 +7,14 @@ import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 type NoteDetailProps = {
   noteId: string;
 };
 
 export default function NoteDetail({ noteId }: NoteDetailProps) {
+  const navigate = useNavigate();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
 
   if (!note) {
@@ -29,7 +31,7 @@ export default function NoteDetail({ noteId }: NoteDetailProps) {
           role="toolbar"
           aria-label="Note actions"
         >
-          <button className={styles["note__controls-button"]}>
+          <button className={styles["note__controls-button"]} onClick={() => navigate(-1)}>
             <ArrowLeftIcon />
             <span>Go Back</span>
           </button>
