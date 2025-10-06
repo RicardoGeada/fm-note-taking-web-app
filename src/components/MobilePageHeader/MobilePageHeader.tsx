@@ -1,12 +1,12 @@
 import clsx from "clsx";
-import styles from "./PageHeader.module.scss";
+import styles from "./MobilePageHeader.module.scss";
 import LogoIcon from "./../../assets/images/logo.svg?react";
 
-type PageHeaderProps = {
+type MobilePageHeaderProps = {
   className?: string;
 };
 
-export default function PageHeader({ className }: PageHeaderProps) {
+export default function MobilePageHeader({ className }: MobilePageHeaderProps) {
   return (
     <header className={clsx(styles["page-header"], className)}>
       <LogoIcon />
