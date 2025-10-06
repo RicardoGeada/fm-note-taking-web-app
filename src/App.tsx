@@ -20,6 +20,7 @@ const router = createBrowserRouter([
       {
         path: "/all",
         element: <AllNotes />,
+        handle: { title : "All Notes" },
         children: [{ path: ":noteId", element: null }],
       },
     ],

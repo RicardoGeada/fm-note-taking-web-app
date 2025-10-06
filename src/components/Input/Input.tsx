@@ -10,7 +10,7 @@ interface InputButtonConfig {
 }
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label: string,
+  label?: string,
   id: string,
   error?: boolean | string,
   hint?: string,
@@ -21,7 +21,7 @@ const Input: React.FC<InputProps> = ({ label, id, error, hint, button, ...props 
 
   return (
     <div className={styles["input-field"]}>
-      <label className={styles["input-field__label"]} htmlFor={id}>{ label }</label>
+      {label && <label className={styles["input-field__label"]} htmlFor={id}>{ label }</label>}
 
       <div className={styles["input-field__input-container"]} >
         <input
