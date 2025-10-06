@@ -1,21 +1,12 @@
-import { Outlet, useParams } from "react-router-dom";
-import MobileNav from "../../../components/MobileNav/MobileNav";
-import PageHeader from "../../../components/PageHeader/PageHeader";
-import styles from "./Home.module.scss";
-import clsx from "clsx";
+import { useMediaQuery } from "react-responsive";
+import MobileLayout from "../../../layouts/Mobile/MobileLayout";
+import DesktopLayout from "../../../layouts/Desktop/DesktopLayout";
 
 function Home() {
-
-  const { noteId } = useParams();
+  const isDesktop = useMediaQuery({minWidth: 1080});
 
   return (
-    <div className={styles["layout"]}>
-      <PageHeader className={styles["layout__header"]}/>
-      <main className={clsx(styles["layout__main"], noteId ? styles["no-scroll"] : "")}>
-        <Outlet />
-      </main>
-      <MobileNav className={styles["layout__nav"]} />
-    </div>
+    isDesktop ? <DesktopLayout /> : <MobileLayout />
   );
 }
 
