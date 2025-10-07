@@ -1,0 +1,32 @@
+@use "./../../fonts.scss";
+
+li {
+  list-style: none;
+}
+
+.sidebar-item {
+  padding: var(--spacing-125) var(--spacing-150);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-75);
+  color: var(--color-neutral-700);
+  text-decoration: none;
+  border-radius: var(--spacing-100);
+  @include fonts.apply-text-preset("4");
+
+  svg {
+    width: var(--spacing-250);
+    height: var(--spacing-250);
+  }
+
+  &__text {
+    margin-right: auto;
+  }
+
+  &--active {
+    background-color: var(--color-neutral-100);
+    .sidebar-item__icon {
+      color: var(--color-blue-500);
+    }
+  }
+}
