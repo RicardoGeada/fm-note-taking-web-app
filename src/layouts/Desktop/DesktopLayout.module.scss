@@ -11,21 +11,18 @@
 
   &__header {
     grid-area: header;
+    border-bottom: 1px solid var(--color-neutral-200);
   }
 
   &__main {
     grid-area: main;
     position: relative;
     overflow: auto;
-    background-color: rgb(78, 78, 143);
   }
 
   &__nav {
     grid-area: nav;
     width: 272px;
+    border-right: 1px solid var(--color-neutral-200);
   }
 }
-
-// .no-scroll {
-//   overflow: hidden;
-// }
