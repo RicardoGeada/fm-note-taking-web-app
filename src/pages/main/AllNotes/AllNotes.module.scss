@@ -84,6 +84,11 @@
 }
 
 @media (min-width: 67.5rem) { // 1080px
+  .all-notes-section {
+    display: flex;
+    height: 100%;
+  }
+
   .all-notes {
     max-width: 290px;
     padding: var(--spacing-250) var(--spacing-200) var(--spacing-250) var(--spacing-400);

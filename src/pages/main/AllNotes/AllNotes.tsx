@@ -1,8 +1,7 @@
 import NoteListItem from "../../../components/NoteListItem/NoteListItem";
 import styles from "./AllNotes.module.scss";
 import DUMMY_NOTES from "../../../dummy-notes";
-import { useParams } from "react-router-dom";
-import NoteDetail from "../../../components/NoteDetail/NoteDetail";
+import { Outlet, useParams } from "react-router-dom";
 import AddIcon from "./../../../assets/images/icon-plus.svg?react";
 import { useMediaQuery } from "react-responsive";
 import clsx from "clsx";
@@ -12,13 +11,19 @@ export default function AllNotes() {
   const { noteId } = useParams();
 
   return (
-    <>
+    <section className={styles["all-notes-section"]}>
       <div className={styles["all-notes"]}>
         {!isDesktop && (
           <h2 className={styles["all-notes__headline"]}>All Notes</h2>
         )}
 
-        <button className={clsx("btn btn--primary",styles["new-note-button"], isDesktop ? "" : "btn--circle")}>
+        <button
+          className={clsx(
+            "btn btn--primary",
+            styles["new-note-button"],
+            isDesktop ? "" : "btn--circle"
+          )}
+        >
           {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
         </button>
 
@@ -38,11 +43,13 @@ export default function AllNotes() {
         )}
       </div>
 
-      {noteId && (
+      {!isDesktop && noteId && (
         <div className={styles["overlay"]}>
-          <NoteDetail noteId={noteId} />
+          <Outlet />
         </div>
       )}
-    </>
+
+      {isDesktop && noteId && <Outlet />}
+    </section>
   );
 }
