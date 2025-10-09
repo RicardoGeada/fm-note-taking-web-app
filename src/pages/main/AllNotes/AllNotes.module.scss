@@ -1,36 +1,5 @@
 @use "./../../../fonts.scss";
 
-.all-notes {
-  position: relative;
-  padding: var(--spacing-250) var(--spacing-200);
-
-  &__headline {
-    color: var(--color-neutral-950);
-    margin-bottom: var(--spacing-200);
-    @include fonts.apply-text-preset("1");
-  }
-
-  &__empty-notification {
-    background-color: var(--color-neutral-100);
-    padding: var(--spacing-100);
-    border-radius: var(--spacing-100);
-    border: 1px solid var(--color-neutral-200);
-  }
-}
-
-.notes-list {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-50);
-
-  > :not(:last-child)::after {
-    content: "";
-    width: 100%;
-    height: 1px;
-    background-color: var(--color-neutral-200);
-  }
-}
-
 .overlay {
   position: absolute;
   z-index: 1000;
@@ -41,65 +10,9 @@
   background-color: var(--color-neutral-0);
 }
 
-.new-note-button {
-  position: fixed;
-  right: var(--spacing-200);
-  bottom: calc(56px + var(--spacing-200)); // 56px for mobile nav height
-  width: var(--spacing-600);
-  height: var(--spacing-600);
-  border-radius: var(--radius-full);
-  box-shadow: 0 7px 11px 0 rgb(from var(--color-neutral-300) r g b / 70%);
-
-  svg {
-    flex-shrink: 0;
-    width: var(--spacing-400);
-    height: var(--spacing-400);
-  }
-}
-
-@media (min-width: 48rem) { // 768px
-    .all-notes {
-    &__empty-notification {
-      position: relative;
-      margin-bottom: var(--spacing-200);
-
-      &::after {
-        content: "";
-        position: absolute;
-        bottom: calc(-1 * var(--spacing-200));
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background-color: var(--color-neutral-200);
-      }
-    }
-  }
-
-  .new-note-button {
-    right: var(--spacing-400);
-    bottom: calc(74px + var(--spacing-400)); // 74px for mobile nav height
-    width: var(--spacing-800);
-    height: var(--spacing-800);
-  }
-}
-
 @media (min-width: 67.5rem) { // 1080px
-  .all-notes-section {
+  .all-notes{
     display: flex;
     height: 100%;
-  }
-
-  .all-notes {
-    max-width: 290px;
-    padding: var(--spacing-250) var(--spacing-200) var(--spacing-250) var(--spacing-400);
-    border-right: 1px solid var(--color-neutral-200);
-  }
-
-  .new-note-button {
-    position: unset;
-    width: 100%;
-    height: unset;
-    box-shadow: none;
-    border-radius: var(--spacing-100);
   }
 }
