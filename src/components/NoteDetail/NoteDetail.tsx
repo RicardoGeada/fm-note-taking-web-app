@@ -29,7 +29,7 @@ export default function NoteDetail() {
           role="toolbar"
           aria-label="Note actions"
         >
-          <button className={styles["note__controls-button"]} onClick={() => navigate(-1)}>
+          <button className={styles["note__controls-button"]} onClick={() => navigate("..")}>
             <ArrowLeftIcon />
             <span>Go Back</span>
           </button>
