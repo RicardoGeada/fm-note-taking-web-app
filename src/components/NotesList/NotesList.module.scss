@@ -3,6 +3,8 @@
 .notes-list-wrapper {
   position: relative;
   padding: var(--spacing-250) var(--spacing-200);
+  overflow-x: auto;
+
 
   &__headline {
     color: var(--color-neutral-950);
@@ -75,6 +77,7 @@
 
 @media (min-width: 67.5rem) { // 1080px
   .notes-list-wrapper {
+    width: 100%;
     max-width: 290px;
     padding: var(--spacing-250) var(--spacing-200) var(--spacing-250) var(--spacing-400);
     border-right: 1px solid var(--color-neutral-200);

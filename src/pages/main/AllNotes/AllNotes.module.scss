@@ -1,5 +1,9 @@
 @use "./../../../fonts.scss";
 
+.all-notes {
+  height: 100%;
+}
+
 .overlay {
   position: absolute;
   z-index: 1000;
@@ -13,6 +17,5 @@
 @media (min-width: 67.5rem) { // 1080px
   .all-notes{
     display: flex;
-    height: 100%;
   }
 }
