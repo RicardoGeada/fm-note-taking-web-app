@@ -8,10 +8,11 @@ import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
 import clsx from "clsx";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { useMediaQuery } from "react-responsive";
 
 export default function NoteDetail() {
-  const { noteId } = useParams(); 
+  const isDesktop = useMediaQuery({ minWidth: 1080 });
+  const { noteId } = useParams();
   const navigate = useNavigate();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
 
@@ -24,38 +25,45 @@ export default function NoteDetail() {
   return (
     <div className={styles["note-wrapper"]}>
       <div className={styles["note"]}>
-        <header
-          className={styles["note__controls"]}
-          role="toolbar"
-          aria-label="Note actions"
-        >
-          <button className={styles["note__controls-button"]} onClick={() => navigate("..")}>
-            <ArrowLeftIcon />
-            <span>Go Back</span>
-          </button>
-
-          <div className={styles["note__controls-right"]}>
-            <button className={styles["note__controls-button"]}>
-              <DeleteIcon />
-            </button>
-            <button className={styles["note__controls-button"]}>
-              <ArchiveIcon />
-            </button>
-            <button className={styles["note__controls-button"]}>
-              <span>Cancel</span>
-            </button>
-            <button
-              className={clsx(
-                styles["note__controls-button"],
-                styles["note__controls-button--primary"]
-              )}
+        {!isDesktop && (
+          <>
+            <header
+              className={styles["note__controls"]}
+              role="toolbar"
+              aria-label="Note actions"
             >
-              <span>Save Note</span>
-            </button>
-          </div>
-        </header>
+              <button
+                className={styles["note__controls-button"]}
+                onClick={() => navigate("..")}
+              >
+                <ArrowLeftIcon />
+                <span>Go Back</span>
+              </button>
 
-        <div className="hl-separator"></div>
+              <div className={styles["note__controls-right"]}>
+                <button className={styles["note__controls-button"]}>
+                  <DeleteIcon />
+                </button>
+                <button className={styles["note__controls-button"]}>
+                  <ArchiveIcon />
+                </button>
+                <button className={styles["note__controls-button"]}>
+                  <span>Cancel</span>
+                </button>
+                <button
+                  className={clsx(
+                    styles["note__controls-button"],
+                    styles["note__controls-button--primary"]
+                  )}
+                >
+                  <span>Save Note</span>
+                </button>
+              </div>
+            </header>
+
+            <div className="hl-separator"></div>
+          </>
+        )}
 
         <h1 className={styles["note__title"]}>{note.title}</h1>
 
@@ -81,6 +89,16 @@ export default function NoteDetail() {
         <div className="hl-separator"></div>
 
         <p className={styles["note__text"]}>{note.text.trim()}</p>
+
+        {isDesktop && (
+          <>
+            <div className="hl-separator"></div>
+            <div className={styles["note__buttons"]}>
+              <button className="btn btn--primary">Save Note</button>
+              <button className="btn btn--secondary">Cancel</button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
