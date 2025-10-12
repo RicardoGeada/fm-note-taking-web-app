@@ -14,43 +14,6 @@
   gap: var(--spacing-150);
   height: 100%;
 
-  &__controls {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  &__controls-right {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-200);
-  }
-
-  &__controls-button {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-75);
-    color: var(--color-neutral-600);
-    @include fonts.apply-text-preset("5");
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    &:hover {
-      color: var(--color-neutral-950);
-    }
-
-    &--primary {
-      color: var(--color-blue-500);
-
-      &:hover {
-        color: var(--color-blue-700);
-      }
-    }
-  }
-
   &__property {
     display: flex;
     align-items: center;

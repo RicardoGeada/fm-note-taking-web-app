@@ -1,19 +1,17 @@
 import styles from "./NoteDetail.module.scss";
 import DUMMY_NOTES from "../../dummy-notes";
-import ArrowLeftIcon from "./../../assets/images/icon-arrow-left.svg?react";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
-import clsx from "clsx";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
-  const navigate = useNavigate();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
 
   if (!note) {
@@ -26,42 +24,10 @@ export default function NoteDetail() {
     <>
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
+
           {!isDesktop && (
             <>
-              <header
-                className={styles["note__controls"]}
-                role="toolbar"
-                aria-label="Note actions"
-              >
-                <button
-                  className={styles["note__controls-button"]}
-                  onClick={() => navigate("..")}
-                >
-                  <ArrowLeftIcon />
-                  <span>Go Back</span>
-                </button>
-
-                <div className={styles["note__controls-right"]}>
-                  <button className={styles["note__controls-button"]}>
-                    <DeleteIcon />
-                  </button>
-                  <button className={styles["note__controls-button"]}>
-                    <ArchiveIcon />
-                  </button>
-                  <button className={styles["note__controls-button"]}>
-                    <span>Cancel</span>
-                  </button>
-                  <button
-                    className={clsx(
-                      styles["note__controls-button"],
-                      styles["note__controls-button--primary"]
-                    )}
-                  >
-                    <span>Save Note</span>
-                  </button>
-                </div>
-              </header>
-
+              <NoteDetailHeader />
               <div className="hl-separator"></div>
             </>
           )}
@@ -102,8 +68,10 @@ export default function NoteDetail() {
               </div>
             </>
           )}
+
         </div>
       </div>
+
       {isDesktop && (
         <aside className={styles["note__controls-desktop"]}>
           <button className="btn btn--border">
@@ -116,6 +84,7 @@ export default function NoteDetail() {
           </button>
         </aside>
       )}
+      
     </>
   );
 }
