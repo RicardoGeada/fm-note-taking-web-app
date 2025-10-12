@@ -86,3 +86,24 @@
     gap: var(--spacing-200);
   }
 }
+
+@media (min-width: 67.5rem) {
+  .note-wrapper {
+    max-width: 588px;
+    border-right: 1px solid var(--color-neutral-200);
+  }
+
+  .note__controls-desktop{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-150);
+    padding: var(--spacing-250) var(--spacing-200);
+    flex-grow: 1;
+
+    button {
+      justify-content: flex-start;
+      max-width: 242px;
+      width: 100%;
+    }
+  }
+}

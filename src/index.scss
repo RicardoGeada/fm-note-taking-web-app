@@ -101,6 +101,12 @@ button {
   gap: var(--spacing-100);
   @include fonts.apply-text-preset("4");
 
+  svg{
+    width: var(--spacing-250);
+    height: var(--spacing-250);
+    flex-shrink: 0;
+  }
+
   &--primary {
     color: var(--color-neutral-0);
     background-color: var(--color-blue-500);
