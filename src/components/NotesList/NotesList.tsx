@@ -1,11 +1,17 @@
 import clsx from "clsx";
 import styles from "./NotesList.module.scss";
 import AddIcon from "./../../assets/images/icon-plus.svg?react";
-import DUMMY_NOTES from "../../dummy-notes";
 import NoteListItem from "../NoteListItem/NoteListItem";
 import { useMediaQuery } from "react-responsive";
+import type { Note } from "../../types/note";
 
-export default function NoteList() {
+type NoteListProps = {
+  notes: Note[];
+  basePath: string;
+}
+
+
+export default function NoteList({ notes, basePath }: NoteListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
 
   return (
@@ -24,17 +30,17 @@ export default function NoteList() {
         {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
       </button>
 
-      {DUMMY_NOTES.length === 0 && (
+      {notes.length === 0 && (
         <div className={styles["notes-list__empty-notification"]}>
           You don't have any notes yet. Start a new note to capture your
           thoughts and ideas.
         </div>
       )}
 
-      {DUMMY_NOTES.length > 0 && (
+      {notes.length > 0 && (
         <ul className={styles["notes-list"]}>
-          {DUMMY_NOTES.filter((note) => !note.archived).map((note) => (
-            <NoteListItem key={note.id} note={note} basePath="/all" />
+          {notes.map((note) => (
+            <NoteListItem key={note.id} note={note} basePath={basePath} />
           ))}
         </ul>
       )}
