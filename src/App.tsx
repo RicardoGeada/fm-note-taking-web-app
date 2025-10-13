@@ -11,6 +11,7 @@ import ResetPassword from "./pages/auth/ResetPassword/ResetPassword";
 import Signup from "./pages/auth/Signup/Signup";
 import AllNotes from "./pages/main/AllNotes/AllNotes";
 import NoteDetail from "./components/NoteDetail/NoteDetail";
+import ArchivedNotes from "./pages/main/ArchivedNotes/ArchivedNotes";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,12 @@ const router = createBrowserRouter([
         path: "/all",
         element: <AllNotes />,
         handle: { title : "All Notes" },
+        children: [{ path: ":noteId", element: <NoteDetail /> }],
+      },
+      {
+        path: "/archived",
+        element: <ArchivedNotes />,
+        handle: { title : "Archived Notes" },
         children: [{ path: ":noteId", element: <NoteDetail /> }],
       },
     ],

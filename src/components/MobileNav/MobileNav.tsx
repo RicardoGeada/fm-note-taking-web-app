@@ -15,7 +15,7 @@ type MobileNavProps = {
 export default function MobileNav({className}: MobileNavProps) {
 
     const navItems = [
-        { to: "/", label: "Home", Icon: HomeIcon },
+        { to: "/all", label: "Home", Icon: HomeIcon },
         { to: "/search", label: "Search", Icon: SearchIcon },
         { to: "/archived", label: "Archived", Icon: ArchiveIcon },
         { to: "/tags", label: "Tags", Icon: TagIcon },
