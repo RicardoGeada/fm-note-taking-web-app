@@ -2,16 +2,20 @@ import styles from "./NoteDetail.module.scss";
 import DUMMY_NOTES from "../../dummy-notes";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
+import RestoreIcon from "./../../assets/images/icon-restore.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
+import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { formatDate } from "../../util/date";
 import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
+import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
+  const { isArchivedRoute } = useCurrentRouteInfo();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
 
   if (!note) {
@@ -24,7 +28,6 @@ export default function NoteDetail() {
     <>
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
-
           {!isDesktop && (
             <>
               <NoteDetailHeader />
@@ -44,6 +47,15 @@ export default function NoteDetail() {
                 {note.tags.join(", ")}
               </span>
             </div>
+            {isArchivedRoute && (
+              <div className={styles["note__property"]}>
+                <span className={styles["note__property-key"]}>
+                  <StatusIcon />
+                  Status
+                </span>
+                <span className={styles["note__property-value"]}>Archived</span>
+              </div>
+            )}
             <div className={styles["note__property"]}>
               <span className={styles["note__property-key"]}>
                 <LastEditedIcon />
@@ -68,23 +80,29 @@ export default function NoteDetail() {
               </div>
             </>
           )}
-
         </div>
       </div>
 
       {isDesktop && (
         <aside className={styles["note__controls-desktop"]}>
+          {!isArchivedRoute && (
+            <button className="btn btn--border">
+              <ArchiveIcon />
+              <span>Archive Note</span>
+            </button>
+          )}
+          {isArchivedRoute && (
+            <button className="btn btn--border">
+              <RestoreIcon />
+              <span>Restore Note</span>
+            </button>
+          )}
           <button className="btn btn--border">
             <DeleteIcon />
-            <span>Archive Note</span>
-          </button>
-          <button className="btn btn--border">
-            <ArchiveIcon />
             <span>Delete Note</span>
           </button>
         </aside>
       )}
-      
     </>
   );
 }

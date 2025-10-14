@@ -3,11 +3,14 @@ import clsx from "clsx";
 import ArrowLeftIcon from "../../../assets/images/icon-arrow-left.svg?react";
 import DeleteIcon from "../../../assets/images/icon-delete.svg?react";
 import ArchiveIcon from "../../../assets/images/icon-archive.svg?react";
+import RestoreIcon from "../../../assets/images/icon-restore.svg?react";
 import { useNavigate } from "react-router-dom";
+import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 
 
 export default function NoteDetailHeader() {
-    const navigate = useNavigate();  
+    const navigate = useNavigate();
+    const { isArchivedRoute } = useCurrentRouteInfo(); 
 
   return (
     <>
@@ -28,9 +31,16 @@ export default function NoteDetailHeader() {
           <button className={styles["note__controls-button"]}>
             <DeleteIcon />
           </button>
-          <button className={styles["note__controls-button"]}>
+          {!isArchivedRoute && (
+            <button className={styles["note__controls-button"]}>
             <ArchiveIcon />
-          </button>
+            </button>
+          )}
+          {isArchivedRoute && (
+            <button className={styles["note__controls-button"]}>
+            <RestoreIcon />
+            </button>
+          )}
           <button className={styles["note__controls-button"]}>
             <span>Cancel</span>
           </button>
