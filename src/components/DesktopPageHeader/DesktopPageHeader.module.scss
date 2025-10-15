@@ -1,28 +1,35 @@
 @use "./../../fonts.scss";
 
 .header {
-    min-height: 80px;
-    height: var(--spacing-1000);
-    padding: 0 var(--spacing-400);
+  min-height: 80px;
+  height: var(--spacing-1000);
+  padding: 0 var(--spacing-400);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-200);
+
+  &__headline {
+    margin-right: auto;
+    @include fonts.apply-text-preset("1");
+
+    &--tag {
+      span {
+        color: var(--color-neutral-600);
+      }
+    }
+  }
+
+  :nth-child(2) {
+    // input
+    max-width: 300px;
+  }
+
+  &__settings-button {
+    width: 42px;
+    height: 42px;
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: var(--spacing-200);
-
-    &__headline {
-        margin-right: auto;
-        @include fonts.apply-text-preset("1");
-    }
-
-    :nth-child(2) { // input
-        max-width: 300px;
-    }
-
-    &__settings-button {
-        width: 42px;
-        height: 42px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--color-neutral-500);
-    }
+    color: var(--color-neutral-500);
+  }
 }
