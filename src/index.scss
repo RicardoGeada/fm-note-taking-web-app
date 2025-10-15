@@ -180,11 +180,13 @@ button {
 .hl-separator {
   width: 100%;
   height: 1px;
+  min-height: 1px;
   background-color: var(--color-neutral-200);
 }
 
 .vl-separator {
   min-width: 1px;
+  width: 1px;
   height: 100%;
   background-color: var(--color-neutral-200);
 }

@@ -23,8 +23,6 @@ export default function NoteList({ notes, basePath }: NoteListProps) {
         <h2 className={styles["notes-list-wrapper__headline"]}>{ title }</h2>
       )}
 
-      {isArchivedRoute && <p>All your archived notes are stored here. You can restore or delete them anytime.</p>}
-
       <button
         className={clsx(
           "btn btn--primary",
@@ -34,6 +32,8 @@ export default function NoteList({ notes, basePath }: NoteListProps) {
       >
         {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
       </button>
+
+      {isArchivedRoute && <p>All your archived notes are stored here. You can restore or delete them anytime.</p>}
 
       {notes.length === 0 && (
         <div className={styles["notes-list__empty-notification"]}>
