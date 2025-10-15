@@ -50,6 +50,13 @@
   }
 }
 
+
+@media (min-width: 48rem) {
+  .note {
+    padding: var(--spacing-300) var(--spacing-400);
+  }
+}
+
 @media (min-width: 67.5rem) {
   .note-wrapper {
     max-width: 588px;

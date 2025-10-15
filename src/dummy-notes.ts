@@ -1,11 +1,23 @@
 // import type { Note } from "./types/note"
+const TAGS = [
+  { id: "dev", name: "Dev" },
+  { id: "react", name: "React" },
+  { id: "travel", name: "Travel" },
+  { id: "typescript", name: "TypeScript" },
+  { id: "health", name: "Health" },
+  { id: "personal", name: "Personal" },
+  { id: "cooking", name: "Cooking" },
+  { id: "recipes", name: "Recipes" },
+  { id: "shopping", name: "Shopping" },
+  { id: "fitness", name: "Fitness" },
+];
 
 const DUMMY_NOTES = [
   {
     id: "note-0",
     archived: false,
     title: "React Performance Optimization",
-    tags: ["Dev", "React"],
+    tags: ["dev", "react"],
     created_at: "2024-10-29T15:23:00Z",
     last_edited: "2024-10-29T15:23:00Z",
     text: `
@@ -31,7 +43,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-1",
     archived: false,
     title: "Japan Travel Planning",
-    tags: ["Travel", "Personal"],
+    tags: ["travel", "personal"],
     created_at: "2024-10-28T15:23:00Z",
     last_edited: "2024-10-28T15:23:00Z",
     text: `
@@ -41,7 +53,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-2",
     archived: false,
     title: "Favorite Pasta Recipes",
-    tags: ["Cooking", "Recipes"],
+    tags: ["cooking", "recipes"],
     created_at: "2024-10-27T15:23:00Z",
     last_edited: "2024-10-27T15:23:00Z",
     text: `
@@ -51,7 +63,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-3",
     archived: false,
     title: "Weekly Workout Plan",
-    tags: ["Dev", "React"],
+    tags: ["dev", "react"],
     created_at: "2024-10-25T15:23:00Z",
     last_edited: "2024-10-25T15:23:00Z",
     text: `
@@ -61,7 +73,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-4",
     archived: false,
     title: "Meal Prep Ideas",
-    tags: ["Cooking", "Health", "Recipes"],
+    tags: ["cooking", "health", "recipes"],
     created_at: "2024-10-12T15:23:00Z",
     last_edited: "2024-10-12T15:23:00Z",
     text: `
@@ -71,7 +83,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-5",
     archived: false,
     title: "Reading List",
-    tags: ["Personal", "Dev"],
+    tags: ["personal", "dev"],
     created_at: "2024-10-05T15:23:00Z",
     last_edited: "2024-10-05T15:23:00Z",
     text: `
@@ -81,7 +93,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-6",
     archived: false,
     title: "Fitness Goals 2025",
-    tags: ["Fitness", "Health", "Personal"],
+    tags: ["fitness", "health", "personal"],
     created_at: "2024-09-22T15:23:00Z",
     last_edited: "2024-09-22T15:23:00Z",
     text: `
@@ -91,7 +103,7 @@ TODO: Benchmark current application and identify bottlenecks
     id: "note-7",
     archived: true,
     title: "TypeScript Migration Guide",
-    tags: ["Dev", "React", "TypeScript"],
+    tags: ["dev", "react", "typescript"],
     created_at: "2024-10-26T15:23:00Z",
     last_edited: "2024-10-26T15:23:00Z",
     text: `
@@ -119,7 +131,7 @@ Deadline: End of Q4 2024
     id: "note-8",
     archived: true,
     title: "Gift Ideas",
-    tags: ["Personal", "Shopping"],
+    tags: ["personal", "shopping"],
     created_at: "2024-10-20T15:23:00Z",
     last_edited: "2024-10-20T15:23:00Z",
     text: `
@@ -129,7 +141,7 @@ Deadline: End of Q4 2024
     id: "note-9",
     archived: true,
     title: "React Component Library",
-    tags: ["Dev", "React"],
+    tags: ["dev", "react"],
     created_at: "2024-10-15T15:23:00Z",
     last_edited: "2024-10-15T15:23:00Z",
     text: `
@@ -137,4 +149,4 @@ Deadline: End of Q4 2024
   },
 ];
 
-export default DUMMY_NOTES;
+export { TAGS, DUMMY_NOTES };

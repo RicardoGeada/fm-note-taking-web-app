@@ -6,24 +6,24 @@ import { useMediaQuery } from "react-responsive";
 import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 import { Link } from "react-router-dom";
+import { TAGS } from "../../dummy-notes";
 
-type NoteListProps = {
+type NotesListProps = {
   notes: Note[];
   basePath: string;
 }
 
 
-export default function NoteList({ notes, basePath }: NoteListProps) {
+export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute } = useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
+  const tagName = TAGS.find(t => t.id === tagId)?.name;
 
   return (
     <div className={styles["notes-list-wrapper"]}>
       {!isDesktop && (
         <h2 className={styles["notes-list-wrapper__headline"]}>{ title }</h2>
       )}
-
-      {isArchivedRoute && <p>All your archived notes are stored here. You can restore or delete them anytime.</p>}
 
       <button
         className={clsx(
@@ -34,6 +34,9 @@ export default function NoteList({ notes, basePath }: NoteListProps) {
       >
         {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
       </button>
+
+      {isArchivedRoute && <p>All your archived notes are stored here. You can restore or delete them anytime.</p>}
+      {(isTagRoute && tagName) && <p>All notes with the "{tagName}" tag are shown here.</p>}
 
       {notes.length === 0 && (
         <div className={styles["notes-list__empty-notification"]}>
