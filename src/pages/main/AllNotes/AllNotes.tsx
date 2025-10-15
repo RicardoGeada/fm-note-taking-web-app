@@ -2,7 +2,7 @@ import styles from "./AllNotes.module.scss";
 import { Outlet, useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import NotesList from "../../../components/NotesList/NotesList";
-import DUMMY_NOTES from "../../../dummy-notes";
+import { DUMMY_NOTES } from "../../../dummy-notes";
 
 export default function AllNotes() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });

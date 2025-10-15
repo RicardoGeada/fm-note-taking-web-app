@@ -12,6 +12,7 @@ import Signup from "./pages/auth/Signup/Signup";
 import AllNotes from "./pages/main/AllNotes/AllNotes";
 import NoteDetail from "./components/NoteDetail/NoteDetail";
 import ArchivedNotes from "./pages/main/ArchivedNotes/ArchivedNotes";
+import Tags from "./pages/main/Tags/Tags";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,12 @@ const router = createBrowserRouter([
         path: "/archived",
         element: <ArchivedNotes />,
         handle: { title : "Archived Notes" },
+        children: [{ path: ":noteId", element: <NoteDetail /> }],
+      },
+      {
+        path: "/tag/:tagId?",
+        element: <Tags />,
+        handle: { title : "Notes Tagged:" },
         children: [{ path: ":noteId", element: <NoteDetail /> }],
       },
     ],

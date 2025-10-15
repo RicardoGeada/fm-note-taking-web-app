@@ -7,13 +7,13 @@ import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 import { Link } from "react-router-dom";
 
-type NoteListProps = {
+type NotesListProps = {
   notes: Note[];
   basePath: string;
 }
 
 
-export default function NoteList({ notes, basePath }: NoteListProps) {
+export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { title, isArchivedRoute } = useCurrentRouteInfo();
 

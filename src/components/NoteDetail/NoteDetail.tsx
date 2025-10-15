@@ -1,5 +1,5 @@
 import styles from "./NoteDetail.module.scss";
-import DUMMY_NOTES from "../../dummy-notes";
+import { DUMMY_NOTES } from "../../dummy-notes";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import RestoreIcon from "./../../assets/images/icon-restore.svg?react";

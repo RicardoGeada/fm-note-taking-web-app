@@ -18,7 +18,7 @@ export default function MobileNav({className}: MobileNavProps) {
         { to: "/all", label: "Home", Icon: HomeIcon },
         { to: "/search", label: "Search", Icon: SearchIcon },
         { to: "/archived", label: "Archived", Icon: ArchiveIcon },
-        { to: "/tags", label: "Tags", Icon: TagIcon },
+        { to: "/tag", label: "Tags", Icon: TagIcon },
         { to: "/settings", label: "Settings", Icon: SettingsIcon },
     ];
 
