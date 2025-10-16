@@ -6,7 +6,7 @@ export function useCurrentRouteInfo() {
     const title = current?.handle?.title ?? "";
 
     const isArchivedRoute = !!useMatch("/archived/*");
-    const tagMatch = useMatch("/tag/:tagId");
+    const tagMatch = useMatch("/tag/:tagId/*");
     const isTagRoute = !!tagMatch;
     const tagId = tagMatch?.params?.tagId ?? null;
 
