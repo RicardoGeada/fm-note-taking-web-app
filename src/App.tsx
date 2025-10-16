@@ -23,20 +23,26 @@ const router = createBrowserRouter([
       {
         path: "/all",
         element: <AllNotes />,
-        handle: { title : "All Notes" },
+        handle: { title: "All Notes" },
         children: [{ path: ":noteId", element: <NoteDetail /> }],
       },
       {
         path: "/archived",
         element: <ArchivedNotes />,
-        handle: { title : "Archived Notes" },
+        handle: { title: "Archived Notes" },
         children: [{ path: ":noteId", element: <NoteDetail /> }],
       },
       {
-        path: "/tag/:tagId?",
+        path: "/tag",
         element: <Tags />,
-        handle: { title : "Notes Tagged:" },
-        children: [{ path: ":noteId", element: <NoteDetail /> }],
+        handle: { title: "Notes Tagged:" },
+        children: [
+          {
+            path: ":tagId",
+            element: null,
+            children: [{ path: ":noteId", element: <NoteDetail /> }],
+          },
+        ],
       },
     ],
   },
