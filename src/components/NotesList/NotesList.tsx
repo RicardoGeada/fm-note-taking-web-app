@@ -8,6 +8,8 @@ import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 import { Link, useNavigate } from "react-router-dom";
 import { TAGS } from "../../dummy-notes";
+import Input from "../Input/Input";
+import SearchIcon from "../../assets/images/icon-search.svg?react";
 
 type NotesListProps = {
   notes: Note[];
@@ -16,32 +18,52 @@ type NotesListProps = {
 
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } =
+    useCurrentRouteInfo();
   const tagName = TAGS.find((t) => t.id === tagId)?.name;
   const navigate = useNavigate();
 
   return (
     <div className={styles["notes-list-wrapper"]}>
-      {!isDesktop && isTagRoute &&
+      {!isDesktop && isTagRoute && (
         <header>
           <button
-          className={styles["notes-list__controls-button"]}
-          onClick={() => navigate(".")}
-        >
-          <ArrowLeftIcon />
-          <span>Go Back</span>
-        </button>
+            className={styles["notes-list__controls-button"]}
+            onClick={() => navigate(".")}
+          >
+            <ArrowLeftIcon />
+            <span>Go Back</span>
+          </button>
         </header>
-      }
+      )}
 
-      {!isDesktop && (
-        <h2 className={clsx(
-          styles["notes-list__headline"],
-          isTagRoute && tagName ? styles["notes-list__headline--tag"] : ""
-        )}>
-          <span>{title}</span> 
+      {!isDesktop && !isSearchRoute && (
+        <h2
+          className={clsx(
+            styles["notes-list__headline"],
+            isTagRoute && tagName ? styles["notes-list__headline--tag"] : ""
+          )}
+        >
+          <span>{title}</span>
           {isTagRoute && tagName && ` ${tagName}`}
         </h2>
+      )}
+
+      {!isDesktop && isSearchRoute && (
+        <>
+          <h2 className={styles["notes-list__headline"]}>Search</h2>
+          <Input
+            label=""
+            id="search"
+            type="text"
+            placeholder="Search by title, content or tags..."
+            button={{
+              position: "left",
+              onClick: () => {},
+              content: <SearchIcon />,
+            }}
+          />
+        </>
       )}
 
       <button
@@ -62,6 +84,10 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       )}
       {isTagRoute && tagName && (
         <p>All notes with the "{tagName}" tag are shown here.</p>
+      )}
+      {/* TODO: search query variable */}
+      {!isDesktop && isSearchRoute && (
+        <p>All notes matching ”Dev” are displayed below.</p>
       )}
 
       {notes.length === 0 && (

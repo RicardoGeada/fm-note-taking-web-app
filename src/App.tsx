@@ -13,6 +13,7 @@ import AllNotes from "./pages/main/AllNotes/AllNotes";
 import NoteDetail from "./components/NoteDetail/NoteDetail";
 import ArchivedNotes from "./pages/main/ArchivedNotes/ArchivedNotes";
 import Tags from "./pages/main/Tags/Tags";
+import Search from "./pages/main/Search/Search";
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,12 @@ const router = createBrowserRouter([
             children: [{ path: ":noteId", element: <NoteDetail /> }],
           },
         ],
+      },
+      {
+        path: "/search",
+        element: <Search />,
+        handle: { title: "Showing results for:" },
+        children: [{ path: ":noteId", element: <NoteDetail /> }],
       },
     ],
   },

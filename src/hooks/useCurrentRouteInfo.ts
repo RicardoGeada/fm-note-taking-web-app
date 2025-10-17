@@ -9,11 +9,13 @@ export function useCurrentRouteInfo() {
     const tagMatch = useMatch("/tag/:tagId/*");
     const isTagRoute = !!tagMatch;
     const tagId = tagMatch?.params?.tagId ?? null;
+    const isSearchRoute = !!useMatch("/search*");
 
     return {
         title,
         isArchivedRoute,
         isTagRoute, 
-        tagId
+        tagId,
+        isSearchRoute
     }
 }
