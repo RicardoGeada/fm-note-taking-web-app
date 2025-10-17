@@ -10,25 +10,28 @@ export default function Tags() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { tagId, noteId } = useParams();
   const taggedNotes = tagId ? DUMMY_NOTES.filter((note) => note.tags.includes(tagId)) : [];
+
   return (
-    <>
-      {(!isDesktop && !tagId) && <div className={styles["tagged-notes"]}>
+    <div className={styles["tagged-notes"]}>
+
+      {(!isDesktop && !tagId) && 
         <div className={styles["tag-list-wrapper"]}>
           <h1 className={styles["tag-list__headline"]}>Tags</h1>
           <ul className={styles["tag-list"]}>
-          {TAGS.map((t) => (
-            <SidebarItem
-              key={t.id}
-              to={`/tag/${t.id}`}
-              Icon={TagIcon}
-              text={t.name}
-            />
-          ))}
+            {TAGS.map((t) => (
+              <SidebarItem
+                key={t.id}
+                to={`/tag/${t.id}`}
+                Icon={TagIcon}
+                text={t.name}
+              />
+            ))}
           </ul>
-        </div>
         </div>}
+
+
       {(tagId) && 
-        <div className={styles["tagged-notes"]}>
+        <>
           <NotesList notes={taggedNotes} basePath={`/tag/${tagId}`} />
           {!isDesktop && noteId && (
             <div className={styles["overlay"]}>
@@ -36,8 +39,9 @@ export default function Tags() {
             </div>
           )}
           {isDesktop && noteId && <Outlet />}
-        </div>
+        </>
       }
-    </>
+
+    </div>
   );
 }
