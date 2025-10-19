@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import styles from "./NotesList.module.scss";
 import AddIcon from "./../../assets/images/icon-plus.svg?react";
-import ArrowLeftIcon from "./../../assets/images/icon-arrow-left.svg?react";
 import NoteListItem from "../NoteListItem/NoteListItem";
 import { useMediaQuery } from "react-responsive";
 import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { TAGS } from "../../dummy-notes";
 import Input from "../Input/Input";
 import SearchIcon from "../../assets/images/icon-search.svg?react";
+import NotesListHeader from "./NotesListHeader/NotesListHeader";
 
 type NotesListProps = {
   notes: Note[];
@@ -18,40 +18,26 @@ type NotesListProps = {
 
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } =
-    useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
   const tagName = TAGS.find((t) => t.id === tagId)?.name;
-  const navigate = useNavigate();
 
   return (
     <div className={styles["notes-list-wrapper"]}>
-      {!isDesktop && isTagRoute && (
-        <header>
-          <button
-            className={styles["notes-list__controls-button"]}
-            onClick={() => navigate(".")}
-          >
-            <ArrowLeftIcon />
-            <span>Go Back</span>
-          </button>
-        </header>
-      )}
+      {!isDesktop && isTagRoute && <NotesListHeader />}
 
-      {!isDesktop && !isSearchRoute && (
+      {!isDesktop && (
         <h2
           className={clsx(
             styles["notes-list__headline"],
             isTagRoute && tagName ? styles["notes-list__headline--tag"] : ""
           )}
         >
-          <span>{title}</span>
+          <span>{!isSearchRoute ? title : "Search"}</span>
           {isTagRoute && tagName && ` ${tagName}`}
         </h2>
       )}
 
       {!isDesktop && isSearchRoute && (
-        <>
-          <h2 className={styles["notes-list__headline"]}>Search</h2>
           <Input
             label=""
             id="search"
@@ -63,7 +49,6 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
               content: <SearchIcon />,
             }}
           />
-        </>
       )}
 
       <button
