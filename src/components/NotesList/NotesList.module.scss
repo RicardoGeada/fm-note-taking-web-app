@@ -21,23 +21,6 @@
     background-color: var(--color-neutral-200);
   }
 
-  &__controls-button {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-75);
-    color: var(--color-neutral-600);
-    @include fonts.apply-text-preset("5");
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    &:hover {
-      color: var(--color-neutral-950);
-    }
-  }
-
   &__headline {
     color: var(--color-neutral-950);
     @include fonts.apply-text-preset("1");
