@@ -5,7 +5,7 @@ import NoteListItem from "../NoteListItem/NoteListItem";
 import { useMediaQuery } from "react-responsive";
 import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { TAGS } from "../../dummy-notes";
 import Input from "../Input/Input";
 import SearchIcon from "../../assets/images/icon-search.svg?react";
@@ -20,6 +20,7 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
   const tagName = TAGS.find((t) => t.id === tagId)?.name;
+  const navigate = useNavigate();
 
   return (
     <div className={styles["notes-list-wrapper"]}>
@@ -57,6 +58,7 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
           styles["new-note-button"],
           isDesktop ? "" : "btn--circle"
         )}
+        onClick={() => {navigate("./new-note")}}
       >
         {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
       </button>

@@ -1,7 +1,7 @@
 import { useMatch, useMatches } from "react-router-dom";
 
 export function useCurrentRouteInfo() {
-    const matches = useMatches() as Array<{ handle?: { title?:string } }>;
+    const matches = useMatches() as Array<{ handle?: { title?:string, isNewNote?:boolean } }>;
     const current = matches.find((m) => m.handle?.title);
     const title = current?.handle?.title ?? "";
 
@@ -10,12 +10,14 @@ export function useCurrentRouteInfo() {
     const isTagRoute = !!tagMatch;
     const tagId = tagMatch?.params?.tagId ?? null;
     const isSearchRoute = !!useMatch("/search");
+    const isNewNoteRoute = matches.some(m => m.handle?.isNewNote);
 
     return {
         title,
         isArchivedRoute,
         isTagRoute, 
         tagId,
-        isSearchRoute
+        isSearchRoute,
+        isNewNoteRoute
     }
 }
