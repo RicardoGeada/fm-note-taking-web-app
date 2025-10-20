@@ -25,13 +25,19 @@ const router = createBrowserRouter([
         path: "/all",
         element: <AllNotes />,
         handle: { title: "All Notes" },
-        children: [{ path: ":noteId", element: <NoteDetail /> }],
+        children: [
+          { path: ":noteId", element: <NoteDetail /> },
+          { path: "new-note", element: <>New Note</>, handle: { isNewNote: true } },
+        ],
       },
       {
         path: "/archived",
         element: <ArchivedNotes />,
         handle: { title: "Archived Notes" },
-        children: [{ path: ":noteId", element: <NoteDetail /> }],
+        children: [
+          { path: ":noteId", element: <NoteDetail /> },
+          { path: "new-note", element: <>New Note</>, handle: { isNewNote: true } },
+        ],
       },
       {
         path: "/tag",
@@ -41,7 +47,10 @@ const router = createBrowserRouter([
           {
             path: ":tagId",
             element: null,
-            children: [{ path: ":noteId", element: <NoteDetail /> }],
+            children: [
+              { path: ":noteId", element: <NoteDetail /> },
+              { path: "new-note", element: <>New Note</>, handle: { isNewNote: true } },
+            ],
           },
         ],
       },
@@ -49,7 +58,10 @@ const router = createBrowserRouter([
         path: "/search",
         element: <Search />,
         handle: { title: "Showing results for:" },
-        children: [{ path: ":noteId", element: <NoteDetail /> }],
+        children: [
+          { path: ":noteId", element: <NoteDetail /> },
+          { path: "new-note", element: <>New Note</>, handle: { isNewNote: true } },
+        ],
       },
     ],
   },
