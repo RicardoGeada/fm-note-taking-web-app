@@ -1,9 +1,26 @@
 @use "./../../fonts.scss";
 
 .new-note-wrapper {
-    height: 100%;
-    width: 100%;
-    overflow: auto;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+input,
+textarea {
+  border: 1px solid transparent;
+  outline: transparent;
+  border-radius: 4px;
+  width: 100%;
+
+  &::placeholder {
+    color: var(--color-neutral-400);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px var(--color-neutral-0),
+      0 0 0 3px var(--color-neutral-500);
+  }
 }
 
 .new-note {
@@ -13,6 +30,14 @@
   flex-direction: column;
   gap: var(--spacing-150);
   height: 100%;
+
+  &__headline {
+    @include fonts.apply-text-preset("1");
+
+    &::placeholder {
+      color: var(--color-neutral-950);
+    }
+  }
 
   &__property {
     display: flex;
@@ -36,11 +61,19 @@
 
   &__property-value {
     padding: var(--spacing-75) 0;
+    color: var(--color-neutral-400);
+    flex: 1;
   }
 
   &__textarea {
+    resize: none;
     white-space: pre-wrap;
     flex: 1;
+    @include fonts.apply-text-preset("5");
+
+    &::placeholder {
+      color: var(--color-neutral-700);
+    }
   }
 
   &__buttons {
@@ -49,7 +82,6 @@
     gap: var(--spacing-200);
   }
 }
-
 
 @media (min-width: 48rem) {
   .new-note {
