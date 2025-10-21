@@ -2,13 +2,20 @@ import styles from "./NewNote.module.scss";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { useMediaQuery } from "react-responsive";
+import NewNoteHeader from "./NewNoteHeader/NewNoteHeader";
 
 export default function NewNote() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   return (
     <>
+      
       <div className={styles["new-note-wrapper"]}>
+        
         <div className={styles["new-note"]}>
+          {!isDesktop && <>
+            <NewNoteHeader />
+            <div className="hl-separator"></div>
+          </>}
           <input className={styles["new-note__headline"]} type="text" placeholder={"Enter a title..."} required/>
 
           <div className={styles["new-note__properties"]}>
