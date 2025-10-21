@@ -9,7 +9,7 @@ export default function NewNote() {
     <>
       <div className={styles["new-note-wrapper"]}>
         <div className={styles["new-note"]}>
-          <input type="text" placeholder={"Enter a title..."} />
+          <input className={styles["new-note__headline"]} type="text" placeholder={"Enter a title..."} required/>
 
           <div className={styles["new-note__properties"]}>
             <div className={styles["new-note__property"]}>
