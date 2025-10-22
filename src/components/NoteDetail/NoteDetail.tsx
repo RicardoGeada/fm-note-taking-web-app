@@ -11,12 +11,15 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
+import DeleteNodeModal from "../DeleteNoteModal/DeleteNoteModal";
+import { useRef } from "react";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
   const { isArchivedRoute } = useCurrentRouteInfo();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
+  const deleteNoteDialog = useRef<HTMLDialogElement | null>(null);
 
   if (!note) {
     return <div>Not found.</div>;
@@ -24,13 +27,20 @@ export default function NoteDetail() {
 
   const lastEdited = formatDate(note.last_edited);
 
+  function handleDelete() {
+    if(deleteNoteDialog.current instanceof HTMLDialogElement) {
+      deleteNoteDialog.current.showModal();
+    }
+  }
+
   return (
     <>
+      <DeleteNodeModal ref={deleteNoteDialog}/>
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
           {!isDesktop && (
             <>
-              <NoteDetailHeader />
+              <NoteDetailHeader handleDelete={handleDelete}/>
               <div className="hl-separator"></div>
             </>
           )}
@@ -97,7 +107,7 @@ export default function NoteDetail() {
               <span>Restore Note</span>
             </button>
           )}
-          <button className="btn btn--border">
+          <button className="btn btn--border" onClick={handleDelete}>
             <DeleteIcon />
             <span>Delete Note</span>
           </button>

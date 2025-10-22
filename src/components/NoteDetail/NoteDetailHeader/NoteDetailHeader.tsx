@@ -7,8 +7,11 @@ import RestoreIcon from "../../../assets/images/icon-restore.svg?react";
 import { useNavigate } from "react-router-dom";
 import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 
+type NoteDetailHeaderProps = {
+  handleDelete: () => void;
+}
 
-export default function NoteDetailHeader() {
+export default function NoteDetailHeader({handleDelete}: NoteDetailHeaderProps) {
     const navigate = useNavigate();
     const { isArchivedRoute } = useCurrentRouteInfo(); 
 
@@ -28,7 +31,7 @@ export default function NoteDetailHeader() {
         </button>
 
         <div className={styles["note__controls-right"]}>
-          <button className={styles["note__controls-button"]}>
+          <button className={styles["note__controls-button"]} onClick={handleDelete}>
             <DeleteIcon />
           </button>
           {!isArchivedRoute && (
