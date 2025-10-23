@@ -2,11 +2,11 @@ import type { Ref } from "react";
 import styles from "./DeleteNoteModal.module.scss";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 
-type DeleteNodeModalProps = {
+type DeleteNoteModalProps = {
   ref: Ref<HTMLDialogElement>;
 };
 
-export default function DeleteNodeModal({ ref }: DeleteNodeModalProps) {
+export default function DeleteNoteModal({ ref }: DeleteNoteModalProps) {
   return (
     <dialog className={styles["delete-note-modal"]} ref={ref}>
       <div className={styles["delete-note-modal__top"]}>

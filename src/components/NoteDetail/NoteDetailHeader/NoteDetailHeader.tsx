@@ -9,9 +9,10 @@ import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 
 type NoteDetailHeaderProps = {
   handleDelete: () => void;
+  handleArchive: () => void;
 }
 
-export default function NoteDetailHeader({handleDelete}: NoteDetailHeaderProps) {
+export default function NoteDetailHeader({handleDelete, handleArchive}: NoteDetailHeaderProps) {
     const navigate = useNavigate();
     const { isArchivedRoute } = useCurrentRouteInfo(); 
 
@@ -35,7 +36,7 @@ export default function NoteDetailHeader({handleDelete}: NoteDetailHeaderProps) 
             <DeleteIcon />
           </button>
           {!isArchivedRoute && (
-            <button className={styles["note__controls-button"]}>
+            <button className={styles["note__controls-button"]} onClick={handleArchive}>
             <ArchiveIcon />
             </button>
           )}

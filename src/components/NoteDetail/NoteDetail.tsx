@@ -11,8 +11,9 @@ import { useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
-import DeleteNodeModal from "../DeleteNoteModal/DeleteNoteModal";
+import DeleteNoteModal from "../DeleteNoteModal/DeleteNoteModal";
 import { useRef } from "react";
+import ArchiveNoteModal from "../ArchiveNoteModal/ArchiveNoteModal";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
@@ -20,6 +21,7 @@ export default function NoteDetail() {
   const { isArchivedRoute } = useCurrentRouteInfo();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
   const deleteNoteDialog = useRef<HTMLDialogElement | null>(null);
+  const archiveNoteDialog = useRef<HTMLDialogElement | null>(null);
 
   if (!note) {
     return <div>Not found.</div>;
@@ -33,14 +35,21 @@ export default function NoteDetail() {
     }
   }
 
+  function handleArchive() {
+    if(archiveNoteDialog.current instanceof HTMLDialogElement) {
+      archiveNoteDialog.current.showModal();
+    }
+  }
+
   return (
     <>
-      <DeleteNodeModal ref={deleteNoteDialog}/>
+      <DeleteNoteModal ref={deleteNoteDialog}/>
+      <ArchiveNoteModal ref={archiveNoteDialog}/>
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
           {!isDesktop && (
             <>
-              <NoteDetailHeader handleDelete={handleDelete}/>
+              <NoteDetailHeader handleDelete={handleDelete} handleArchive={handleArchive}/>
               <div className="hl-separator"></div>
             </>
           )}
@@ -96,7 +105,7 @@ export default function NoteDetail() {
       {isDesktop && (
         <aside className={styles["note__controls-desktop"]}>
           {!isArchivedRoute && (
-            <button className="btn btn--border">
+            <button className="btn btn--border" onClick={handleArchive}>
               <ArchiveIcon />
               <span>Archive Note</span>
             </button>

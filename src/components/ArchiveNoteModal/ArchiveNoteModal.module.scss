@@ -1,0 +1,53 @@
+@use "./../../fonts.scss";
+
+.archive-note-modal {
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 12px;
+  max-width: 343px;
+  margin: auto;
+
+  &__top {
+    padding: 20px;
+    display: flex;
+    gap: var(--spacing-200);
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background-color: var(--color-neutral-100);
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__text {
+    h2 {
+      margin-bottom: 6px;
+      @include fonts.apply-text-preset("3");
+    }
+    p {
+      @include fonts.apply-text-preset("5");
+    }
+  }
+
+  &__form {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-200);
+    padding:  16px 20px ;
+  }
+
+  &::backdrop {
+    background-color: rgb(from var(--color-neutral-950) r g b / 50%);
+  }
+}
+
+@media (min-width: 48rem) {
+    .archive-note-modal {
+        max-width: 440px;
+    }
+}
