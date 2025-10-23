@@ -1,19 +1,27 @@
+// React Hooks
+import { useRef } from "react";
+import { useParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+
+// Own Hooks, Utils ...
 import styles from "./NoteDetail.module.scss";
-import { DUMMY_NOTES } from "../../dummy-notes";
+import { formatDate } from "../../util/date";
+import { useCurrentRouteInfo } from "./../../hooks/useCurrentRouteInfo";
+import { DUMMY_NOTES } from "./../../dummy-notes";
+
+// Components
+import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
+import DeleteNoteModal from "./../DeleteNoteModal/DeleteNoteModal";
+import ArchiveNoteModal from "./../ArchiveNoteModal/ArchiveNoteModal";
+
+// Icons
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import RestoreIcon from "./../../assets/images/icon-restore.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
-import { formatDate } from "../../util/date";
-import { useParams } from "react-router-dom";
-import { useMediaQuery } from "react-responsive";
-import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
-import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
-import DeleteNoteModal from "../DeleteNoteModal/DeleteNoteModal";
-import { useRef } from "react";
-import ArchiveNoteModal from "../ArchiveNoteModal/ArchiveNoteModal";
+import NoteDetailProperty from "./NoteDetailProperty/NoteDetailProperty";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
@@ -29,27 +37,24 @@ export default function NoteDetail() {
 
   const lastEdited = formatDate(note.last_edited);
 
-  function handleDelete() {
-    if(deleteNoteDialog.current instanceof HTMLDialogElement) {
-      deleteNoteDialog.current.showModal();
-    }
-  }
-
-  function handleArchive() {
-    if(archiveNoteDialog.current instanceof HTMLDialogElement) {
-      archiveNoteDialog.current.showModal();
-    }
+  function openDialog(ref: React.RefObject<HTMLDialogElement | null>) {
+    ref.current?.showModal();
   }
 
   return (
     <>
-      <DeleteNoteModal ref={deleteNoteDialog}/>
-      <ArchiveNoteModal ref={archiveNoteDialog}/>
+      {/* Modals */}
+      <DeleteNoteModal ref={deleteNoteDialog} />
+      <ArchiveNoteModal ref={archiveNoteDialog} />
+
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
           {!isDesktop && (
             <>
-              <NoteDetailHeader handleDelete={handleDelete} handleArchive={handleArchive}/>
+              <NoteDetailHeader
+                handleDelete={() => openDialog(deleteNoteDialog)}
+                handleArchive={() => openDialog(archiveNoteDialog)}
+              />
               <div className="hl-separator"></div>
             </>
           )}
@@ -57,33 +62,9 @@ export default function NoteDetail() {
           <h1 className={styles["note__title"]}>{note.title}</h1>
 
           <div className={styles["note__properties"]}>
-            <div className={styles["note__property"]}>
-              <span className={styles["note__property-key"]}>
-                <TagIcon />
-                Tags
-              </span>
-              <span className={styles["note__property-value"]}>
-                {note.tags.join(", ")}
-              </span>
-            </div>
-            {isArchivedRoute && (
-              <div className={styles["note__property"]}>
-                <span className={styles["note__property-key"]}>
-                  <StatusIcon />
-                  Status
-                </span>
-                <span className={styles["note__property-value"]}>Archived</span>
-              </div>
-            )}
-            <div className={styles["note__property"]}>
-              <span className={styles["note__property-key"]}>
-                <LastEditedIcon />
-                Last edited
-              </span>
-              <span className={styles["note__property-value"]}>
-                {lastEdited}
-              </span>
-            </div>
+            <NoteDetailProperty icon={<TagIcon />} label="Tags" value={note.tags.join(", ")}/>
+            {isArchivedRoute && <NoteDetailProperty icon={<StatusIcon />} label="Status" value={"Archived"}/>}
+            <NoteDetailProperty icon={<LastEditedIcon />} label="Last edited" value={lastEdited}/>
           </div>
 
           <div className="hl-separator"></div>
@@ -105,7 +86,7 @@ export default function NoteDetail() {
       {isDesktop && (
         <aside className={styles["note__controls-desktop"]}>
           {!isArchivedRoute && (
-            <button className="btn btn--border" onClick={handleArchive}>
+            <button className="btn btn--border" onClick={() => openDialog(archiveNoteDialog)}>
               <ArchiveIcon />
               <span>Archive Note</span>
             </button>
@@ -116,7 +97,7 @@ export default function NoteDetail() {
               <span>Restore Note</span>
             </button>
           )}
-          <button className="btn btn--border" onClick={handleDelete}>
+          <button className="btn btn--border" onClick={() => openDialog(deleteNoteDialog)}>
             <DeleteIcon />
             <span>Delete Note</span>
           </button>

@@ -14,30 +14,6 @@
   gap: var(--spacing-150);
   height: 100%;
 
-  &__property {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-100);
-    @include fonts.apply-text-preset("6");
-  }
-
-  &__property-key {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-75);
-    color: var(--color-neutral-700);
-    min-width: 115px;
-
-    svg {
-      width: var(--spacing-200);
-      height: var(--spacing-200);
-    }
-  }
-
-  &__property-value {
-    padding: var(--spacing-75) 0;
-  }
-
   &__text {
     white-space: pre-wrap;
     margin-bottom: auto;
