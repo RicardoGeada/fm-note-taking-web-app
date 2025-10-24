@@ -1,6 +1,7 @@
 import { forwardRef, useImperativeHandle, useRef} from "react";
 import styles from "./ArchiveNoteModal.module.scss";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
+import { createPortal } from "react-dom";
 
 export type ArchiveNoteModalRef = {
   open: () => void;
@@ -8,6 +9,7 @@ export type ArchiveNoteModalRef = {
 
 const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteModal(_, ref) {
   
+  const modalRoot = document.getElementById("modals");
   const dialog = useRef<HTMLDialogElement | null>(null);
 
   useImperativeHandle(ref, () => {
@@ -18,7 +20,9 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
     }
   })
 
-  return (
+  if(!modalRoot) return null;
+
+  return createPortal(
     <dialog className={styles["archive-note-modal"]} ref={dialog}>
       <div className={styles["archive-note-modal__top"]}>
         <div className={styles["archive-note-modal__icon"]}>
@@ -38,7 +42,8 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
         <button className="btn btn--secondary">Cancel</button>
         <button className="btn btn--primary">Archive Note</button>
       </form>
-    </dialog>
+    </dialog>,
+    modalRoot
   );
 })
 
