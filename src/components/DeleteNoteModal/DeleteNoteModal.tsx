@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from "react";
+import { createPortal } from "react-dom";
 import styles from "./DeleteNoteModal.module.scss";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 
@@ -7,7 +8,8 @@ export type DeleteNoteModalRef = {
 };
 
 const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(_, ref) {
-
+  
+  const modalRoot = document.getElementById("modals");
   const dialog = useRef<HTMLDialogElement | null>(null);
 
   useImperativeHandle(ref, () => {
@@ -18,7 +20,9 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
     }
   })
 
-  return (
+  if (!modalRoot) return null;
+
+  return createPortal(
     <dialog className={styles["delete-note-modal"]} ref={dialog}>
       <div className={styles["delete-note-modal__top"]}>
         <div className={styles["delete-note-modal__icon"]}>
@@ -38,7 +42,8 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
         <button className="btn btn--secondary">Cancel</button>
         <button className="btn btn--red">Delete Note</button>
       </form>
-    </dialog>
+    </dialog>,
+    modalRoot
   );
 });
 
