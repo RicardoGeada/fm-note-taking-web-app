@@ -1,14 +1,25 @@
-import type { Ref } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import styles from "./DeleteNoteModal.module.scss";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 
-type DeleteNoteModalProps = {
-  ref: Ref<HTMLDialogElement>;
+export type DeleteNoteModalRef = {
+  open: () => void;
 };
 
-export default function DeleteNoteModal({ ref }: DeleteNoteModalProps) {
+const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(_, ref) {
+
+  const dialog = useRef<HTMLDialogElement | null>(null);
+
+  useImperativeHandle(ref, () => {
+    return {
+      open() {
+        dialog.current?.showModal();
+      }
+    }
+  })
+
   return (
-    <dialog className={styles["delete-note-modal"]} ref={ref}>
+    <dialog className={styles["delete-note-modal"]} ref={dialog}>
       <div className={styles["delete-note-modal__top"]}>
         <div className={styles["delete-note-modal__icon"]}>
           <DeleteIcon />
@@ -29,4 +40,6 @@ export default function DeleteNoteModal({ ref }: DeleteNoteModalProps) {
       </form>
     </dialog>
   );
-}
+});
+
+export default DeleteNoteModal;

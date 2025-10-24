@@ -1,14 +1,25 @@
-import type { Ref } from "react";
+import { forwardRef, useImperativeHandle, useRef} from "react";
 import styles from "./ArchiveNoteModal.module.scss";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 
-type ArchiveNoteModalProps = {
-  ref: Ref<HTMLDialogElement>;
+export type ArchiveNoteModalRef = {
+  open: () => void;
 };
 
-export default function ArchiveNoteModal({ ref }: ArchiveNoteModalProps) {
+const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteModal(_, ref) {
+  
+  const dialog = useRef<HTMLDialogElement | null>(null);
+
+  useImperativeHandle(ref, () => {
+    return {
+      open() {
+          dialog.current?.showModal();
+      },
+    }
+  })
+
   return (
-    <dialog className={styles["archive-note-modal"]} ref={ref}>
+    <dialog className={styles["archive-note-modal"]} ref={dialog}>
       <div className={styles["archive-note-modal__top"]}>
         <div className={styles["archive-note-modal__icon"]}>
           <ArchiveIcon />
@@ -29,4 +40,6 @@ export default function ArchiveNoteModal({ ref }: ArchiveNoteModalProps) {
       </form>
     </dialog>
   );
-}
+})
+
+export default ArchiveNoteModal;
