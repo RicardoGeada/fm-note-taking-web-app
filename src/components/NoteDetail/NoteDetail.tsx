@@ -11,8 +11,8 @@ import { DUMMY_NOTES } from "./../../dummy-notes";
 
 // Components
 import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
-import DeleteNoteModal from "./../DeleteNoteModal/DeleteNoteModal";
-import ArchiveNoteModal from "./../ArchiveNoteModal/ArchiveNoteModal";
+import DeleteNoteModal, { type DeleteNoteModalRef } from "./../DeleteNoteModal/DeleteNoteModal";
+import ArchiveNoteModal, { type ArchiveNoteModalRef } from "./../ArchiveNoteModal/ArchiveNoteModal";
 
 // Icons
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
@@ -28,8 +28,8 @@ export default function NoteDetail() {
   const { noteId } = useParams();
   const { isArchivedRoute } = useCurrentRouteInfo();
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
-  const deleteNoteDialog = useRef<HTMLDialogElement | null>(null);
-  const archiveNoteDialog = useRef<HTMLDialogElement | null>(null);
+  const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
+  const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
 
   if (!note) {
     return <div>Not found.</div>;
@@ -37,8 +37,8 @@ export default function NoteDetail() {
 
   const lastEdited = formatDate(note.last_edited);
 
-  function openDialog(ref: React.RefObject<HTMLDialogElement | null>) {
-    ref.current?.showModal();
+  function openDialog(ref: React.RefObject<DeleteNoteModalRef| ArchiveNoteModalRef | null>) {
+    ref.current?.open();
   }
 
   return (
