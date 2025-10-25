@@ -1,0 +1,58 @@
+@use "./../../fonts.scss";
+
+.toast {
+    position: absolute;
+    bottom: calc(56px + 20px);
+    right: 16px;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+    border: 1px solid var(--color-neutral-200);
+    border-radius: 8px;
+    background-color: var(--color-neutral-0);
+    padding: var(--spacing-100);
+    width: 390px;
+    animation: slideIn 225ms ease-in-out;
+
+
+    @include fonts.apply-text-preset("6");
+
+    &__checkmark-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--color-green-500);
+    }
+
+    &__text {
+        flex: 1;
+    }
+
+    &__link {
+        color: var(--color-neutral-950);
+    }
+
+    &__close-icon {
+        width: 16px;
+        height: 16px;
+        color: var(--color-neutral-400);
+    }
+
+    @keyframes slideIn {
+        from {transform: translateX(calc(100% + 64px));}
+        to {transform: translateX(0);}
+    }
+}
+
+@media (min-width: 48rem) {
+    .toast {
+        bottom: calc(74px + 32px); // 74px mobile nav 
+        right: 32px;
+    }
+}
+
+@media (min-width: 67.5rem) {
+    .toast {
+        bottom: 64px;
+        right: 64px;
+    }
+}
