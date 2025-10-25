@@ -22,6 +22,7 @@ import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import NoteDetailProperty from "./NoteDetailProperty/NoteDetailProperty";
+import Toast from "../Toast/Toast";
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
@@ -46,6 +47,9 @@ export default function NoteDetail() {
       {/* Modals */}
       <DeleteNoteModal ref={deleteNoteDialog} />
       <ArchiveNoteModal ref={archiveNoteDialog} />
+
+      {/* Toasts */}
+      <Toast text="Note archived" link={{to: "/archived", text: "Archived Notes"}}/>
 
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
