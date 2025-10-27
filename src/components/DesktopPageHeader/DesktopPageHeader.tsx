@@ -6,7 +6,7 @@ import SettingsIcon from "../../assets/images/icon-settings.svg?react";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 import { TAGS } from "../../dummy-notes";
 import { useState} from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 export default function DesktopPageHeader({ ...props }) {
   const { title, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
@@ -46,9 +46,9 @@ export default function DesktopPageHeader({ ...props }) {
         onChange={handleInput}
       />
 
-      <button className={styles["header__settings-button"]}>
+      <Link to={"/settings"} className={styles["header__settings-button"]}>
         <SettingsIcon />
-      </button>
+      </Link>
     </header>
   );
 }

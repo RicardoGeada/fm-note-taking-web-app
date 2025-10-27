@@ -15,6 +15,7 @@ import ArchivedNotes from "./pages/main/ArchivedNotes/ArchivedNotes";
 import Tags from "./pages/main/Tags/Tags";
 import Search from "./pages/main/Search/Search";
 import NewNote from "./components/NewNote/NewNote";
+import Settings from "./pages/main/Settings/Settings";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
         handle: { title: "All Notes" },
         children: [
           { path: ":noteId", element: <NoteDetail /> },
-          { path: "new-note", element: <NewNote />, handle: { isNewNote: true } },
+          {
+            path: "new-note",
+            element: <NewNote />,
+            handle: { isNewNote: true },
+          },
         ],
       },
       {
@@ -37,7 +42,11 @@ const router = createBrowserRouter([
         handle: { title: "Archived Notes" },
         children: [
           { path: ":noteId", element: <NoteDetail /> },
-          { path: "new-note", element: <NewNote />, handle: { isNewNote: true } },
+          {
+            path: "new-note",
+            element: <NewNote />,
+            handle: { isNewNote: true },
+          },
         ],
       },
       {
@@ -50,7 +59,11 @@ const router = createBrowserRouter([
             element: null,
             children: [
               { path: ":noteId", element: <NoteDetail /> },
-              { path: "new-note", element: <NewNote />, handle: { isNewNote: true } },
+              {
+                path: "new-note",
+                element: <NewNote />,
+                handle: { isNewNote: true },
+              },
             ],
           },
         ],
@@ -61,7 +74,22 @@ const router = createBrowserRouter([
         handle: { title: "Showing results for:" },
         children: [
           { path: ":noteId", element: <NoteDetail /> },
-          { path: "new-note", element: <NewNote />, handle: { isNewNote: true } },
+          {
+            path: "new-note",
+            element: <NewNote />,
+            handle: { isNewNote: true },
+          },
+        ],
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
+        handle: { title: "Settings" },
+        children: [
+          { path: "color-theme", element: null },
+          { path: "font-theme", element: null },
+          { path: "change-password", element: null },
+          { path: "logout", element: null },
         ],
       },
     ],
