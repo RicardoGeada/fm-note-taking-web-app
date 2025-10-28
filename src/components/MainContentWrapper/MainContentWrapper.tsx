@@ -12,19 +12,19 @@ type Props = {
 export default function MainContentWrapper({ children, className }: Props) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
-  const { isNewNoteRoute } = useCurrentRouteInfo();
+  const { isNewNoteRoute, isSettingsRoute } = useCurrentRouteInfo();
 
   return (
     <div className={clsx(styles["main-content-wrapper"], className) }>
       {children}
 
-      {!isDesktop && (noteId || isNewNoteRoute) && (
+      {!isDesktop && (noteId || isNewNoteRoute || isSettingsRoute) && (
         <div className={styles["overlay"]}>
           <Outlet />
         </div>
       )}
 
-      {isDesktop && (noteId || isNewNoteRoute) && <Outlet />}
+      {isDesktop && (noteId || isNewNoteRoute || isSettingsRoute) && <Outlet />}
     </div>
   );
 }

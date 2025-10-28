@@ -1,0 +1,54 @@
+@use "./../../../../fonts.scss";
+
+.color-theme {
+  padding: var(--spacing-300) var(--spacing-200);
+
+  &__back-link {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+    color: var(--color-neutral-950);
+    text-decoration: none;
+    margin-bottom: var(--spacing-150);
+  }
+
+  &__headline {
+    margin-bottom: var(--spacing-100);
+    @include fonts.apply-text-preset("1");
+  }
+
+  &__subtext {
+    margin-bottom: var(--spacing-250);
+    @include fonts.apply-text-preset("5");
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-250);
+    align-items: flex-end;
+  }
+
+  &__radio-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-200);
+    width: 100%;
+  }
+}
+
+@media (min-width: 48rem) {
+  .color-theme {
+    padding: var(--spacing-300) var(--spacing-400);
+  }
+}
+
+@media (min-width: 67.5rem) {
+  .color-theme {
+    padding: var(--spacing-400);
+    width: 100%;
+    max-width: 585px;
+  }
+}
+
+

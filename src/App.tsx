@@ -16,6 +16,7 @@ import Tags from "./pages/main/Tags/Tags";
 import Search from "./pages/main/Search/Search";
 import NewNote from "./components/NewNote/NewNote";
 import Settings from "./pages/main/Settings/Settings";
+import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 
 const router = createBrowserRouter([
   {
@@ -86,10 +87,10 @@ const router = createBrowserRouter([
         element: <Settings />,
         handle: { title: "Settings" },
         children: [
-          { path: "color-theme", element: null },
-          { path: "font-theme", element: null },
-          { path: "change-password", element: null },
-          { path: "logout", element: null },
+          { path: "color-theme", element: <ColorTheme />, handle: { isSettingsChildRoute: true }, },
+          { path: "font-theme", element: null, handle: { isSettingsChildRoute: true }, },
+          { path: "change-password", element: null, handle: { isSettingsChildRoute: true }, },
+          { path: "logout", element: null, handle: { isSettingsChildRoute: true }, },
         ],
       },
     ],
