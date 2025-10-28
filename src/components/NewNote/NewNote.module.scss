@@ -4,22 +4,22 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-}
 
-input,
-textarea {
-  border: 1px solid transparent;
-  outline: transparent;
-  border-radius: 4px;
-  width: 100%;
+  input,
+  textarea {
+    border: 1px solid transparent;
+    outline: transparent;
+    border-radius: 4px;
+    width: 100%;
 
-  &::placeholder {
-    color: var(--color-neutral-400);
-  }
+    &::placeholder {
+      color: var(--color-neutral-400);
+    }
 
-  &:focus {
-    box-shadow: 0 0 0 2px var(--color-neutral-0),
-      0 0 0 3px var(--color-neutral-500);
+    &:focus {
+      box-shadow: 0 0 0 2px var(--color-neutral-0),
+        0 0 0 3px var(--color-neutral-500);
+    }
   }
 }
 
