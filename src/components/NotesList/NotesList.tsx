@@ -58,7 +58,7 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
           styles["new-note-button"],
           isDesktop ? "" : "btn--circle"
         )}
-        onClick={() => {navigate("./new-note")}}
+        onClick={() => {navigate(`${basePath}/new-note`)}}
       >
         {isDesktop ? <span>+ Create New Note</span> : <AddIcon />}
       </button>
@@ -88,7 +88,7 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
           {isArchivedRoute && (
             <p>
               No notes have been archived yet. Move notes here for safekeeping,
-              or <Link to="">create a new note.</Link>
+              or <Link to={`${basePath}/new-note`}>create a new note.</Link>
             </p>
           )}
         </div>
