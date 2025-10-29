@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 import styles from "./ColorTheme.module.scss";
 
@@ -7,7 +8,7 @@ import SettingsRadioButton from "../../../../components/SettingsRadioButton/Sett
 import LightIcon from "./../../../../assets/images/icon-sun.svg?react";
 import MoonIcon from "./../../../../assets/images/icon-moon.svg?react";
 import SystemIcon from "./../../../../assets/images/icon-system-theme.svg?react";
-import { useMediaQuery } from "react-responsive";
+
 
 export default function ColorTheme() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
