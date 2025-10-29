@@ -10,6 +10,12 @@
     color: var(--color-neutral-950);
     text-decoration: none;
     margin-bottom: var(--spacing-150);
+    @include fonts.apply-text-preset("4");
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
   }
 
   &__headline {
@@ -48,7 +54,10 @@
     padding: var(--spacing-400);
     width: 100%;
     max-width: 585px;
+
+    &__headline {
+      margin-bottom: var(--spacing-50);
+      @include fonts.apply-text-preset("3");
+    }
   }
 }
-
-
