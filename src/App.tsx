@@ -18,6 +18,7 @@ import NewNote from "./components/NewNote/NewNote";
 import Settings from "./pages/main/Settings/Settings";
 import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
+import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
 
 const router = createBrowserRouter([
   {
@@ -90,7 +91,7 @@ const router = createBrowserRouter([
         children: [
           { path: "color-theme", element: <ColorTheme />, handle: { isSettingsChildRoute: true }, },
           { path: "font-theme", element: <FontTheme />, handle: { isSettingsChildRoute: true }, },
-          { path: "change-password", element: null, handle: { isSettingsChildRoute: true }, },
+          { path: "change-password", element: <ChangePassword />, handle: { isSettingsChildRoute: true }, },
           { path: "logout", element: null, handle: { isSettingsChildRoute: true }, },
         ],
       },

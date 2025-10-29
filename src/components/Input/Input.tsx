@@ -1,4 +1,3 @@
-/// <reference types="vite-plugin-svgr/client" />
 import clsx from "clsx";
 import styles from "./Input.module.scss";
 import InfoIcon from './../../assets/images/icon-info.svg?react';
