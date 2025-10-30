@@ -4,6 +4,9 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext/AuthProvider";
+
+
 import Home from "./pages/main/Home/Home";
 import Login from "./pages/auth/Login/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword/ForgotPassword";
@@ -19,6 +22,8 @@ import Settings from "./pages/main/Settings/Settings";
 import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
 import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
+
+
 
 const router = createBrowserRouter([
   {
@@ -89,10 +94,26 @@ const router = createBrowserRouter([
         element: <Settings />,
         handle: { title: "Settings" },
         children: [
-          { path: "color-theme", element: <ColorTheme />, handle: { isSettingsChildRoute: true }, },
-          { path: "font-theme", element: <FontTheme />, handle: { isSettingsChildRoute: true }, },
-          { path: "change-password", element: <ChangePassword />, handle: { isSettingsChildRoute: true }, },
-          { path: "logout", element: null, handle: { isSettingsChildRoute: true }, },
+          {
+            path: "color-theme",
+            element: <ColorTheme />,
+            handle: { isSettingsChildRoute: true },
+          },
+          {
+            path: "font-theme",
+            element: <FontTheme />,
+            handle: { isSettingsChildRoute: true },
+          },
+          {
+            path: "change-password",
+            element: <ChangePassword />,
+            handle: { isSettingsChildRoute: true },
+          },
+          {
+            path: "logout",
+            element: null,
+            handle: { isSettingsChildRoute: true },
+          },
         ],
       },
     ],
@@ -104,7 +125,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  );
 }
 
 export default App;
