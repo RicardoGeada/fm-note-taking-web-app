@@ -1,9 +1,16 @@
-import Input from "../../../components/Input/Input";
-import styles from "./Signup.module.scss";
-import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
-import { useInput } from "../../../hooks/useInput.ts";
-import clsx from "clsx";
+import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
+
+import clsx from "clsx";
+import { signUp } from "./../../../firebase/auth";
+
+import styles from "./Signup.module.scss";
+import Input from "../../../components/Input/Input";
+import { useInput } from "../../../hooks/useInput.ts";
+import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
+
+import LogoIcon from "./../../../assets/images/logo.svg?react";
+import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
 
 function Signup() {
   const {
@@ -20,14 +27,17 @@ function Signup() {
     hasError: passwordHasError,
   } = useInput("", (value) => hasMinLength(value, 8));
 
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    signUp(emailValue, passwordValue)
+     .then(() => console.log("success"))
+     .catch((err) => console.log(err))
+  }
+
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} action="">
-        <img
-          className={styles["form__logo"]}
-          src="./images/logo.svg"
-          alt="notes logo"
-        />
+      <form className={styles["form"]} onSubmit={(event) => onSubmit(event)}>
+        <LogoIcon className={styles["form__logo"]} />
 
         <div
           className={clsx(
@@ -95,7 +105,7 @@ function Signup() {
             className={clsx("btn", "btn--border", styles["btn"])}
             type="button"
           >
-            <img src="./images/icon-google.svg" alt="" />
+            <GoogleIcon />
             Google
           </button>
         </div>
