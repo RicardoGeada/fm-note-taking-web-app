@@ -1,4 +1,4 @@
-import type { FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 import clsx from "clsx";
@@ -11,6 +11,8 @@ import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";
 import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
+import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
+import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
 
 function Signup() {
   const {
@@ -27,11 +29,13 @@ function Signup() {
     hasError: passwordHasError,
   } = useInput("", (value) => hasMinLength(value, 8));
 
+  const [showPassword, setShowPassword] = useState(false);
+
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     signUp(emailValue, passwordValue)
-     .then(() => console.log("success"))
-     .catch((err) => console.log(err))
+      .then(() => console.log("success"))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -67,7 +71,7 @@ function Signup() {
           <Input
             label="Password"
             id="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             name="password"
             value={passwordValue}
             onBlur={handlePasswordBlur}
@@ -77,9 +81,9 @@ function Signup() {
             button={{
               position: "right",
               onClick: () => {
-                console.log("Click");
+                setShowPassword((prev) => !prev);
               },
-              content: <img src="./images/icon-show-password.svg"></img>,
+              content: showPassword ? <HidePassword /> : <ShowPassword />,
             }}
           />
 
