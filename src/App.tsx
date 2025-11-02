@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext/AuthProvider";
 
-
 import Home from "./pages/main/Home/Home";
 import Login from "./pages/auth/Login/Login";
 import ForgotPassword from "./pages/auth/ForgotPassword/ForgotPassword";
@@ -22,8 +21,7 @@ import Settings from "./pages/main/Settings/Settings";
 import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
 import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
-
-
+import { ToastProvider } from "./contexts/ToastContext/ToastProvider";
 
 const router = createBrowserRouter([
   {
@@ -127,7 +125,9 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <ToastProvider>
+        <RouterProvider router={router} />
+      </ToastProvider>
     </AuthProvider>
   );
 }

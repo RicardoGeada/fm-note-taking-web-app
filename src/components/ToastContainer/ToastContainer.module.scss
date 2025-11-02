@@ -1,0 +1,22 @@
+.toasts-container {
+    position: absolute;
+    bottom: calc(56px + 20px);
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-50);
+}
+
+@media (min-width: 48rem) {
+    .toasts-container {
+        bottom: calc(74px + 32px); // 74px mobile nav 
+        right: 32px;
+    }
+}
+
+@media (min-width: 67.5rem) {
+    .toasts-container {
+        bottom: 64px;
+        right: 64px;
+    }
+}
