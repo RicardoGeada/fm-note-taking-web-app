@@ -1,9 +1,6 @@
 @use "./../../fonts.scss";
 
 .toast {
-    position: absolute;
-    bottom: calc(56px + 20px);
-    right: 16px;
     display: flex;
     align-items: center;
     gap: var(--spacing-100);
@@ -23,12 +20,25 @@
         color: var(--color-green-500);
     }
 
+    &__error-icon {
+        width: 16px;
+        height: 16px;
+        background-color: var(--color-red-500);
+        border-radius: var(--radius-full);
+        color: var(--color-neutral-0);
+    }
+
     &__text {
         flex: 1;
     }
 
     &__link {
         color: var(--color-neutral-950);
+    }
+
+    &__close-button {
+        width: 16px;
+        height: 16px;
     }
 
     &__close-icon {
@@ -43,16 +53,3 @@
     }
 }
 
-@media (min-width: 48rem) {
-    .toast {
-        bottom: calc(74px + 32px); // 74px mobile nav 
-        right: 32px;
-    }
-}
-
-@media (min-width: 67.5rem) {
-    .toast {
-        bottom: 64px;
-        right: 64px;
-    }
-}

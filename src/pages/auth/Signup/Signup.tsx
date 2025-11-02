@@ -13,8 +13,11 @@ import LogoIcon from "./../../../assets/images/logo.svg?react";
 import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
 import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
 import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
+import { useToast } from "../../../hooks/useToast.ts";
 
 function Signup() {
+  const { showToast } = useToast();
+
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
@@ -34,8 +37,8 @@ function Signup() {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     signUp(emailValue, passwordValue)
-      .then(() => console.log("success"))
-      .catch((err) => console.log(err));
+      .then(() => showToast({ text: "Your account was successfully created."}))
+      .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
   }
 
   return (

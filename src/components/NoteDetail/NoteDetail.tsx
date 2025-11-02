@@ -22,7 +22,6 @@ import RestoreIcon from "./../../assets/images/icon-restore.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
-import Toast, { type ToastRef } from "../Toast/Toast";
 
 
 export default function NoteDetail() {
@@ -32,7 +31,6 @@ export default function NoteDetail() {
   const note = DUMMY_NOTES.find((n) => n.id === noteId);
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
-  const toast = useRef<ToastRef | null>(null);
 
   if (!note) {
     return <div>Not found.</div>;
@@ -49,9 +47,6 @@ export default function NoteDetail() {
       {/* Modals */}
       <DeleteNoteModal ref={deleteNoteDialog} />
       <ArchiveNoteModal ref={archiveNoteDialog} />
-
-      {/* Toast */}
-      <Toast ref={toast} />
 
       <div className={styles["note-wrapper"]}>
         <div className={styles["note"]}>
@@ -81,7 +76,7 @@ export default function NoteDetail() {
             <>
               <div className="hl-separator"></div>
               <div className={styles["note__buttons"]}>
-                <button className="btn btn--primary" onClick={() => toast.current?.show({text: "Note saved successfully!"})}>Save Note</button>
+                <button className="btn btn--primary">Save Note</button>
                 <button className="btn btn--secondary">Cancel</button>
               </div>
             </>

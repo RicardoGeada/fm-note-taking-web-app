@@ -1,65 +1,36 @@
 import { Link } from "react-router-dom";
-import { createPortal } from "react-dom";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 
 import styles from "./Toast.module.scss";
 
 import CheckIcon from "./../../assets/images/icon-checkmark.svg?react";
+import ErrorIcon from "./../../assets/images/icon-cross.svg?react";
 import CloseIcon from "./../../assets/images/icon-cross.svg?react";
+import type { ToastData } from "../../contexts/ToastContext/ToastContext";
 
-type ToastProps = {
-  text: string;
-  link?: {
-    text: string;
-    to: string;
-  };
+export type ToastProps = {
+  toast: ToastData;
+  onClose: (id: string) => void;
 };
 
-export type ToastRef = {
-  show: ({ text, link }: ToastProps) => void;
-};
-
-const Toast = forwardRef<ToastRef>(function Toast(_, ref) {
-  const [toast, setToast] = useState<ToastProps | null>(null);
-  const [visible, setVisible] = useState(false);
-
-  const toastRoot = document.getElementById("toasts");
-
-  useImperativeHandle(ref, () => ({
-    show(props: ToastProps) {
-      setToast(props);
-      setVisible(true);
-    },
-  }));
-
-  useEffect(() => {
-    if (!visible) return;
-    const timer = setTimeout(() => setVisible(false), 3000);
-    return () => clearTimeout(timer);
-  }, [visible]);
-
-  if (!toastRoot || !visible || !toast) return null;
-
-  return createPortal(
+export default function Toast({ toast, onClose }: ToastProps) {
+  return (
     <div
       role="alert"
       aria-live="polite"
       aria-atomic="true"
       className={styles["toast"]}
     >
-      <CheckIcon className={styles["toast__checkmark-icon"]} />
-      <span className={styles["toast__text"]}>{toast?.text}</span>
+      {!toast.error && <CheckIcon className={styles["toast__checkmark-icon"]} />}
+      {toast.error && <ErrorIcon className={styles["toast__error-icon"]} />}
+      <span className={styles["toast__text"]}>{toast.text}</span>
       {toast.link && (
         <Link className={styles["toast__link"]} to={toast.link.to}>
           {toast.link.text}
         </Link>
       )}
-      <button onClick={() => setVisible(false)}>
+      <button className={styles["toast__close-button"]} onClick={() => onClose(toast.id)}>
         <CloseIcon className={styles["toast__close-icon"]} />
       </button>
-    </div>,
-    toastRoot
+    </div>
   );
-});
-
-export default Toast;
+}
