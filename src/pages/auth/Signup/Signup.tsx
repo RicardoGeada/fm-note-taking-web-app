@@ -38,7 +38,7 @@ function Signup() {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     signUp(emailValue, passwordValue)
-      .then(() => showToast({ text: "Your account was successfully created."}))
+      .then(() => {showToast({ text: "Your account was successfully created."})} )
       .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
   }
 
