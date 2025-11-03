@@ -2,18 +2,19 @@ import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 
 import clsx from "clsx";
-import { signUp } from "./../../../firebase/auth";
+import { signUp, signInWithGoogle } from "./../../../firebase/auth";
 
 import styles from "./Signup.module.scss";
 import Input from "../../../components/Input/Input";
 import { useInput } from "../../../hooks/useInput.ts";
+import { useToast } from "../../../hooks/useToast.ts";
 import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";
 import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
 import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
 import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
-import { useToast } from "../../../hooks/useToast.ts";
+
 
 function Signup() {
   const { showToast } = useToast();
@@ -34,16 +35,22 @@ function Signup() {
 
   const [showPassword, setShowPassword] = useState(false);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     signUp(emailValue, passwordValue)
-      .then(() => showToast({ text: "Your account was successfully created."}))
+      .then(() => {showToast({ text: "Your account was successfully created."})} )
       .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
+  }
+
+  function handleSignInWithGoogle() {
+    signInWithGoogle()
+    .then(() => showToast({ text: "Your account was successfully created."}))
+    .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
   }
 
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} onSubmit={(event) => onSubmit(event)}>
+      <form className={styles["form"]} onSubmit={(event) => handleSubmit(event)}>
         <LogoIcon className={styles["form__logo"]} />
 
         <div
@@ -93,6 +100,7 @@ function Signup() {
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
+            disabled={(!emailValue || !passwordValue)}
           >
             Signup
           </button>
@@ -111,6 +119,7 @@ function Signup() {
           <button
             className={clsx("btn", "btn--border", styles["btn"])}
             type="button"
+            onClick={() => handleSignInWithGoogle()}
           >
             <GoogleIcon />
             Google
