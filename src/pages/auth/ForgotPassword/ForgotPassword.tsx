@@ -4,7 +4,14 @@ import { isEmail, isNotEmpty } from "../../../util/validation";
 import styles from "./ForgotPassword.module.scss";
 import clsx from "clsx";
 
+import LogoIcon from "./../../../assets/images/logo.svg?react";
+import type { FormEvent } from "react";
+import { doSendPasswordResetEmail } from "../../../firebase/auth";
+import { useToast } from "../../../hooks/useToast";
+
 function ForgotPassword() {
+  const toast = useToast();
+
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
@@ -12,14 +19,17 @@ function ForgotPassword() {
     hasError: emailHasError,
   } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+      event.preventDefault();
+      doSendPasswordResetEmail(emailValue)
+      .then(() => toast.showToast({text: "Successfully send reset link."}))
+      .catch(() => toast.showToast({text: "Ups something went wrong.", error: true}));
+    }
+
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} action="">
-        <img
-          className={styles["form__logo"]}
-          src="./images/logo.svg"
-          alt="notes logo"
-        />
+      <form className={styles["form"]} onSubmit={(event) => handleSubmit(event)}>
+        <LogoIcon className={styles["form__logo"]} />
 
         <div
           className={clsx(
@@ -49,6 +59,7 @@ function ForgotPassword() {
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
+            disabled={!emailValue}
           >
             Send Reset Link
           </button>
