@@ -7,9 +7,14 @@ import ChangePasswordIcon from "./../../../assets/images/icon-lock.svg?react";
 import LogoutIcon from "./../../../assets/images/icon-logout.svg?react";
 import SettingsListItem from "./SettingsListItem/SettingsListItem";
 import { useMediaQuery } from "react-responsive";
+import { doSignOut } from "../../../firebase/auth";
 
 export default function Settings() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
+
+  function handleLogout() {
+    doSignOut()
+  }
 
   return (
     <MainContentWrapper>
@@ -20,7 +25,10 @@ export default function Settings() {
           <SettingsListItem Icon={FontIcon} to="/settings/font-theme" text="Font Theme"/>
           <SettingsListItem Icon={ChangePasswordIcon} to="/settings/change-password" text="Change Password"/>
           <div className="hl-separator"></div>
-          <SettingsListItem Icon={LogoutIcon} to="/settings/logout" text="Logout"/>
+          <button className={styles["settings__logout-button"]} onClick={handleLogout}>
+            <LogoutIcon/>
+            <span>Logout</span>
+          </button>
         </ul>
       </div>
     </MainContentWrapper>
