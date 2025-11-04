@@ -25,10 +25,17 @@ export function useInput<T>(defaultValue: T, validationFn: (value: T) => boolean
     setDidEdit(true);
   }
 
+  function reset() {
+    setEnteredValue(defaultValue);
+    setDidEdit(false);
+  }
+
   return {
     value: enteredValue,
     handleInputChange,
     handleInputBlur,
     hasError: didEdit && !valueIsValid,
+    reset,
+    isValid: enteredValue && valueIsValid,
   };
 }

@@ -1,5 +1,5 @@
 import { auth } from "./firebase";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 
 export const signUp = async (email : string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -19,3 +19,12 @@ export const signInWithGoogle = async () => {
 export const doSignOut = () => {
     return auth.signOut();
 }
+
+export const doSendPasswordResetEmail = (email: string) => {
+    return sendPasswordResetEmail(auth, email)
+}
+
+export const doConfirmPasswordReset = (oobCode: string, newPassword: string) => {
+    return confirmPasswordReset(auth, oobCode, newPassword)
+}
+

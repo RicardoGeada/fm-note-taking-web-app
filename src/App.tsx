@@ -21,48 +21,21 @@ import Settings from "./pages/main/Settings/Settings";
 import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
 import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
-import { ToastProvider } from "./contexts/ToastContext/ToastProvider";
+import AppLayout from "./layouts/AppLayout/AppLayout";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Home />,
+    element: <AppLayout />,
     children: [
-      { index: true, element: <Navigate to="/all" replace /> }, // redirect to all
       {
-        path: "/all",
-        element: <AllNotes />,
-        handle: { title: "All Notes" },
+        path: "/",
+        element: <Home />,
         children: [
-          { path: ":noteId", element: <NoteDetail /> },
+          { index: true, element: <Navigate to="/all" replace /> }, // redirect to all
           {
-            path: "new-note",
-            element: <NewNote />,
-            handle: { isNewNote: true },
-          },
-        ],
-      },
-      {
-        path: "/archived",
-        element: <ArchivedNotes />,
-        handle: { title: "Archived Notes" },
-        children: [
-          { path: ":noteId", element: <NoteDetail /> },
-          {
-            path: "new-note",
-            element: <NewNote />,
-            handle: { isNewNote: true },
-          },
-        ],
-      },
-      {
-        path: "/tag",
-        element: <Tags />,
-        handle: { title: "Notes Tagged:" },
-        children: [
-          {
-            path: ":tagId",
-            element: null,
+            path: "/all",
+            element: <AllNotes />,
+            handle: { title: "All Notes" },
             children: [
               { path: ":noteId", element: <NoteDetail /> },
               {
@@ -72,62 +45,92 @@ const router = createBrowserRouter([
               },
             ],
           },
-        ],
-      },
-      {
-        path: "/search",
-        element: <Search />,
-        handle: { title: "Showing results for:" },
-        children: [
-          { path: ":noteId", element: <NoteDetail /> },
           {
-            path: "new-note",
-            element: <NewNote />,
-            handle: { isNewNote: true },
+            path: "/archived",
+            element: <ArchivedNotes />,
+            handle: { title: "Archived Notes" },
+            children: [
+              { path: ":noteId", element: <NoteDetail /> },
+              {
+                path: "new-note",
+                element: <NewNote />,
+                handle: { isNewNote: true },
+              },
+            ],
+          },
+          {
+            path: "/tag",
+            element: <Tags />,
+            handle: { title: "Notes Tagged:" },
+            children: [
+              {
+                path: ":tagId",
+                element: null,
+                children: [
+                  { path: ":noteId", element: <NoteDetail /> },
+                  {
+                    path: "new-note",
+                    element: <NewNote />,
+                    handle: { isNewNote: true },
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            path: "/search",
+            element: <Search />,
+            handle: { title: "Showing results for:" },
+            children: [
+              { path: ":noteId", element: <NoteDetail /> },
+              {
+                path: "new-note",
+                element: <NewNote />,
+                handle: { isNewNote: true },
+              },
+            ],
+          },
+          {
+            path: "/settings",
+            element: <Settings />,
+            handle: { title: "Settings" },
+            children: [
+              {
+                path: "color-theme",
+                element: <ColorTheme />,
+                handle: { isSettingsChildRoute: true },
+              },
+              {
+                path: "font-theme",
+                element: <FontTheme />,
+                handle: { isSettingsChildRoute: true },
+              },
+              {
+                path: "change-password",
+                element: <ChangePassword />,
+                handle: { isSettingsChildRoute: true },
+              },
+              {
+                path: "logout",
+                element: null,
+                handle: { isSettingsChildRoute: true },
+              },
+            ],
           },
         ],
       },
-      {
-        path: "/settings",
-        element: <Settings />,
-        handle: { title: "Settings" },
-        children: [
-          {
-            path: "color-theme",
-            element: <ColorTheme />,
-            handle: { isSettingsChildRoute: true },
-          },
-          {
-            path: "font-theme",
-            element: <FontTheme />,
-            handle: { isSettingsChildRoute: true },
-          },
-          {
-            path: "change-password",
-            element: <ChangePassword />,
-            handle: { isSettingsChildRoute: true },
-          },
-          {
-            path: "logout",
-            element: null,
-            handle: { isSettingsChildRoute: true },
-          },
-        ],
-      },
+      { path: "/login", element: <Login /> },
+      { path: "/forgot-password", element: <ForgotPassword /> },
+      { path: "/reset-password", element: <ResetPassword /> },
+      { path: "/signup", element: <Signup /> },
     ],
   },
-  { path: "/login", element: <Login /> },
-  { path: "/forgot-password", element: <ForgotPassword /> },
-  { path: "/reset-password", element: <ResetPassword /> },
-  { path: "/signup", element: <Signup /> },
 ]);
 
 function App() {
   return (
     <AuthProvider>
-      <ToastProvider>
-        <RouterProvider router={router} />
-      </ToastProvider>
+      <RouterProvider router={router} />
     </AuthProvider>
   );
 }
