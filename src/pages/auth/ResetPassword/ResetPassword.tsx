@@ -1,21 +1,25 @@
-import styles from "./ResetPassword.module.scss";
+import { useState, type FormEvent } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+
 import clsx from "clsx";
+
+import styles from "./ResetPassword.module.scss";
 import Input from "../../../components/Input/Input";
 import { useInput } from "../../../hooks/useInput";
+import { useToast } from "../../../hooks/useToast";
 import { hasMinLength, isEqualToOtherValue } from "../../../util/validation";
-import { useState, type FormEvent } from "react";
+import { doConfirmPasswordReset } from "../../../firebase/auth";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";
 import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
 import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
-import { doConfirmPasswordReset } from "../../../firebase/auth";
-import { useSearchParams } from "react-router-dom";
-import { useToast } from "../../../hooks/useToast";
 
 function ResetPassword() {
   const [searchParams] = useSearchParams();
   const oobCode = searchParams.get("oobCode");
-  const toast = useToast();
+  const { showToast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate()
 
   const {
     value: newPasswordValue,
@@ -42,24 +46,45 @@ function ResetPassword() {
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     if (oobCode) {
+      setSubmitting(true);
       doConfirmPasswordReset(oobCode, newPasswordValue)
-        .then(() => toast.showToast({ text: "Password successfully reset." }))
-        .catch(() =>
-          toast.showToast({ text: "Ups something went wrong", error: true })
-        )
+        .then(() => {showToast({ text: "Password successfully reset." }); navigate("/login");})
+        .catch((error) => {
+          if (error.code === "auth/expired-action-code") {
+            showToast({
+              text: "This reset link has expired.",
+              error: true,
+              link: { text: "Request a new one", to: "/forgot-password" },
+            });
+          } else if (error.code === "auth/invalid-action-code") {
+            showToast({
+              text: "This reset link is invalid.",
+              error: true,
+              link: { text: "Request a new one", to: "/forgot-password" },
+            });
+          } else {
+            showToast({ text: "An unexpected error occurred.", error: true });
+          }
+        })
+
         .finally(() => {
           newPasswordReset();
           confirmPasswordReset();
+          setSubmitting(false);
         });
     } else {
-      toast.showToast({text: "No valid password reset link found. Please request a new one.", error: true, link: { text: "Forgot Password", to: "/forgot-password" }})
+      showToast({
+        text: "No valid password reset link found. Please request a new one.",
+        error: true,
+        link: { text: "Forgot Password", to: "/forgot-password" },
+      });
     }
   }
 
   return (
     <main className={styles["main"]}>
       <form
-        className={styles["form"]}
+        className={clsx(styles["form"], submitting ? "loading-border" : "")}
         onSubmit={(event) => handleSubmit(event)}
       >
         <LogoIcon className={styles["form__logo"]} />
@@ -78,6 +103,7 @@ function ResetPassword() {
 
         <div className={styles["form__section"]}>
           <Input
+            autoComplete="new-password"
             label="New Password"
             id="newPassword"
             type={showNewPassword ? "text" : "password"}
@@ -92,11 +118,16 @@ function ResetPassword() {
               onClick: () => {
                 setShowNewPassword((prev) => !prev);
               },
-              content: showNewPassword ? <HidePassword /> : <ShowPassword />,
+              content: showNewPassword ? (
+                <HidePassword aria-label="Hide password" />
+              ) : (
+                <ShowPassword aria-label="Show password" />
+              ),
             }}
           />
 
           <Input
+            autoComplete="confirm-password"
             label="Confirm New Password"
             id="confirmNewPassword"
             type={showConfirmPassword ? "text" : "password"}
@@ -114,9 +145,9 @@ function ResetPassword() {
                 setShowConfirmPassword((prev) => !prev);
               },
               content: showConfirmPassword ? (
-                <HidePassword />
+                <HidePassword aria-label="Hide password" />
               ) : (
-                <ShowPassword />
+                <ShowPassword aria-label="Show password" />
               ),
             }}
           />
@@ -124,7 +155,9 @@ function ResetPassword() {
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
-            disabled={ !(newPasswordIsValid && confirmPasswordIsValid) }
+            disabled={
+              !newPasswordIsValid || !confirmPasswordIsValid || submitting
+            }
           >
             Reset Password
           </button>

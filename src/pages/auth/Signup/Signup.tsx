@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import clsx from "clsx";
 import { signUp, signInWithGoogle } from "./../../../firebase/auth";
@@ -15,15 +15,17 @@ import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
 import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
 import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
 
-
 function Signup() {
   const { showToast } = useToast();
+  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
     handleInputBlur: handleEmailBlur,
     hasError: emailHasError,
+    isValid: emailIsValid,
   } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
   const {
@@ -31,26 +33,50 @@ function Signup() {
     handleInputChange: handlePasswordChange,
     handleInputBlur: handlePasswordBlur,
     hasError: passwordHasError,
+    isValid: passwordIsValid,
   } = useInput("", (value) => hasMinLength(value, 8));
 
   const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitting(true);
     signUp(emailValue, passwordValue)
-      .then(() => {showToast({ text: "Your account was successfully created."})} )
-      .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
+      .then(() => {
+        showToast({ text: "Your account was successfully created." });
+        navigate("/login");
+      })
+      .catch(() =>
+        showToast({
+          text: "An error occurred. Please try again later.",
+          error: true,
+        })
+      )
+      .finally(() => setSubmitting(false));
   }
 
   function handleSignInWithGoogle() {
+    setSubmitting(true);
     signInWithGoogle()
-    .then(() => showToast({ text: "Your account was successfully created."}))
-    .catch(() => showToast({ text: "Ups something went wrong.", error: true}));
+      .then(() => {
+        showToast({ text: "Your account was successfully created." });
+        navigate("/login");
+      })
+      .catch(() =>
+        showToast({
+          text: "An error occurred. Please try again later.",
+          error: true,
+        })
+      )
+      .finally(() => setSubmitting(false));
   }
 
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} onSubmit={(event) => handleSubmit(event)}>
+      <form
+        className={clsx(styles["form"], submitting ? "loading-border" : "")}
+        onSubmit={(event) => handleSubmit(event)}
+      >
         <LogoIcon className={styles["form__logo"]} />
 
         <div
@@ -67,6 +93,7 @@ function Signup() {
 
         <div className={styles["form__section"]}>
           <Input
+            autoComplete="email"
             label="Email Address"
             id="email"
             type="email"
@@ -79,6 +106,7 @@ function Signup() {
           />
 
           <Input
+            autoComplete="new-password"
             label="Password"
             id="password"
             type={showPassword ? "text" : "password"}
@@ -93,14 +121,18 @@ function Signup() {
               onClick: () => {
                 setShowPassword((prev) => !prev);
               },
-              content: showPassword ? <HidePassword /> : <ShowPassword />,
+              content: showPassword ? (
+                <HidePassword aria-label="Hide password" />
+              ) : (
+                <ShowPassword aria-label="Show password" />
+              ),
             }}
           />
 
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
-            disabled={(!emailValue || !passwordValue)}
+            disabled={!emailIsValid || !passwordIsValid || submitting}
           >
             Signup
           </button>
@@ -120,6 +152,7 @@ function Signup() {
             className={clsx("btn", "btn--border", styles["btn"])}
             type="button"
             onClick={() => handleSignInWithGoogle()}
+            disabled={submitting}
           >
             <GoogleIcon />
             Google

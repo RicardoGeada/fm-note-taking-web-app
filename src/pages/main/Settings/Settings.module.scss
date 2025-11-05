@@ -28,7 +28,7 @@
       color: var(--color-neutral-950);
       text-decoration: none;
       padding: 8px;
-      @include fonts.apply-text-preset("4");
+      @include fonts.apply-text-preset("400");
 
       &:hover,
       &.active {

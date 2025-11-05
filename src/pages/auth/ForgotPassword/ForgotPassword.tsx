@@ -1,34 +1,52 @@
-import Input from "../../../components/Input/Input";
-import { useInput } from "../../../hooks/useInput";
-import { isEmail, isNotEmpty } from "../../../util/validation";
-import styles from "./ForgotPassword.module.scss";
+import { useState, type FormEvent } from "react";
+
 import clsx from "clsx";
 
-import LogoIcon from "./../../../assets/images/logo.svg?react";
-import type { FormEvent } from "react";
-import { doSendPasswordResetEmail } from "../../../firebase/auth";
+import styles from "./ForgotPassword.module.scss";
+import Input from "../../../components/Input/Input";
+import { useInput } from "../../../hooks/useInput";
 import { useToast } from "../../../hooks/useToast";
+import { isEmail, isNotEmpty } from "../../../util/validation";
+import { doSendPasswordResetEmail } from "../../../firebase/auth";
+
+import LogoIcon from "./../../../assets/images/logo.svg?react";
 
 function ForgotPassword() {
-  const toast = useToast();
+  const { showToast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
     handleInputBlur: handleEmailBlur,
     hasError: emailHasError,
+    isValid: emailIsValid,
+    reset: resetEmailValue,
   } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-      event.preventDefault();
-      doSendPasswordResetEmail(emailValue)
-      .then(() => toast.showToast({text: "Successfully send reset link."}))
-      .catch(() => toast.showToast({text: "Ups something went wrong.", error: true}));
-    }
+    event.preventDefault();
+    setSubmitting(true);
+    doSendPasswordResetEmail(emailValue)
+      .then(() => {
+        showToast({ text: "We've sent you a password reset link." });
+        resetEmailValue();
+      })
+      .catch(() =>
+        showToast({
+          text: "Something went wrong. Please try again later.",
+          error: true,
+        })
+      )
+      .finally(() => setSubmitting(false));
+  }
 
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} onSubmit={(event) => handleSubmit(event)}>
+      <form
+        className={clsx(styles["form"], submitting ? "loading-border" : "")}
+        onSubmit={(event) => handleSubmit(event)}
+      >
         <LogoIcon className={styles["form__logo"]} />
 
         <div
@@ -45,7 +63,8 @@ function ForgotPassword() {
 
         <section className={styles["form__section"]}>
           <Input
-            label="Email Adress"
+            autoComplete="email"
+            label="Email Address"
             id="email"
             type="email"
             name="email"
@@ -59,7 +78,7 @@ function ForgotPassword() {
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
-            disabled={!emailValue}
+            disabled={!emailIsValid || submitting}
           >
             Send Reset Link
           </button>
