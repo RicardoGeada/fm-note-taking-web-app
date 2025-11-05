@@ -93,6 +93,7 @@ function Signup() {
 
         <div className={styles["form__section"]}>
           <Input
+            autoComplete="email"
             label="Email Address"
             id="email"
             type="email"
@@ -105,6 +106,7 @@ function Signup() {
           />
 
           <Input
+            autoComplete="new-password"
             label="Password"
             id="password"
             type={showPassword ? "text" : "password"}

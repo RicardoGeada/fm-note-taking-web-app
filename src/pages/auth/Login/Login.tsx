@@ -100,6 +100,7 @@ function Login() {
 
         <div className={styles["form__section"]}>
           <Input
+            autoComplete="email"
             label="Email Address"
             id="email"
             type="email"
@@ -119,6 +120,7 @@ function Login() {
               Forgot
             </Link>
             <Input
+              autoComplete="current-password"
               label="Password"
               id="password"
               type={showPassword ? "text" : "password"}
