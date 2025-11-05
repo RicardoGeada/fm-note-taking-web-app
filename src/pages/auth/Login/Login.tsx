@@ -10,22 +10,22 @@ import { useInput } from "../../../hooks/useInput.ts";
 import { useToast } from "../../../hooks/useToast.ts";
 import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
 
-
 import LogoIcon from "./../../../assets/images/logo.svg?react";
 import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
 import ShowPassword from "./../../../assets/images/icon-show-password.svg?react";
 import HidePassword from "./../../../assets/images/icon-hide-password.svg?react";
 
-
 function Login() {
   const { showToast } = useToast();
   const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     value: emailValue,
     handleInputChange: handleEmailChange,
     handleInputBlur: handleEmailBlur,
     hasError: emailHasError,
+    isValid: emailIsValid,
   } = useInput("", (value) => isEmail(value) && isNotEmpty(value));
 
   const {
@@ -33,30 +33,57 @@ function Login() {
     handleInputChange: handlePasswordChange,
     handleInputBlur: handlePasswordBlur,
     hasError: passwordHasError,
+    isValid: passwordIsValid,
   } = useInput("", (value) => hasMinLength(value, 8));
 
   const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    setSubmitting(true);
     signIn(emailValue, passwordValue)
-      .then(() => {showToast({ text: "Logged in successfully." }); navigate("/all")})
-      .catch(() =>
-        showToast({ text: "Ups something went wrong.", error: true })
-      );
+      .then(() => {
+        showToast({ text: "Logged in successfully." });
+        navigate("/all");
+      })
+      .catch((error) => {
+        if (error.code === "auth/invalid-credential") {
+          showToast({
+            text: "Please make sure to use a correct email and password.",
+            error: true,
+          });
+        } else {
+          showToast({
+            text: "An error occurred. Please try again later.",
+            error: true,
+          });
+        }
+      })
+      .finally(() => setSubmitting(false));
   }
 
   function handleSignInWithGoogle() {
+    setSubmitting(true);
     signInWithGoogle()
-      .then(() => {showToast({ text: "Logged in successfully." }); navigate("/all")})
+      .then(() => {
+        showToast({ text: "Logged in successfully." });
+        navigate("/all");
+      })
       .catch(() =>
-        showToast({ text: "Ups something went wrong.", error: true })
-      );
+        showToast({
+          text: "An error occurred. Please try again later.",
+          error: true,
+        })
+      )
+      .finally(() => setSubmitting(false));
   }
 
   return (
     <main className={styles["main"]}>
-      <form className={styles["form"]} onSubmit={(event) => handleSubmit(event)}>
+      <form
+        className={clsx(styles["form"], submitting ? "loading-border": "")}
+        onSubmit={(event) => handleSubmit(event)}
+      >
         <LogoIcon className={styles["form__logo"]} />
 
         <div
@@ -105,7 +132,7 @@ function Login() {
                 onClick: () => {
                   setShowPassword((prev) => !prev);
                 },
-                content: showPassword ? <HidePassword /> : <ShowPassword />,
+                content: showPassword ? <HidePassword aria-label="Hide password" /> : <ShowPassword aria-label="Show password" />,
               }}
             />
           </div>
@@ -113,7 +140,7 @@ function Login() {
           <button
             className={clsx("btn", "btn--primary", styles["btn"])}
             type="submit"
-            disabled={!emailValue || !passwordValue}
+            disabled={!emailIsValid || !passwordIsValid || submitting}
           >
             Login
           </button>
@@ -133,6 +160,7 @@ function Login() {
             className={clsx("btn", "btn--border", styles["btn"])}
             type="button"
             onClick={() => handleSignInWithGoogle()}
+            disabled={submitting}
           >
             <GoogleIcon />
             Google

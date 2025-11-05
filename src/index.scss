@@ -175,7 +175,7 @@ button {
     &:hover {
       color: var(--color-neutral-600);
       background-color: var(--color-neutral-100);
-      border: 1px solid transparent;
+      border: 1px solid var(--color-neutral-300);
     }
 
     &:focus {
@@ -213,6 +213,8 @@ button {
   }
 }
 
+// Separators
+
 .hl-separator {
   width: 100%;
   height: 1px;
@@ -225,4 +227,45 @@ button {
   width: 1px;
   height: 100%;
   background-color: var(--color-neutral-200);
+}
+
+
+// Animations
+
+.loading-border {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+
+  & > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  &::before{
+    content: "";
+    position: absolute;
+    top: -50%;
+    z-index: -1;
+    width: 64px;
+    height: 200%;
+    background: linear-gradient(to right, transparent, var(--color-blue-500), transparent);
+    animation: rotate 4s linear infinite;
+  }
+
+  &::after{
+    content: "";
+    position: absolute;
+    background-color: inherit;
+    inset: 4px;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 }
