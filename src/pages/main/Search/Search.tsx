@@ -1,14 +1,15 @@
 import NotesList from "../../../components/NotesList/NotesList";
-import { DUMMY_NOTES } from "../../../dummy-notes";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import MainContentWrapper from "../../../components/MainContentWrapper/MainContentWrapper";
+import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
 
 export default function Search() {
   const [params] = useSearchParams();
   const q = params.get("q") || "";
   const [search] = useState(q);
-  const searchedNotes = DUMMY_NOTES.filter((note) => {
+  const { notes } = useFireStoreContext();
+  const searchedNotes = notes.filter((note) => {
     const loweredSearch = search.toLowerCase();
     return (
       note.title.toLowerCase().includes(loweredSearch) ||

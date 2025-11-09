@@ -37,9 +37,11 @@
     background-color: var(--color-neutral-200);
     border-radius: 4px;
     padding: var(--spacing-25) var(--spacing-75);
+    @include fonts.apply-text-preset("6");
   }
 
   &__last-edited {
     color: var(--color-neutral-700);
+    @include fonts.apply-text-preset("6");
   }
 }

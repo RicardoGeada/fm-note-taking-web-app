@@ -1,9 +1,10 @@
 import NotesList from "../../../components/NotesList/NotesList";
-import { DUMMY_NOTES } from "../../../dummy-notes";
 import MainContentWrapper from "../../../components/MainContentWrapper/MainContentWrapper";
+import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
 
 export default function ArchivedNotes() {
-  const archivedNotes = DUMMY_NOTES.filter((note) => note.archived);
+  const { notes } = useFireStoreContext();
+  const archivedNotes = notes.filter((note) => note.archived);
 
   return (
     <MainContentWrapper>

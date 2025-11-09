@@ -8,7 +8,7 @@ export function useCurrentRouteInfo() {
     const isArchivedRoute = !!useMatch("/archived/*");
     const tagMatch = useMatch("/tag/:tagId/*");
     const isTagRoute = !!tagMatch;
-    const tagId = tagMatch?.params?.tagId ?? null;
+    const tagId = tagMatch?.params?.tagId?.toLowerCase() ?? null;
     const isSearchRoute = !!useMatch("/search");
     const isNewNoteRoute = matches.some(m => m.handle?.isNewNote);
     const isSettingsRoute = matches.some(m => m.handle?.isSettingsChildRoute);

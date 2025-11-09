@@ -6,10 +6,10 @@ import { useMediaQuery } from "react-responsive";
 import type { Note } from "../../types/note";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
 import { Link, useNavigate } from "react-router-dom";
-import { TAGS } from "../../dummy-notes";
 import Input from "../Input/Input";
 import SearchIcon from "../../assets/images/icon-search.svg?react";
 import NotesListHeader from "./NotesListHeader/NotesListHeader";
+import capitalize from "../../utils/capitalize";
 
 type NotesListProps = {
   notes: Note[];
@@ -19,7 +19,6 @@ type NotesListProps = {
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
-  const tagName = TAGS.find((t) => t.id === tagId)?.name;
   const navigate = useNavigate();
 
   return (
@@ -30,11 +29,11 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
         <h2
           className={clsx(
             styles["notes-list__headline"],
-            isTagRoute && tagName ? styles["notes-list__headline--tag"] : ""
+            isTagRoute && tagId ? styles["notes-list__headline--tag"] : ""
           )}
         >
           <span>{!isSearchRoute ? title : "Search"}</span>
-          {isTagRoute && tagName && ` ${tagName}`}
+          {isTagRoute && tagId && ` ${capitalize(tagId)}`}
         </h2>
       )}
 
@@ -69,8 +68,8 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
           them anytime.
         </p>
       )}
-      {isTagRoute && tagName && (
-        <p>All notes with the "{tagName}" tag are shown here.</p>
+      {isTagRoute && tagId && (
+        <p>All notes with the "{capitalize(tagId)}" tag are shown here.</p>
       )}
       {/* TODO: search query variable */}
       {!isDesktop && isSearchRoute && (
