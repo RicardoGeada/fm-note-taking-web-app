@@ -7,7 +7,6 @@ import { useMediaQuery } from "react-responsive";
 import styles from "./NoteDetail.module.scss";
 import { formatDate } from "../../util/date";
 import { useCurrentRouteInfo } from "./../../hooks/useCurrentRouteInfo";
-import { DUMMY_NOTES } from "./../../dummy-notes";
 
 // Components
 import NoteDetailHeader from "./NoteDetailHeader/NoteDetailHeader";
@@ -22,13 +21,15 @@ import RestoreIcon from "./../../assets/images/icon-restore.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
+import { useFireStoreContext } from "../../hooks/useFireStoreContext";
 
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
   const { isArchivedRoute } = useCurrentRouteInfo();
-  const note = DUMMY_NOTES.find((n) => n.id === noteId);
+  const { notes } = useFireStoreContext();
+  const note = notes.find((n) => n.id === noteId);
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
 

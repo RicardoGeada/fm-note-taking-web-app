@@ -15,27 +15,26 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
   const [notes, setNotes] = useState<Note[]>([]);
 
   useEffect(() => {
-    if(!currentUser) {
-        setNotes([]);
-        return
+    if (!currentUser) {
+      setNotes([]);
+      return;
     }
 
     const notesQuery = query(collection(db, "users", currentUser.uid, "notes"));
     const unsubscribe = onSnapshot(notesQuery, (snapshot) => {
-        const loadedNotes: Note[] = [];
-        snapshot.forEach((doc) => {
-            loadedNotes.push({ id: doc.id, ...doc.data() } as Note)
-        });
+      const loadedNotes: Note[] = [];
+      snapshot.forEach((doc) => {
+        loadedNotes.push({ id: doc.id, ...doc.data() } as Note);
+      });
 
-        setNotes(loadedNotes);
-    })
+      setNotes(loadedNotes);
+    });
 
     return () => unsubscribe();
   }, [currentUser]);
 
-
   const value = {
-    notes
+    notes,
   };
 
   return (
