@@ -4,13 +4,13 @@ import Input from "../Input/Input";
 import SearchIcon from "../../assets/images/icon-search.svg?react";
 import SettingsIcon from "../../assets/images/icon-settings.svg?react";
 import { useCurrentRouteInfo } from "../../hooks/useCurrentRouteInfo";
-import { TAGS } from "../../dummy-notes";
 import { useState} from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import capitalize from "../../utils/capitalize";
+
 
 export default function DesktopPageHeader({ ...props }) {
   const { title, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
-  const tagName = TAGS.find((t) => t.id === tagId)?.name;
   const [params] = useSearchParams();
   const q = params.get("q") || "";
   const [search, setSearch] = useState(q);
@@ -24,11 +24,11 @@ export default function DesktopPageHeader({ ...props }) {
       <h1
         className={clsx(
           styles["header__headline"],
-          ((isTagRoute && tagName) || isSearchRoute) ? styles["header__headline--tag"] : ""
+          ((isTagRoute && tagId) || isSearchRoute) ? styles["header__headline--tag"] : ""
         )}
       >
         <span>{title}</span> 
-        {isTagRoute && tagName && ` ${tagName}`}
+        {isTagRoute && tagId && ` ${capitalize(tagId)}`}
         {isSearchRoute && ` ${search}`}
       </h1>
 

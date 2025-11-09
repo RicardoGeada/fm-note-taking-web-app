@@ -5,9 +5,11 @@ import HomeIcon from "./../../assets/images/icon-home.svg?react";
 import ArchivedIcon from "./../../assets/images/icon-archive.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import { TAGS } from "../../dummy-notes";
+import { useFireStoreContext } from "../../hooks/useFireStoreContext";
 
 export default function DesktopNav({ ...props }) {
+  const { tags } = useFireStoreContext();
+
   return (
     <aside className={clsx(styles["sidebar"], props.className)}>
       <LogoIcon className={styles["sidebar__logo"]} />
@@ -23,12 +25,12 @@ export default function DesktopNav({ ...props }) {
         <div className="hl-separator"></div>
         <span className={styles["sidebar__text-divider"]}>Tags</span>
         <ul className={styles["sidebar__tag-list"]}>
-          {TAGS.map((t) => (
+          {tags.map((t) => (
             <SidebarItem
-              key={t.id}
-              to={`/tag/${t.id}`}
+              key={t}
+              to={`/tag/${t}`}
               Icon={TagIcon}
-              text={t.name}
+              text={t}
             />
           ))}
         </ul>

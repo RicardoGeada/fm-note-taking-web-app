@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { NavLink } from "react-router-dom";
 import ChevronRightIcon from "./../../assets/images/icon-chevron-right.svg?react";
 import styles from "./SidebarItem.module.scss";
+import capitalize from "../../utils/capitalize";
 
 type SidebarItemProps = {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
@@ -23,7 +24,7 @@ export default function SidebarItem({ Icon, text, to }: SidebarItemProps) {
         {({ isActive }) => (
           <>
             <Icon className={styles["sidebar-item__icon"]} />
-            <span className={styles["sidebar-item__text"]}>{text}</span>
+            <span className={styles["sidebar-item__text"]}>{capitalize(text)}</span>
             {isActive && <ChevronRightIcon />}
           </>
         )}

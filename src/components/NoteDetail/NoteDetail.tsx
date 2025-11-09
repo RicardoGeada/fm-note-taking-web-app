@@ -22,6 +22,7 @@ import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import capitalize from "../../utils/capitalize";
 
 
 export default function NoteDetail() {
@@ -64,7 +65,7 @@ export default function NoteDetail() {
           <h1 className={styles["note__title"]}>{note.title}</h1>
 
           <div className={styles["note__properties"]}>
-            <NoteDetailProperty icon={<TagIcon />} label="Tags" value={note.tags.join(", ")}/>
+            <NoteDetailProperty icon={<TagIcon />} label="Tags" value={note.tags.map(t => capitalize(t)).join(", ")}/>
             {isArchivedRoute && <NoteDetailProperty icon={<StatusIcon />} label="Status" value={"Archived"}/>}
             <NoteDetailProperty icon={<LastEditedIcon />} label="Last edited" value={lastEdited}/>
           </div>

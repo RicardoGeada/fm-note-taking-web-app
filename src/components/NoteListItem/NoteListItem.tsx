@@ -3,6 +3,7 @@ import type { Note } from "../../types/note";
 import { formatDate } from "../../util/date";
 import styles from "./NoteListItem.module.scss";
 import clsx from "clsx";
+import capitalize from "../../utils/capitalize";
 
 type NoteListItemProps = {
   note: Note;
@@ -27,7 +28,7 @@ export default function NoteListItem({ note, basePath }: NoteListItemProps) {
           <div className={styles["note-item__tags"]}>
             {note.tags.map((tag) => (
               <div key={tag} className={styles["note-item__tag"]}>
-                {tag}
+                {capitalize(tag)}
               </div>
             ))}
           </div>

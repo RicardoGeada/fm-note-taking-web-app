@@ -13,6 +13,7 @@ interface FireStoreProviderProps {
 export function FireStoreProvider({ children }: FireStoreProviderProps) {
   const { currentUser } = useAuthContext();
   const [notes, setNotes] = useState<Note[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   useEffect(() => {
     if (!currentUser) {
@@ -22,12 +23,15 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
 
     const notesQuery = query(collection(db, "users", currentUser.uid, "notes"));
     const unsubscribe = onSnapshot(notesQuery, (snapshot) => {
+      // load notes
       const loadedNotes: Note[] = [];
       snapshot.forEach((doc) => {
         loadedNotes.push({ id: doc.id, ...doc.data() } as Note);
       });
-
       setNotes(loadedNotes);
+      // derive tags from notes
+      const allTags = Array.from(new Set(loadedNotes.flatMap((n) => n.tags)));
+      setTags(allTags);
     });
 
     return () => unsubscribe();
@@ -35,6 +39,7 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
 
   const value = {
     notes,
+    tags
   };
 
   return (
