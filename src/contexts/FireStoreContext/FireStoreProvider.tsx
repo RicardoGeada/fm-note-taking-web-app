@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { FireStoreContext } from "./FireStoreContext";
 import type { Note } from "../../types/note";
 
-import { collection, onSnapshot, query } from "firebase/firestore";
+import { addDoc, collection, onSnapshot, query } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -37,9 +37,15 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
     return () => unsubscribe();
   }, [currentUser]);
 
+  const addNote = async (note: Omit<Note, "id">) => {
+    if(!currentUser) return;
+    await addDoc(collection(db, "users", currentUser.uid, "notes"), note);
+  }
+
   const value = {
     notes,
-    tags
+    tags,
+    addNote
   };
 
   return (
