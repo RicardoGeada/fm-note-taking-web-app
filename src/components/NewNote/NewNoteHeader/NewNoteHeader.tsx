@@ -3,9 +3,11 @@ import clsx from "clsx";
 import ArrowLeftIcon from "../../../assets/images/icon-arrow-left.svg?react";
 import { useNavigate } from "react-router-dom";
 
+type NewNoteHeaderProps = {
+  isSubmitting: boolean,
+}
 
-
-export default function NewNoteHeader() {
+export default function NewNoteHeader({ isSubmitting }: NewNoteHeaderProps ) {
     const navigate = useNavigate();
 
   return (
@@ -24,7 +26,7 @@ export default function NewNoteHeader() {
         </button>
 
         <div className={styles["new-note__controls-right"]}>
-          <button className={styles["new-note__controls-button"]}>
+          <button className={styles["new-note__controls-button"]} type="reset">
             <span>Cancel</span>
           </button>
           <button
@@ -32,6 +34,8 @@ export default function NewNoteHeader() {
               styles["new-note__controls-button"],
               styles["new-note__controls-button--primary"]
             )}
+            type="submit"
+            disabled={isSubmitting}
           >
             <span>Save Note</span>
           </button>
