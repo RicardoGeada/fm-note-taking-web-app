@@ -5,6 +5,7 @@ export interface FireStoreContextType {
     notes: Note[];
     tags: string[];
     addNote: (note: Omit<Note, "id">) => Promise<void>,
+    deleteNote: (id: string) => Promise<void>,
 }
 
 export const FireStoreContext = createContext<FireStoreContextType | undefined>(undefined);
