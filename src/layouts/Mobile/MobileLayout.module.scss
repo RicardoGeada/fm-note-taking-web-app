@@ -11,6 +11,8 @@
 
   &__header {
     grid-area: header;
+    position: relative;
+    z-index: 999;
   }
 
   &__main {
