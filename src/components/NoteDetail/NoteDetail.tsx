@@ -1,6 +1,6 @@
 // React Hooks
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 
 // Own Hooks, Utils ...
@@ -33,9 +33,16 @@ export default function NoteDetail() {
   const note = notes.find((n) => n.id === noteId);
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!note) {
+      navigate("..", { replace: true });
+    }
+  }, [note, navigate]);
 
   if (!note) {
-    return <div>Not found.</div>;
+    return null;
   }
 
   const lastEdited = formatDate(note.last_edited);
