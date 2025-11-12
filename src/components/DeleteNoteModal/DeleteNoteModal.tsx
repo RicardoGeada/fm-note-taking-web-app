@@ -1,9 +1,9 @@
-import { forwardRef, useImperativeHandle, useRef, type FormEvent } from "react";
+import { forwardRef, useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "./DeleteNoteModal.module.scss";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
 import { useFireStoreContext } from "../../hooks/useFireStoreContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useToast } from "../../hooks/useToast";
 
 export type DeleteNoteModalRef = {
@@ -19,7 +19,6 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
   const { deleteNote } = useFireStoreContext();
   const { noteId } = useParams();
   const { showToast } = useToast();
-  const navigate = useNavigate();
 
   useImperativeHandle(ref, () => {
     return {
@@ -31,13 +30,11 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
 
   if (!modalRoot) return null;
 
-  function handleDelete(e: FormEvent) {
-    e.preventDefault();
+  function handleDelete() {
     if (!noteId) return;
 
     deleteNote(noteId)
       .then(() => {
-        navigate("..");
         showToast({ text: "Note permanently deleted." });
       })
       .catch(() => showToast({ text: "Error deleting note", error: true }));
@@ -59,13 +56,14 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
         </div>
       </div>
       <div className="hl-separator"></div>
-      <form className={styles["delete-note-modal__form"]}>
-        <button formMethod="dialog" className="btn btn--secondary">Cancel</button>
-        
-      </form>
-      <button type="button" className="btn btn--red" onClick={handleDelete}>
+      <form method="dialog" className={styles["delete-note-modal__form"]}>
+        <button className="btn btn--secondary">
+          Cancel
+        </button>
+        <button className="btn btn--red" onClick={handleDelete}>
           Delete Note
         </button>
+      </form>
     </dialog>,
     modalRoot
   );

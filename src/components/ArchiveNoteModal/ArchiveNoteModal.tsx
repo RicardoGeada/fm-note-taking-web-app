@@ -2,6 +2,9 @@ import { forwardRef, useImperativeHandle, useRef} from "react";
 import styles from "./ArchiveNoteModal.module.scss";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import { createPortal } from "react-dom";
+import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useParams } from "react-router-dom";
+import { useToast } from "../../hooks/useToast";
 
 export type ArchiveNoteModalRef = {
   open: () => void;
@@ -11,6 +14,10 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
   
   const modalRoot = document.getElementById("modals");
   const dialog = useRef<HTMLDialogElement | null>(null);
+  const { archiveNote } = useFireStoreContext();
+  const { noteId } = useParams();
+  const { showToast } = useToast();
+
 
   useImperativeHandle(ref, () => {
     return {
@@ -21,6 +28,16 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
   })
 
   if(!modalRoot) return null;
+
+  function handleArchive() {
+    if(!noteId) return;
+
+    archiveNote(noteId)
+      .then(() => {
+        showToast({text: "Note Archived", link: {text: "Archived Notes", to: "/archived"}})
+      })
+      .catch(() => showToast({ text: "Error archiving note", error: true }))
+  }
 
   return createPortal(
     <dialog className={styles["archive-note-modal"]} ref={dialog}>
@@ -40,7 +57,7 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
       <div className="hl-separator"></div>
       <form method="dialog" className={styles["archive-note-modal__form"]}>
         <button className="btn btn--secondary">Cancel</button>
-        <button className="btn btn--primary">Archive Note</button>
+        <button className="btn btn--primary" onClick={handleArchive}>Archive Note</button>
       </form>
     </dialog>,
     modalRoot
