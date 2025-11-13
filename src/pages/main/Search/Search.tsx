@@ -8,7 +8,7 @@ export default function Search() {
   const [params] = useSearchParams();
   const q = params.get("q") || "";
   const [search] = useState(q);
-  const { notes } = useFireStoreContext();
+  const { notes, isLoadingNotes } = useFireStoreContext();
   const searchedNotes = notes.filter((note) => {
     const loweredSearch = search.toLowerCase();
     return (
@@ -20,7 +20,7 @@ export default function Search() {
 
   return (
     <MainContentWrapper>
-      <NotesList notes={searchedNotes} basePath={"/search"} />
+      {!isLoadingNotes && <NotesList notes={searchedNotes} basePath={"/search"} />}
     </MainContentWrapper>
   );
 }

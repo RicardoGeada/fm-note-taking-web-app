@@ -22,6 +22,8 @@ import ColorTheme from "./pages/main/Settings/ColorTheme/ColorTheme";
 import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
 import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
 import AppLayout from "./layouts/AppLayout/AppLayout";
+import { useAuthContext } from "./hooks/useAuthContext";
+import { FireStoreProvider } from "./contexts/FireStoreContext/FireStoreProvider";
 
 const router = createBrowserRouter([
   {
@@ -130,8 +132,20 @@ const router = createBrowserRouter([
 function App() {
   return (
     <AuthProvider>
-      <RouterProvider router={router} />
+      <AppWithProviders />
     </AuthProvider>
+  );
+}
+
+function AppWithProviders() {
+  const { userLoggedIn } = useAuthContext();
+
+  return userLoggedIn ? (
+    <FireStoreProvider>
+      <RouterProvider router={router} />
+    </FireStoreProvider>
+  ) : (
+    <RouterProvider router={router} />
   );
 }
 

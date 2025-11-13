@@ -29,19 +29,22 @@ import { useToast } from "../../hooks/useToast";
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
-  const { isArchivedRoute } = useCurrentRouteInfo();
-  const { notes, restoreNote } = useFireStoreContext();
-  const note = notes.find((n) => n.id === noteId);
+  const { isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
+  const { loading, activeNotes, archivedNotes, getNotesByTag, restoreNote } = useFireStoreContext();
+  
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
   const navigate = useNavigate();
   const { showToast } = useToast();
 
+  const notes = isArchivedRoute ? archivedNotes : isTagRoute && tagId ? getNotesByTag(tagId) : activeNotes;
+  const note = notes.find((n) => n.id === noteId);
+
   useEffect(() => {
-    if(!note) {
+    if(!loading && !note) {
       navigate("..", { replace: true });
     }
-  }, [note, navigate]);
+  }, [note, loading, navigate]);
 
   if (!note) {
     return null;
