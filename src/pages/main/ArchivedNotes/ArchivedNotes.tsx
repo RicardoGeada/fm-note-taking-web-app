@@ -3,12 +3,11 @@ import MainContentWrapper from "../../../components/MainContentWrapper/MainConte
 import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
 
 export default function ArchivedNotes() {
-  const { notes } = useFireStoreContext();
-  const archivedNotes = notes.filter((note) => note.archived);
+  const { archivedNotes, isLoadingNotes } = useFireStoreContext();
 
   return (
     <MainContentWrapper>
-      <NotesList notes={archivedNotes} basePath="/archived"/>
+      {!isLoadingNotes && <NotesList notes={archivedNotes} basePath="/archived"/>}
     </MainContentWrapper>
   );
 }

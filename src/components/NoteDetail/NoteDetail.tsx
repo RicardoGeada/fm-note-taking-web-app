@@ -23,23 +23,28 @@ import StatusIcon from "./../../assets/images/icon-status.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { useFireStoreContext } from "../../hooks/useFireStoreContext";
 import capitalize from "../../utils/capitalize";
+import { useToast } from "../../hooks/useToast";
 
 
 export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
-  const { isArchivedRoute } = useCurrentRouteInfo();
-  const { notes } = useFireStoreContext();
-  const note = notes.find((n) => n.id === noteId);
+  const { isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
+  const { loading, activeNotes, archivedNotes, getNotesByTag, restoreNote } = useFireStoreContext();
+  
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
   const navigate = useNavigate();
+  const { showToast } = useToast();
+
+  const notes = isArchivedRoute ? archivedNotes : isTagRoute && tagId ? getNotesByTag(tagId) : activeNotes;
+  const note = notes.find((n) => n.id === noteId);
 
   useEffect(() => {
-    if(!note) {
+    if(!loading && !note) {
       navigate("..", { replace: true });
     }
-  }, [note, navigate]);
+  }, [note, loading, navigate]);
 
   if (!note) {
     return null;
@@ -49,6 +54,14 @@ export default function NoteDetail() {
 
   function openDialog(ref: React.RefObject<DeleteNoteModalRef| ArchiveNoteModalRef | null>) {
     ref.current?.open();
+  }
+
+  function handleRestore() {
+    if(!noteId) return;
+
+    restoreNote(noteId)
+    .then(() => showToast({text: "Note restored to active notes.", link: {text: "All Notes", to: "/all"}}))
+    .catch(() => showToast({text: "Error restoring note", error: true}))
   }
 
   return (
@@ -64,6 +77,7 @@ export default function NoteDetail() {
               <NoteDetailHeader
                 handleDelete={() => openDialog(deleteNoteDialog)}
                 handleArchive={() => openDialog(archiveNoteDialog)}
+                handleRestore={handleRestore}
               />
               <div className="hl-separator"></div>
             </>
@@ -102,7 +116,7 @@ export default function NoteDetail() {
             </button>
           )}
           {isArchivedRoute && (
-            <button className="btn btn--border">
+            <button className="btn btn--border" onClick={handleRestore}>
               <RestoreIcon />
               <span>Restore Note</span>
             </button>

@@ -8,14 +8,12 @@ import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 
 export default function Tags() {
   const { tagId } = useCurrentRouteInfo();
-  const { notes, tags } = useFireStoreContext();
-  const taggedNotes = tagId
-    ? notes.filter((note) => note.tags.includes(tagId))
-    : [];
+  const { getNotesByTag, tags, isLoadingNotes } = useFireStoreContext();
+  const taggedNotes = tagId ? getNotesByTag(tagId) : [];
 
   return (
     <MainContentWrapper>
-      {!tagId && (
+      {!isLoadingNotes && !tagId && (
         <div className={styles["tag-list-wrapper"]}>
           <h1 className={styles["tag-list__headline"]}>Tags</h1>
           <ul className={styles["tag-list"]}>
@@ -30,7 +28,7 @@ export default function Tags() {
           </ul>
         </div>
       )}
-      {tagId && <NotesList notes={taggedNotes} basePath={`/tag/${tagId}`} />}
+      {!isLoadingNotes && tagId && <NotesList notes={taggedNotes} basePath={`/tag/${tagId}`} />}
     </MainContentWrapper>
   );
 }
