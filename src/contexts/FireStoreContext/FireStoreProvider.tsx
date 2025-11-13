@@ -54,12 +54,19 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
     await updateDoc(docRef, { archived: true });
   }
 
+  const restoreNote = async (id: string) => {
+    if (!currentUser) return;
+    const docRef = doc(db, "users", currentUser.uid, "notes", id);
+    await updateDoc(docRef, { archived: false });
+  }
+
   const value = {
     notes,
     tags,
     addNote,
     deleteNote,
-    archiveNote
+    archiveNote,
+    restoreNote
   };
 
   return (
