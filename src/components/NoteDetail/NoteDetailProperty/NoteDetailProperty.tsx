@@ -11,7 +11,7 @@ export default function NoteDetailProperty({icon, label, value}: NoteDetailPrope
     <div className={styles["note__property"]}>
       <span className={styles["note__property-key"]}>
         {icon}
-        {label}
+        <span>{label}</span>
       </span>
       <span className={styles["note__property-value"]}>
         {value}

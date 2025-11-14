@@ -5,12 +5,13 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-100);
+    padding: var(--spacing-75) 0;
     @include fonts.apply-text-preset("6");
   }
 
   &__property-key {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: var(--spacing-75);
     color: var(--color-neutral-700);
     min-width: 115px;
@@ -19,9 +20,5 @@
       width: var(--spacing-200);
       height: var(--spacing-200);
     }
-  }
-
-  &__property-value {
-    padding: var(--spacing-75) 0;
   }
 }
