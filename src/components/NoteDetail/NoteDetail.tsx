@@ -30,7 +30,7 @@ export default function NoteDetail() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
   const { noteId } = useParams();
   const { isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
-  const { loading, activeNotes, archivedNotes, getNotesByTag, restoreNote } = useFireStoreContext();
+  const { isLoadingNotes, activeNotes, archivedNotes, getNotesByTag, restoreNote } = useFireStoreContext();
   
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);
@@ -41,10 +41,10 @@ export default function NoteDetail() {
   const note = notes.find((n) => n.id === noteId);
 
   useEffect(() => {
-    if(!loading && !note) {
+    if(!isLoadingNotes && !note) {
       navigate("..", { replace: true });
     }
-  }, [note, loading, navigate]);
+  }, [note, isLoadingNotes, navigate]);
 
   if (!note) {
     return null;
