@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import NewNoteHeader from "./NewNoteHeader/NewNoteHeader";
 import { useFireStoreContext } from "../../hooks/useFireStoreContext";
 import { useState, type FormEvent } from "react";
+import formatTags from "../../utils/formatTags";
 
 export default function NewNote() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
@@ -33,17 +34,7 @@ export default function NewNote() {
     form.reset();
   }
 
-  function formatTags(input: string): string[] {
-    return Array.from(
-      new Set(
-        input
-          .toLowerCase()
-          .split(",")
-          .map(t => t.trim())
-          .filter(Boolean)
-      )
-    );
-  }
+
 
   return (
     <>

@@ -21,4 +21,10 @@
       height: var(--spacing-200);
     }
   }
+
+  &__property-value {
+    padding: var(--spacing-75) 0;
+    color: var(--color-neutral-400);
+    flex: 1;
+  }
 }

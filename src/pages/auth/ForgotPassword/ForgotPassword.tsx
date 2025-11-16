@@ -6,7 +6,7 @@ import styles from "./ForgotPassword.module.scss";
 import Input from "../../../components/Input/Input";
 import { useInput } from "../../../hooks/useInput";
 import { useToast } from "../../../hooks/useToast";
-import { isEmail, isNotEmpty } from "../../../util/validation";
+import { isEmail, isNotEmpty } from "../../../utils/validation";
 import { doSendPasswordResetEmail } from "../../../firebase/auth";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";
