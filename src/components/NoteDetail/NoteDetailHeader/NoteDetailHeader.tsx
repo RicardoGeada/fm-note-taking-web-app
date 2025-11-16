@@ -11,9 +11,10 @@ type NoteDetailHeaderProps = {
   handleDelete: () => void;
   handleArchive: () => void;
   handleRestore: () => void;
+  isSubmitting: boolean;
 }
 
-export default function NoteDetailHeader({handleDelete, handleArchive, handleRestore}: NoteDetailHeaderProps) {
+export default function NoteDetailHeader({handleDelete, handleArchive, handleRestore, isSubmitting}: NoteDetailHeaderProps) {
     const navigate = useNavigate();
     const { isArchivedRoute } = useCurrentRouteInfo(); 
 
@@ -33,27 +34,29 @@ export default function NoteDetailHeader({handleDelete, handleArchive, handleRes
         </button>
 
         <div className={styles["note__controls-right"]}>
-          <button className={styles["note__controls-button"]} onClick={handleDelete}>
+          <button type="button" className={styles["note__controls-button"]} onClick={handleDelete}>
             <DeleteIcon />
           </button>
           {!isArchivedRoute && (
-            <button className={styles["note__controls-button"]} onClick={handleArchive}>
+            <button type="button" className={styles["note__controls-button"]} onClick={handleArchive}>
             <ArchiveIcon />
             </button>
           )}
           {isArchivedRoute && (
-            <button className={styles["note__controls-button"]} onClick={handleRestore}>
+            <button type="button" className={styles["note__controls-button"]} onClick={handleRestore}>
             <RestoreIcon />
             </button>
           )}
-          <button className={styles["note__controls-button"]}>
+          <button type="reset" className={styles["note__controls-button"]}>
             <span>Cancel</span>
           </button>
           <button
+            type="submit"
             className={clsx(
               styles["note__controls-button"],
               styles["note__controls-button--primary"]
             )}
+            disabled={isSubmitting}
           >
             <span>Save Note</span>
           </button>

@@ -12,7 +12,7 @@ export interface FireStoreContextType {
     deleteNote: (id: string) => Promise<void>,
     archiveNote: (id: string) => Promise<void>,
     restoreNote: (id: string) => Promise<void>,
-    updateNote: (id: string, note: Omit<Note, "id | archived | created_at">) => Promise<void>,
+    updateNote: (id: string, note: Omit<Note, "id" | "archived" | "created_at">) => Promise<void>,
 }
 
 export const FireStoreContext = createContext<FireStoreContextType | undefined>(undefined);

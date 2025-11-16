@@ -3,7 +3,7 @@ import styles from "./NoteDetailProperty.module.scss";
 type NoteDetailPropertyProps = {
     icon: React.ReactNode;
     label: string,
-    value: string,
+    value: React.ReactNode,
 }
 
 export default function NoteDetailProperty({icon, label, value}: NoteDetailPropertyProps) {

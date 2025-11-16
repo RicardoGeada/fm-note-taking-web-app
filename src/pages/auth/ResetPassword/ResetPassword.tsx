@@ -7,7 +7,7 @@ import styles from "./ResetPassword.module.scss";
 import Input from "../../../components/Input/Input";
 import { useInput } from "../../../hooks/useInput";
 import { useToast } from "../../../hooks/useToast";
-import { hasMinLength, isEqualToOtherValue } from "../../../util/validation";
+import { hasMinLength, isEqualToOtherValue } from "../../../utils/validation";
 import { doConfirmPasswordReset } from "../../../firebase/auth";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";

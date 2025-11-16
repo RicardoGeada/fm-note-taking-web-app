@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import type { Note } from "../../types/note";
-import { formatDate } from "../../util/date";
+import formatDate from "../../utils/date";
 import styles from "./NoteListItem.module.scss";
 import clsx from "clsx";
 import capitalize from "../../utils/capitalize";

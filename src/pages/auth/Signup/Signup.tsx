@@ -8,7 +8,7 @@ import styles from "./Signup.module.scss";
 import Input from "../../../components/Input/Input";
 import { useInput } from "../../../hooks/useInput.ts";
 import { useToast } from "../../../hooks/useToast.ts";
-import { hasMinLength, isEmail, isNotEmpty } from "../../../util/validation.ts";
+import { hasMinLength, isEmail, isNotEmpty } from "../../../utils/validation.ts";
 
 import LogoIcon from "./../../../assets/images/logo.svg?react";
 import GoogleIcon from "./../../../assets/images/icon-google.svg?react";
