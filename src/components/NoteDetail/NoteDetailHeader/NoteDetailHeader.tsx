@@ -11,10 +11,11 @@ type NoteDetailHeaderProps = {
   handleDelete: () => void;
   handleArchive: () => void;
   handleRestore: () => void;
+  handleCancel: () => void;
   isSubmitting: boolean;
 }
 
-export default function NoteDetailHeader({handleDelete, handleArchive, handleRestore, isSubmitting}: NoteDetailHeaderProps) {
+export default function NoteDetailHeader({handleDelete, handleArchive, handleRestore, handleCancel, isSubmitting}: NoteDetailHeaderProps) {
     const navigate = useNavigate();
     const { isArchivedRoute } = useCurrentRouteInfo(); 
 
@@ -47,7 +48,7 @@ export default function NoteDetailHeader({handleDelete, handleArchive, handleRes
             <RestoreIcon />
             </button>
           )}
-          <button type="reset" className={styles["note__controls-button"]}>
+          <button type="button" className={styles["note__controls-button"]} onClick={handleCancel} disabled={isSubmitting}>
             <span>Cancel</span>
           </button>
           <button

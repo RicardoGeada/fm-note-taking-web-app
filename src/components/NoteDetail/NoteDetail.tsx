@@ -111,6 +111,10 @@ export default function NoteDetail() {
     updateNote(noteId, note).finally(() => setIsSubmitting(false));
   }
 
+  function handleCancel() {
+    if(currentNote) setNote({... currentNote, tags: currentNote.tags.map((t) => capitalize(t)).join(", ")});
+  }
+
   return (
     <>
       {/* Modals */}
@@ -125,6 +129,7 @@ export default function NoteDetail() {
                 handleDelete={() => openDialog(deleteNoteDialog)}
                 handleArchive={() => openDialog(archiveNoteDialog)}
                 handleRestore={handleRestore}
+                handleCancel={handleCancel}
                 isSubmitting={isSubmitting}
               />
               <div className="hl-separator"></div>
@@ -179,7 +184,7 @@ export default function NoteDetail() {
                 <button type="submit" className="btn btn--primary" disabled={isSubmitting}>
                   Save Note
                 </button>
-                <button type="reset" className="btn btn--secondary">
+                <button type="button" className="btn btn--secondary" disabled={isSubmitting} onClick={handleCancel}>
                   Cancel
                 </button>
               </div>
