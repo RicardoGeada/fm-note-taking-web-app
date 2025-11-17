@@ -80,7 +80,7 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
     await updateDoc(docRef, { archived: false });
   };
 
-  const updateNote = async (id: string, note: Omit<Note, "id | archived | created_at">) => {
+  const updateNote = async (id: string, note: Omit<Note, "id" | "archived" | "created_at">) => {
     if (!currentUser) return;
     const docRef = doc(db, "users", currentUser.uid, "notes", id);
     await updateDoc(docRef, {...note});
