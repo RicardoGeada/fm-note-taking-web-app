@@ -108,7 +108,10 @@ export default function NoteDetail() {
       text: text.trim(),
       last_edited: new Date().toISOString(),
     }
-    updateNote(noteId, note).finally(() => setIsSubmitting(false));
+    updateNote(noteId, note)
+    .then(() => showToast({text: "Note saved successfully!"}))
+    .catch(() => showToast({text: "Error saving note.", error: true }))
+    .finally(() => setIsSubmitting(false));
   }
 
   function handleCancel() {
