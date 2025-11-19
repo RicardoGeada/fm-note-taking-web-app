@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
 import { FireStoreContext } from "./FireStoreContext";
 import type { Note } from "../../types/note";
 
@@ -53,7 +53,7 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
 
   const activeNotes = useMemo(() => notes.filter((n) => !n.archived), [notes]);
   const archivedNotes = useMemo(() => notes.filter((n) => n.archived), [notes]);
-  const getNotesByTag = (tag: string) => notes.filter((n) => n.tags.includes(tag));
+  const getNotesByTag = useCallback((tag: string) => notes.filter((n) => n.tags.includes(tag)), [notes]);
 
 
 
