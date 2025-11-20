@@ -32,6 +32,7 @@ import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 
 // styles
 import styles from "./NoteDetail.module.scss";
+import preventFormSubmitOnEnter from "../../utils/preventFormSubmitOnEnter";
 
 
 
@@ -125,7 +126,7 @@ export default function NoteDetail() {
       <ArchiveNoteModal ref={archiveNoteDialog} />
 
       <div className={styles["note-wrapper"]}>
-        <form className={styles["note"]} onSubmit={handleSubmit}>
+        <form className={styles["note"]} onSubmit={handleSubmit} onKeyDown={preventFormSubmitOnEnter}>
           {!isDesktop && (
             <>
               <NoteDetailHeader
