@@ -6,6 +6,7 @@ import NewNoteHeader from "./NewNoteHeader/NewNoteHeader";
 import { useFireStoreContext } from "../../hooks/useFireStoreContext";
 import { useState, type FormEvent } from "react";
 import formatTags from "../../utils/formatTags";
+import preventFormSubmitOnEnter from "../../utils/preventFormSubmitOnEnter";
 
 export default function NewNote() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
@@ -35,13 +36,12 @@ export default function NewNote() {
   }
 
 
-
   return (
     <>
       
       <div className={styles["new-note-wrapper"]}>
         
-        <form className={styles["new-note"]} onSubmit={handleSubmit}>
+        <form className={styles["new-note"]} onSubmit={handleSubmit} onKeyDown={preventFormSubmitOnEnter}>
           {!isDesktop && <>
             <NewNoteHeader isSubmitting={isSubmitting}/>
             <div className="hl-separator"></div>
