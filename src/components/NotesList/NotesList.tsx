@@ -18,7 +18,7 @@ type NotesListProps = {
 
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute, search } = useCurrentRouteInfo();
   const navigate = useNavigate();
 
   return (
@@ -71,9 +71,8 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       {isTagRoute && tagId && (
         <p>All notes with the "{capitalize(tagId)}" tag are shown here.</p>
       )}
-      {/* TODO: search query variable */}
       {!isDesktop && isSearchRoute && (
-        <p>All notes matching ”Dev” are displayed below.</p>
+        <p>All notes matching ”{capitalize(search)}” are displayed below.</p>
       )}
 
       {notes.length === 0 && (
