@@ -21,11 +21,11 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
   const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute, search, setSearchParams } = useCurrentRouteInfo();
   const navigate = useNavigate();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    const search = fd.get("search") as string;
-    setSearchParams(`?q=${search}`);
+    const search = (fd.get("search") as string).trim();
+    setSearchParams(`?q=${encodeURIComponent(search)}`);
   }
 
   return (
@@ -45,7 +45,7 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       )}
 
       {!isDesktop && isSearchRoute && (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSearch}>
           <Input
             label=""
             id="search"
