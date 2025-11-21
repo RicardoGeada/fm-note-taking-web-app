@@ -18,8 +18,15 @@ type NotesListProps = {
 
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute, search } = useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute, search, setSearchParams } = useCurrentRouteInfo();
   const navigate = useNavigate();
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const search = fd.get("search") as string;
+    setSearchParams(`?q=${search}`);
+  }
 
   return (
     <div className={styles["notes-list-wrapper"]}>
@@ -38,17 +45,21 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       )}
 
       {!isDesktop && isSearchRoute && (
+        <form onSubmit={handleSubmit}>
           <Input
             label=""
             id="search"
+            name="search"
             type="text"
             placeholder="Search by title, content or tags..."
             button={{
               position: "left",
               onClick: () => {},
               content: <SearchIcon />,
+              type: "submit",
             }}
           />
+        </form>
       )}
 
       <button

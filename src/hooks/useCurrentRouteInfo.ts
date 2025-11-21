@@ -5,14 +5,14 @@ export function useCurrentRouteInfo() {
     const current = matches.find((m) => m.handle?.title);
     const title = current?.handle?.title ?? "";
 
-    const [params] = useSearchParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
     const isArchivedRoute = !!useMatch("/archived/*");
     const tagMatch = useMatch("/tag/:tagId/*");
     const isTagRoute = !!tagMatch;
     const tagId = tagMatch?.params?.tagId?.toLowerCase() ?? null;
     const isSearchRoute = !!useMatch("/search");
-    const search = params.get("q")?.trim().toLowerCase() || ""; 
+    const search = searchParams.get("q")?.trim().toLowerCase() || ""; 
     const isNewNoteRoute = matches.some(m => m.handle?.isNewNote);
     const isSettingsRoute = matches.some(m => m.handle?.isSettingsChildRoute);
 
@@ -23,6 +23,7 @@ export function useCurrentRouteInfo() {
         tagId,
         isSearchRoute,
         search,
+        setSearchParams,
         isNewNoteRoute,
         isSettingsRoute
     }

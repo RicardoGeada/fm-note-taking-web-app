@@ -6,6 +6,7 @@ interface InputButtonConfig {
   position: 'left' | 'right',
   onClick: () => void,
   content: React.ReactNode, 
+  type?: "button" | "reset" | "submit" | undefined,
 }
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -38,7 +39,7 @@ const Input: React.FC<InputProps> = ({ label, id, error, hint, button, ...props 
         {/* Icon / Button */}
         {button && (
           <button 
-            type="button"
+            type={button.type ?? "button"}
             onClick={button.onClick} 
             className={clsx(
               styles["input-field__btn"], 
