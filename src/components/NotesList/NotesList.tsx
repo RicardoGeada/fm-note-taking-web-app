@@ -18,8 +18,15 @@ type NotesListProps = {
 
 export default function NotesList({ notes, basePath }: NotesListProps) {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute } = useCurrentRouteInfo();
+  const { title, isArchivedRoute, isTagRoute, tagId, isSearchRoute, search, setSearchParams } = useCurrentRouteInfo();
   const navigate = useNavigate();
+
+  function handleSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    const search = (fd.get("search") as string).trim();
+    setSearchParams(`?q=${encodeURIComponent(search)}`);
+  }
 
   return (
     <div className={styles["notes-list-wrapper"]}>
@@ -38,17 +45,21 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       )}
 
       {!isDesktop && isSearchRoute && (
+        <form onSubmit={handleSearch}>
           <Input
             label=""
             id="search"
+            name="search"
             type="text"
             placeholder="Search by title, content or tags..."
             button={{
               position: "left",
               onClick: () => {},
               content: <SearchIcon />,
+              type: "submit",
             }}
           />
+        </form>
       )}
 
       <button
@@ -71,9 +82,8 @@ export default function NotesList({ notes, basePath }: NotesListProps) {
       {isTagRoute && tagId && (
         <p>All notes with the "{capitalize(tagId)}" tag are shown here.</p>
       )}
-      {/* TODO: search query variable */}
       {!isDesktop && isSearchRoute && (
-        <p>All notes matching ”Dev” are displayed below.</p>
+        <p>All notes matching ”{capitalize(search)}” are displayed below.</p>
       )}
 
       {notes.length === 0 && (
