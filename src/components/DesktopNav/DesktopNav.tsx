@@ -5,10 +5,10 @@ import HomeIcon from "./../../assets/images/icon-home.svg?react";
 import ArchivedIcon from "./../../assets/images/icon-archive.svg?react";
 import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import SidebarItem from "../SidebarItem/SidebarItem";
-import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../hooks/useNotesContext";
 
 export default function DesktopNav({ ...props }) {
-  const { tags } = useFireStoreContext();
+  const { tags } = useNotesContext();
 
   return (
     <aside className={clsx(styles["sidebar"], props.className)}>

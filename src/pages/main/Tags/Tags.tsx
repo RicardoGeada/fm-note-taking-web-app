@@ -3,14 +3,14 @@ import NotesList from "../../../components/NotesList/NotesList";
 import SidebarItem from "../../../components/SidebarItem/SidebarItem";
 import TagIcon from "../../../assets/images/icon-tag.svg?react";
 import MainContentWrapper from "../../../components/MainContentWrapper/MainContentWrapper";
-import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../../hooks/useNotesContext";
 import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Tags() {
   const { tagId } = useCurrentRouteInfo();
-  const { getNotesByTag, tags, isLoadingNotes } = useFireStoreContext();
+  const { getNotesByTag, tags, isLoadingNotes } = useNotesContext();
   const navigate = useNavigate();
   const taggedNotes = tagId ? getNotesByTag(tagId) : [];
 

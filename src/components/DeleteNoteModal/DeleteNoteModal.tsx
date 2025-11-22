@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "./DeleteNoteModal.module.scss";
 import DeleteIcon from "./../../assets/images/icon-delete.svg?react";
-import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../hooks/useNotesContext";
 import { useParams } from "react-router-dom";
 import { useToast } from "../../hooks/useToast";
 
@@ -16,7 +16,7 @@ const DeleteNoteModal = forwardRef<DeleteNoteModalRef>(function DeleteNoteModal(
 ) {
   const modalRoot = document.getElementById("modals");
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const { deleteNote } = useFireStoreContext();
+  const { deleteNote } = useNotesContext();
   const { noteId } = useParams();
   const { showToast } = useToast();
 

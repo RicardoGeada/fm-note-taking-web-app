@@ -1,12 +1,12 @@
 import NotesList from "../../../components/NotesList/NotesList";
 import { useMemo } from "react";
 import MainContentWrapper from "../../../components/MainContentWrapper/MainContentWrapper";
-import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../../hooks/useNotesContext";
 import { useCurrentRouteInfo } from "../../../hooks/useCurrentRouteInfo";
 
 export default function Search() {
   const { search } = useCurrentRouteInfo();
-  const { notes, isLoadingNotes } = useFireStoreContext();
+  const { notes, isLoadingNotes } = useNotesContext();
   const searchedNotes = useMemo(() => {
     const lowered = search.toLowerCase();
     return notes.filter(

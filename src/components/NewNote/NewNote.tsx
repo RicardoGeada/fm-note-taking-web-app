@@ -3,14 +3,14 @@ import TagIcon from "./../../assets/images/icon-tag.svg?react";
 import LastEditedIcon from "./../../assets/images/icon-clock.svg?react";
 import { useMediaQuery } from "react-responsive";
 import NewNoteHeader from "./NewNoteHeader/NewNoteHeader";
-import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../hooks/useNotesContext";
 import { useState, type FormEvent } from "react";
 import formatTags from "../../utils/formatTags";
 import preventFormSubmitOnEnter from "../../utils/preventFormSubmitOnEnter";
 
 export default function NewNote() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
-  const { addNote } = useFireStoreContext();
+  const { addNote } = useNotesContext();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {

@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import type { Note } from "../../types/note";
 
-export interface FireStoreContextType {
+export interface NotesContextType {
     notes: Note[];
     tags: string[];
     isLoadingNotes: boolean;
@@ -15,4 +15,4 @@ export interface FireStoreContextType {
     updateNote: (id: string, note: Omit<Note, "id" | "archived" | "created_at">) => Promise<void>,
 }
 
-export const FireStoreContext = createContext<FireStoreContextType | undefined>(undefined);
+export const NotesContext = createContext<NotesContextType | undefined>(undefined);

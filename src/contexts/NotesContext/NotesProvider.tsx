@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
-import { FireStoreContext } from "./FireStoreContext";
+import { NotesContext } from "./NotesContext";
 import type { Note } from "../../types/note";
 
 import {
@@ -14,11 +14,11 @@ import {
 import { db } from "../../firebase/firebase";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
-interface FireStoreProviderProps {
+interface NotesProviderProps {
   children: ReactNode;
 }
 
-export function FireStoreProvider({ children }: FireStoreProviderProps) {
+export function NotesProvider({ children }: NotesProviderProps) {
   const { currentUser } = useAuthContext();
   const [notes, setNotes] = useState<Note[]>([]);
   const [isLoadingNotes, setIsLoadingNotes] = useState(true);
@@ -101,8 +101,8 @@ export function FireStoreProvider({ children }: FireStoreProviderProps) {
   };
 
   return (
-    <FireStoreContext.Provider value={value}>
+    <NotesContext.Provider value={value}>
       {children}
-    </FireStoreContext.Provider>
+    </NotesContext.Provider>
   );
 }
