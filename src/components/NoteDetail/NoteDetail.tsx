@@ -6,7 +6,7 @@ import { useMediaQuery } from "react-responsive";
 // hooks 
 import { useToast } from "../../hooks/useToast";
 import { useCurrentRouteInfo } from "./../../hooks/useCurrentRouteInfo";
-import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../hooks/useNotesContext";
 
 // utils
 import formatDate from "../../utils/date";
@@ -43,7 +43,7 @@ export default function NoteDetail() {
   const { showToast } = useToast();
 
   const { isArchivedRoute, isTagRoute, tagId } = useCurrentRouteInfo();
-  const { isLoadingNotes, activeNotes, archivedNotes, getNotesByTag, restoreNote, updateNote } = useFireStoreContext();
+  const { isLoadingNotes, activeNotes, archivedNotes, getNotesByTag, restoreNote, updateNote } = useNotesContext();
 
   const deleteNoteDialog = useRef<DeleteNoteModalRef | null>(null);
   const archiveNoteDialog = useRef<ArchiveNoteModalRef | null>(null);

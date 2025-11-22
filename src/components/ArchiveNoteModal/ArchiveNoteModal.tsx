@@ -2,7 +2,7 @@ import { forwardRef, useImperativeHandle, useRef} from "react";
 import styles from "./ArchiveNoteModal.module.scss";
 import ArchiveIcon from "./../../assets/images/icon-archive.svg?react";
 import { createPortal } from "react-dom";
-import { useFireStoreContext } from "../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../hooks/useNotesContext";
 import { useParams } from "react-router-dom";
 import { useToast } from "../../hooks/useToast";
 
@@ -14,7 +14,7 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
   
   const modalRoot = document.getElementById("modals");
   const dialog = useRef<HTMLDialogElement | null>(null);
-  const { archiveNote } = useFireStoreContext();
+  const { archiveNote } = useNotesContext();
   const { noteId } = useParams();
   const { showToast } = useToast();
 

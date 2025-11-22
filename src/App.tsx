@@ -23,7 +23,7 @@ import FontTheme from "./pages/main/Settings/FontTheme/FontTheme";
 import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword";
 import AppLayout from "./layouts/AppLayout/AppLayout";
 import { useAuthContext } from "./hooks/useAuthContext";
-import { FireStoreProvider } from "./contexts/FireStoreContext/FireStoreProvider";
+import { NotesProvider } from "./contexts/NotesContext/NotesProvider";
 
 const router = createBrowserRouter([
   {
@@ -141,9 +141,9 @@ function AppWithProviders() {
   const { userLoggedIn } = useAuthContext();
 
   return userLoggedIn ? (
-    <FireStoreProvider>
+    <NotesProvider>
       <RouterProvider router={router} />
-    </FireStoreProvider>
+    </NotesProvider>
   ) : (
     <RouterProvider router={router} />
   );

@@ -1,9 +1,9 @@
 import NotesList from "../../../components/NotesList/NotesList";
 import MainContentWrapper from "../../../components/MainContentWrapper/MainContentWrapper";
-import { useFireStoreContext } from "../../../hooks/useFireStoreContext";
+import { useNotesContext } from "../../../hooks/useNotesContext";
 
 export default function ArchivedNotes() {
-  const { archivedNotes, isLoadingNotes } = useFireStoreContext();
+  const { archivedNotes, isLoadingNotes } = useNotesContext();
 
   return (
     <MainContentWrapper>
