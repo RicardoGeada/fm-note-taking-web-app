@@ -58,13 +58,26 @@
   // === Shadows ===
   --shadow-small: 0px 4px 6px rgba(#f0f0f0, 0.6);
   --shadow-large: 0px 8px 12px rgba(#f0f0f0, 0.6);
+
+  // === Font ===
+  --font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+html[data-font="sans-serif"] {
+  --font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+html[data-font="serif"] {
+  --font-family: "Noto Serif", Georgia, 'Times New Roman', Times, serif, 
+}
+html[data-font="monospace"] {
+  --font-family: "Source Code Pro", 'Courier New', Courier, monospace;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-family: var(--font-family);
 }
 
 body {

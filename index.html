@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -11,5 +11,10 @@
     <div id="modals"></div>
     <div id="toasts"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // load font from localStorage 
+      const savedFont = localStorage.getItem("fontTheme");
+      if (savedFont) document.documentElement.setAttribute("data-font", savedFont);
+    </script>
   </body>
 </html>
