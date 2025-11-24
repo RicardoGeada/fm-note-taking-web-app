@@ -24,6 +24,7 @@ import ChangePassword from "./pages/main/Settings/ChangePassword/ChangePassword"
 import AppLayout from "./layouts/AppLayout/AppLayout";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { NotesProvider } from "./contexts/NotesContext/NotesProvider";
+import { SettingsProvider } from "./contexts/SettingsContext/SettingsProvider";
 
 const router = createBrowserRouter([
   {
@@ -141,9 +142,11 @@ function AppWithProviders() {
   const { userLoggedIn } = useAuthContext();
 
   return userLoggedIn ? (
-    <NotesProvider>
-      <RouterProvider router={router} />
-    </NotesProvider>
+    <SettingsProvider>
+      <NotesProvider>
+        <RouterProvider router={router} />
+      </NotesProvider>
+    </SettingsProvider>
   ) : (
     <RouterProvider router={router} />
   );
