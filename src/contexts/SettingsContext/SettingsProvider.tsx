@@ -55,9 +55,17 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
     }
   }, [isLoadingSettings, settings.fontTheme]);
 
+  const setFontTheme = (theme: "sans-serif" | "serif" | "monospace") => {
+    setSettings(prev => {return {
+      ...prev,
+      fontTheme: theme,
+    }})
+  }
+
   const value = {
     ...settings,
     isLoadingSettings,
+    setFontTheme,
   };
 
   return (
