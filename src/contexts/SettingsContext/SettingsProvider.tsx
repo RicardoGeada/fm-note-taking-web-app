@@ -3,10 +3,10 @@ import { SettingsContext } from "./SettingsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../firebase/firebase";
-import { getInitialFont } from "../../utils/settingsUtils";
+import { getInitialFont, getInitialTheme } from "../../utils/settingsUtils";
 
 interface UserSettings {
-  colorTheme: "light-mode" | "dark-mode" | "system";
+  colorTheme: "light" | "dark" | "system";
   fontTheme: "sans-serif" | "serif" | "monospace";
 }
 
@@ -15,7 +15,7 @@ interface SettingsProviderProps {
 }
 
 const defaultSettings: UserSettings = {
-  colorTheme: "system",
+  colorTheme: getInitialTheme(),
   fontTheme: getInitialFont(),
 };
 
@@ -38,6 +38,7 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
         const data = snapshot.data() as UserSettings;
         setSettings(data);
         localStorage.setItem("fontTheme", data.fontTheme);
+        localStorage.setItem("colorTheme", data.colorTheme);
       } else {
         setSettings(defaultSettings);
       }
@@ -50,10 +51,20 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
   // --- Apply DOM updates ---
   useEffect(() => {
     if (!isLoadingSettings) {
-      document.documentElement.setAttribute("data-font", settings.fontTheme);
-      localStorage.setItem("fontTheme", settings.fontTheme);
+      const { fontTheme, colorTheme } = settings;
+      document.documentElement.setAttribute("data-font", fontTheme);
+      localStorage.setItem("fontTheme", fontTheme);
+      
+      if (colorTheme === "light") {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else if (colorTheme === "dark") {
+        document.documentElement.setAttribute("data-theme", "dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+      }
+      localStorage.setItem("colorTheme", colorTheme);
     }
-  }, [isLoadingSettings, settings.fontTheme]);
+  }, [isLoadingSettings, settings]);
 
   const setFontTheme = (theme: "sans-serif" | "serif" | "monospace") => {
     setSettings(prev => {return {
@@ -62,10 +73,18 @@ export function SettingsProvider({ children }: SettingsProviderProps) {
     }})
   }
 
+  const setColorTheme = (theme: "light" | "dark" | "system") => {
+    setSettings(prev => {return {
+      ...prev,
+      colorTheme: theme,
+    }})
+  }
+
   const value = {
     ...settings,
     isLoadingSettings,
     setFontTheme,
+    setColorTheme,
   };
 
   return (

@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useSettingsContext } from "../../../../hooks/useSettingsContext";
+import { useState } from "react";
 
 import styles from "./ColorTheme.module.scss";
 
@@ -10,8 +12,16 @@ import MoonIcon from "./../../../../assets/images/icon-moon.svg?react";
 import SystemIcon from "./../../../../assets/images/icon-system-theme.svg?react";
 
 
+
 export default function ColorTheme() {
   const isDesktop = useMediaQuery({ minWidth: 1080 });
+  const { colorTheme, setColorTheme } = useSettingsContext();
+  const [selectedTheme, setSelectedTheme] = useState(colorTheme);
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setColorTheme(selectedTheme);
+  }
 
   return (
     <div className={styles["color-theme"]}>
@@ -25,7 +35,7 @@ export default function ColorTheme() {
       <p className={styles["color-theme__subtext"]}>
         Choose your color theme:{" "}
       </p>
-      <form className={styles["color-theme__form"]}>
+      <form className={styles["color-theme__form"]} onSubmit={handleSubmit}>
         <div className={styles["color-theme__radio-buttons"]}>
           <SettingsRadioButton
             Icon={LightIcon}
@@ -33,6 +43,9 @@ export default function ColorTheme() {
             subtitle="Pick a clean and classic light theme"
             id="light-mode"
             name="color-theme"
+            value="light"
+            checked={selectedTheme === "light"}
+            onChange={() => setSelectedTheme("light")}
           />
           <SettingsRadioButton
             Icon={MoonIcon}
@@ -40,6 +53,9 @@ export default function ColorTheme() {
             subtitle="Select a sleek and modern dark theme"
             id="dark-mode"
             name="color-theme"
+            value="dark"
+            checked={selectedTheme === "dark"}
+            onChange={() => setSelectedTheme("dark")}
           />
           <SettingsRadioButton
             Icon={SystemIcon}
@@ -47,6 +63,9 @@ export default function ColorTheme() {
             subtitle="Adapts to your device's theme"
             id="system-mode"
             name="color-theme"
+            value="system"
+            checked={selectedTheme === "system"}
+            onChange={() => setSelectedTheme("system")}
           />
         </div>
 
