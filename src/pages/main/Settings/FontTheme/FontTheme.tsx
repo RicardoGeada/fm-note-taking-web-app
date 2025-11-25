@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { useSettingsContext } from "../../../../hooks/useSettingsContext";
+import { useState } from "react";
 
 import styles from "./FontTheme.module.scss";
 
@@ -8,8 +10,7 @@ import SettingsRadioButton from "../../../../components/SettingsRadioButton/Sett
 import SansSerifIcon from "./../../../../assets/images/icon-font-sans-serif.svg?react";
 import SerifIcon from "./../../../../assets/images/icon-font-serif.svg?react";
 import MonospaceIcon from "./../../../../assets/images/icon-font-monospace.svg?react";
-import { useSettingsContext } from "../../../../hooks/useSettingsContext";
-import { useState } from "react";
+
 
 
 export default function FontTheme() {
