@@ -9,7 +9,7 @@ li {
   display: flex;
   align-items: center;
   gap: var(--spacing-75);
-  color: var(--color-neutral-700);
+  color: var(--color-text-2);
   text-decoration: none;
   border-radius: var(--spacing-100);
   @include fonts.apply-text-preset("4");
@@ -24,7 +24,7 @@ li {
   }
 
   &--active {
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-bg-active-1);
     .sidebar-item__icon {
       color: var(--color-blue-500);
     }

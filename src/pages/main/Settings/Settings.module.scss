@@ -9,7 +9,6 @@
   gap: var(--spacing-200);
 
   &__headline {
-    color: var(--color-neutral-950);
     @include fonts.apply-text-preset("1");
   }
 
@@ -25,7 +24,7 @@
       align-items: center;
       gap: var(--spacing-100);
       border-radius: 6px;
-      color: var(--color-neutral-950);
+      color: var(--color-text-1);
       text-decoration: none;
       padding: 8px;
       @include fonts.apply-text-preset("4");

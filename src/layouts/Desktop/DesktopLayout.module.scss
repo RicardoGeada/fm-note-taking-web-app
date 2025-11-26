@@ -7,11 +7,11 @@
   grid-template-areas:
     "nav header"
     "nav main";
-  background-color: var(--color-neutral-0);
+  background-color: var(--color-surface-1);
 
   &__header {
     grid-area: header;
-    border-bottom: 1px solid var(--color-neutral-200);
+    border-bottom: 1px solid var(--color-border-1);
   }
 
   &__main {
@@ -23,6 +23,6 @@
   &__nav {
     grid-area: nav;
     width: 272px;
-    border-right: 1px solid var(--color-neutral-200);
+    border-right: 1px solid var(--color-border-1);
   }
 }

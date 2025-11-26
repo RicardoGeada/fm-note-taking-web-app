@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--color-neutral-100);
+  background-color: var(--color-bg-page);
   min-height: 100dvh;
   padding: var(--spacing-200);
 }
@@ -15,11 +15,10 @@
   align-items: center;
   gap: var(--spacing-200);
 
-  background-color: var(--color-neutral-0);
-  border: 1px solid var(--color-neutral-200);
+  background-color: var(--color-surface-1);
+  border: 1px solid var(--color-border-1);
   border-radius: var(--spacing-150);
   padding: var(--spacing-500) var(--spacing-200);
-  color: var(--color-neutral-600);
   @include fonts.apply-text-preset("5");
 
   &__logo {
@@ -49,8 +48,11 @@
   }
 
   &__headline {
-    color: var(--color-neutral-950);
     @include fonts.apply-text-preset("1");
+  }
+
+  &__description {
+    color: var(--color-text-3);
   }
 
   .btn {
