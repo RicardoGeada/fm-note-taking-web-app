@@ -14,6 +14,7 @@
   }
 
   &__input {
+    color: var(--color-text-1);
     padding: var(--spacing-150) var(--spacing-200);
     border-radius: var(--spacing-150);
     border: 1px solid var(--color-border-2);
@@ -46,6 +47,12 @@
       border-color: var(--color-red-500);
     }
 
+    &:-webkit-autofill {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: var(--color-text-1);
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
     &--btn-left {
       padding-left: 2.75rem; // 16 + 20 + 8
     }
@@ -59,7 +66,8 @@
     width: var(--spacing-250);
     height: var(--spacing-250);
 
-    img,svg {
+    img,
+    svg {
       color: var(--color-icon);
       width: 100%;
       height: 100%;
