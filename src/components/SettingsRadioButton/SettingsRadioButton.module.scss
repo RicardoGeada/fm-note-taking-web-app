@@ -5,15 +5,15 @@
   align-items: center;
   padding: var(--spacing-200);
   gap: var(--spacing-200);
-  border: 1px solid var(--color-neutral-200);
+  border: 1px solid var(--color-border-1);
   border-radius: var(--spacing-150);
 
   &__icon {
     width: 40px;
     height: 40px;
-    border: 1px solid var(--color-neutral-200);
+    border: 1px solid var(--color-border-4);
     border-radius: var(--spacing-150);
-    background-color: var(--color-neutral-0);
+    background-color: var(--color-surface-1);
     flex-shrink: 0;
     display: flex;
     justify-content: center;
@@ -33,15 +33,15 @@
   }
 
   &:has(input:checked) {
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-bg-hover-1);
   }
 
   &__input {
     appearance: none;
     width: 16px;
     height: 16px;
-    background-color: var(--color-neutral-0);
-    border: 1px solid var(--color-neutral-200);
+    background-color: var(--color-surface-1);
+    border: 2px solid var(--color-border-5);
     border-radius: var(--radius-full);
 
     &:checked {
