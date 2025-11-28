@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-100);
-    color: var(--color-neutral-950);
+    color: var(--color-text-1);
     text-decoration: none;
     margin-bottom: var(--spacing-150);
     @include fonts.apply-text-preset("4");
@@ -24,6 +24,7 @@
   }
 
   &__subtext {
+    color: var(--color-text-7);
     margin-bottom: var(--spacing-250);
     @include fonts.apply-text-preset("5");
   }

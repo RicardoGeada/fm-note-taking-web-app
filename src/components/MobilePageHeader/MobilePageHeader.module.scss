@@ -1,5 +1,11 @@
 .page-header {
     width: 100%;
-    background-color: var(--color-neutral-100);
+    background-color: var(--color-bg-1);
     padding: var(--spacing-150) var(--spacing-200);
+}
+
+@media (min-width: 48rem) {
+    .page-header {
+        padding: var(--spacing-300) var(--spacing-400);
+    }
 }

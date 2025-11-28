@@ -24,6 +24,7 @@
   }
 
   &__subtext {
+    color: var(--color-text-7);
     margin-bottom: var(--spacing-250);
     @include fonts.apply-text-preset("5");
   }

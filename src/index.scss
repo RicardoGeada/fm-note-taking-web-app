@@ -7,21 +7,28 @@ $light-theme: (
   --color-text-4: var(--color-neutral-500),
   --color-text-5: var(--color-neutral-600),
   --color-text-6: var(--color-neutral-600),
+  --color-text-7: var(--color-neutral-700),
 
   --color-bg-page: var(--color-neutral-100),
   --color-bg-active-1: var(--color-neutral-100),
+  --color-bg-active-2: var(--color-blue-50),
   --color-bg-hover-1: var(--color-neutral-50),
   --color-bg-hover-2: var(--color-neutral-100),
   --color-bg-disabled-1: var(--color-neutral-100),
   --color-bg-disabled-2: var(--color-neutral-50),
   --color-surface-1: var(--color-neutral-0),
+  --color-bg-1: var(--color-neutral-100),
   
   --color-border-1: var(--color-neutral-200),
   --color-border-2: var(--color-neutral-300),
   --color-border-3: var(--color-neutral-950),
+  --color-border-4: var(--color-neutral-200),
+  --color-border-5: var(--color-neutral-200),
 
   --color-box-shadow-1: var(--color-neutral-0),
   --color-box-shadow-2: var(--color-neutral-500),
+  --color-box-shadow-3: rgba(#f0f0f0, 0.6),
+
   --color-icon: var(--color-neutral-500),
 );
 $dark-theme: (
@@ -31,20 +38,27 @@ $dark-theme: (
   --color-text-4: var(--color-neutral-400),
   --color-text-5: var(--color-neutral-400),
   --color-text-6: var(--color-neutral-0),
+  --color-text-7: var(--color-neutral-300),
   --color-bg-page: var(--color-neutral-700),
   --color-bg-active-1: var(--color-neutral-800),
+  --color-bg-active-2: var(--color-neutral-700),
   --color-bg-hover-1: var(--color-neutral-800),
   --color-bg-hover-2: var(--color-neutral-800),
   --color-bg-disabled-1: var(--color-neutral-800),
   --color-bg-disabled-2: var(--color-neutral-800),
   --color-surface-1: var(--color-neutral-950),
+  --color-bg-1: var(--color-neutral-800),
 
   --color-border-1: var(--color-neutral-800),
   --color-border-2: var(--color-neutral-600),
   --color-border-3: var(--color-neutral-600),
+  --color-border-4: var(--color-neutral-700),
+  --color-border-5: var(--color-neutral-600),
 
   --color-box-shadow-1: var(--color-neutral-950),
   --color-box-shadow-2: var(--color-neutral-600),
+  --color-box-shadow-3: rgba(#000000, 0.3),
+
   --color-icon: var(--color-neutral-400),
 );
 
