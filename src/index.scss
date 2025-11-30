@@ -15,6 +15,7 @@ $light-theme: (
   --color-bg-active-3: var(--color-neutral-200),
   --color-bg-hover-1: var(--color-neutral-50),
   --color-bg-hover-2: var(--color-neutral-100),
+  --color-bg-hover-3: var(--color-neutral-950),
   --color-bg-disabled-1: var(--color-neutral-100),
   --color-bg-disabled-2: var(--color-neutral-50),
   --color-surface-1: var(--color-neutral-0),
@@ -30,6 +31,7 @@ $light-theme: (
   --color-box-shadow-1: var(--color-neutral-0),
   --color-box-shadow-2: var(--color-neutral-500),
   --color-box-shadow-3: rgba(#f0f0f0, 0.6),
+  --color-box-shadow-4: rgb(from var(--color-neutral-300) r g b / 70%),
 
   --color-icon: var(--color-neutral-500),
 );
@@ -48,6 +50,7 @@ $dark-theme: (
   --color-bg-active-3: var(--color-neutral-600),
   --color-bg-hover-1: var(--color-neutral-800),
   --color-bg-hover-2: var(--color-neutral-800),
+  --color-bg-hover-3: var(--color-neutral-0),
   --color-bg-disabled-1: var(--color-neutral-800),
   --color-bg-disabled-2: var(--color-neutral-800),
   --color-surface-1: var(--color-neutral-950),
@@ -63,6 +66,7 @@ $dark-theme: (
   --color-box-shadow-1: var(--color-neutral-950),
   --color-box-shadow-2: var(--color-neutral-600),
   --color-box-shadow-3: rgba(#000000, 0.3),
+  --color-box-shadow-4: rgba(#000000, 0.3),
 
   --color-icon: var(--color-neutral-400),
 );

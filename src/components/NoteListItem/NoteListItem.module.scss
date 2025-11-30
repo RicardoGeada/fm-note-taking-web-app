@@ -3,7 +3,6 @@
 .note-item {
   list-style: none;
   color: var(--color-text-1);
-  // border-bottom: 1px solid var(--color-neutral-200);
 
   &__link {
     display: flex;
@@ -22,10 +21,6 @@
       }
     }
   }
-
-  // &--selected {
-  //   background-color: var(--color-neutral-100);
-  // }
 
   &__title {
     @include fonts.apply-text-preset("3");

@@ -13,7 +13,7 @@
     display: flex;
     align-items: flex-end;
     gap: var(--spacing-75);
-    color: var(--color-neutral-700);
+    color: var(--color-text-7);
     min-width: 115px;
 
     svg {
@@ -24,7 +24,7 @@
 
   &__property-value {
     padding: var(--spacing-75) 0;
-    color: var(--color-neutral-400);
+    color: var(--color-text-7);
     flex: 1;
   }
 }

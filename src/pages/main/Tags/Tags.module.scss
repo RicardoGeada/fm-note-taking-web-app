@@ -20,12 +20,12 @@
     flex-shrink: 0;
     width: 100%;
     min-height: 1px;
-    background-color: var(--color-neutral-200);
+    background-color: var(--color-border-1);
     margin-top: var(--spacing-50);
   }
 
   &__headline {
-    color: var(--color-neutral-950);
+    color: var(--color-text-1);
     @include fonts.apply-text-preset("1");
   }
 }
