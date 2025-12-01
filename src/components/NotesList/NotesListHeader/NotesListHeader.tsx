@@ -12,7 +12,7 @@ export default function NotesListHeader() {
         onClick={() => navigate(".")}
       >
         <ArrowLeftIcon />
-        <span>Go Back</span>
+        <span>All Tags</span>
       </button>
     </header>
   );
