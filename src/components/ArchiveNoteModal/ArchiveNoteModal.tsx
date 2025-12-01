@@ -54,7 +54,7 @@ const ArchiveNoteModal = forwardRef<ArchiveNoteModalRef>(function ArchiveNoteMod
           </p>
         </div>
       </div>
-      <div className="hl-separator"></div>
+      <div className={styles["hl-separator"]}></div>
       <form method="dialog" className={styles["archive-note-modal__form"]}>
         <button className="btn btn--secondary">Cancel</button>
         <button className="btn btn--primary" onClick={handleArchive}>Archive Note</button>

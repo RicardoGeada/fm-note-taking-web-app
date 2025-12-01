@@ -27,6 +27,7 @@ export default function NoteDetailHeader({handleDelete, handleArchive, handleRes
         aria-label="Note actions"
       >
         <button
+          type="button"
           className={styles["note__controls-button"]}
           onClick={() => navigate("..")}
         >
