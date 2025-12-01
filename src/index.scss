@@ -16,6 +16,7 @@ $light-theme: (
   --color-bg-hover-1: var(--color-neutral-50),
   --color-bg-hover-2: var(--color-neutral-100),
   --color-bg-hover-3: var(--color-neutral-950),
+  --color-bg-hover-4: var(--color-neutral-0),
   --color-bg-disabled-1: var(--color-neutral-100),
   --color-bg-disabled-2: var(--color-neutral-50),
   --color-surface-1: var(--color-neutral-0),
@@ -51,6 +52,7 @@ $dark-theme: (
   --color-bg-hover-1: var(--color-neutral-800),
   --color-bg-hover-2: var(--color-neutral-800),
   --color-bg-hover-3: var(--color-neutral-0),
+  --color-bg-hover-4: var(--color-neutral-800),
   --color-bg-disabled-1: var(--color-neutral-800),
   --color-bg-disabled-2: var(--color-neutral-800),
   --color-surface-1: var(--color-neutral-950),
@@ -252,19 +254,19 @@ button {
   }
 
   &--secondary {
-    color: var(--color-neutral-600);
-    background-color: var(--color-neutral-100);
+    color: var(--color-text-5);
+    background-color: var(--color-bg-1);
 
     &:hover {
-      color: var(--color-neutral-950);
-      background-color: var(--color-neutral-0);
-      border: 1px solid var(--color-neutral-300);
+      color: var(--color-text-1);
+      background-color: var(--color-bg-hover-4);
+      border: 1px solid var(--color-border-2);
     }
 
     &:focus {
-      color: var(--color-neutral-950);
-      background-color: var(--color-neutral-0);
-      border: 1px solid var(--color-neutral-950);
+      color: var(--color-text-1);
+      background-color: var(--color-bg-hover-4);
+      border: 1px solid var(--color-border-3);
       box-shadow: 0 0 0 2px var(--color-box-shadow-1),
         0 0 0 4px var(--color-box-shadow-2);
     }
